@@ -1,44 +1,21 @@
 package stockwatch;
 
+import java.sql.Time;
+
 public class Company {
 
     private final static String OUTPUT_STRING_FORMAT = "%15s";
-    private final static int UNDEFINED_VALUE = 9999;
+    private final static int UNDEFINED_VALUE = -1;
 
     private String companyName;
-    private String lastTransactionPrice;
-    private String openPrice;
-    private String percentageChange;
-    private String companyId;
-    private String lastChanged;
-
-    private class CompanyData {
-        public int companyId;
-        public double percentageChange;
-        public double openPrice;
-        public double lastTransactionPrice;
-    }
-
-    private CompanyData data;
+    private int companyId;
+    private double percentageChange;
+    private double openPrice;
+    private double lastTransactionPrice;
+    private Time lastChanged;
 
     Company() {
         companyName = "";
-        lastTransactionPrice = "";
-        openPrice = "";
-        percentageChange = "";
-        companyId = "";
-        lastChanged = "";
-
-        data = new CompanyData();
-    }
-
-    Company(String name, String close, String open, String change, String id) {
-        companyName = name;
-        lastTransactionPrice = close;
-        openPrice = open;
-        percentageChange = change;
-        companyId = id;
-        lastChanged = " ";
     }
 
     public void setCompanyName(String companyName) {
@@ -46,45 +23,45 @@ public class Company {
     }
 
     public void setLastTransactionPrice(String closePrice) {
-        this.lastTransactionPrice = closePrice;
-        data.lastTransactionPrice = 
-            closePrice.equals("--") ? UNDEFINED_VALUE : Double.parseDouble(closePrice.trim().replace(',', '.'));
+        lastTransactionPrice = closePrice.equals("--") ? UNDEFINED_VALUE : Double.parseDouble(closePrice.trim()
+                .replace(',', '.'));
     }
 
     public void setOpenPrice(String openPrice) {
-        this.openPrice = openPrice;
-        data.openPrice = 
-            openPrice.equals("--") ? UNDEFINED_VALUE : Double.parseDouble(this.openPrice.trim().replace(',', '.'));
+        this.openPrice = openPrice.equals("--") ? UNDEFINED_VALUE : Double.parseDouble(openPrice.trim().replace(',',
+                '.'));
     }
 
     public void setPercentageChange(String percentageChange) {
-        this.percentageChange = percentageChange;
-        data.percentageChange = 
-            percentageChange.equals("--") ? 0 : Double.parseDouble(percentageChange.trim().replace(',', '.'));
+        this.percentageChange = percentageChange.equals("--") ? 0 : Double.parseDouble(percentageChange.trim().replace(
+                ',', '.'));
     }
 
     public void setCompanyId(String companyId) {
-        this.companyId = companyId;
-        data.companyId = 
-            companyId.equals("--") ? UNDEFINED_VALUE : Integer.parseInt(companyId.trim());
-    }
-    
-    public void setLastChanged(String when) {
-        this.lastChanged = when;
+        this.companyId = companyId.equals("--") ? UNDEFINED_VALUE : Integer.parseInt(companyId.trim());
     }
 
-    public String getCompanyId() {
+    public void setLastChanged(String when) {
+        when += ":00";
+        try {
+            this.lastChanged = Time.valueOf(when);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public int getCompanyId() {
         return companyId;
     }
-    
+
     public double getChange() {
-        return data.percentageChange;
+        return percentageChange;
     }
 
     @Override
     public String toString() {
-        return String.format(OUTPUT_STRING_FORMAT, companyName) + " " 
-                + String.format(OUTPUT_STRING_FORMAT, openPrice) + " " 
+        return String.format(OUTPUT_STRING_FORMAT, companyName) + " "
+                + String.format(OUTPUT_STRING_FORMAT, openPrice)+ " " 
                 + String.format(OUTPUT_STRING_FORMAT, lastTransactionPrice) + " "
                 + String.format(OUTPUT_STRING_FORMAT, lastChanged) + " "
                 + String.format(OUTPUT_STRING_FORMAT, percentageChange);
