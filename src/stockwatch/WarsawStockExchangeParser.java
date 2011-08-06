@@ -3,9 +3,7 @@
  */
 package stockwatch;
 
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.TimerTask;
 import java.util.Vector;
 
 import org.jsoup.Jsoup;
@@ -16,25 +14,14 @@ import org.jsoup.select.Elements;
 import ParserExceptions.ParserException;
 
 public class WarsawStockExchangeParser implements QuotesParser {
-
-    private final static String outputStringFormat = "%15s";
+    
     private final static String pageAddress = "http://www.parkiet.com/temat/63.html";
-    private final static String outputFile = "c:/notowania.txt";
 
     Vector<Company> Companies;
-    private String parsedStocks;
-    private String title;
     private boolean parseCompanies;
     
     public WarsawStockExchangeParser() {
         Companies = new Vector<Company>();
-
-        title = String.format(outputStringFormat, "STOCK") + " " 
-                + String.format(outputStringFormat, "OPEN") + " "
-                + String.format(outputStringFormat, "LAST TR. PRICE") + " "
-                + String.format(outputStringFormat, "LAST TR. TIME") + " "
-                + String.format(outputStringFormat, "CHANGE [%]") + "\n";
-
         parseCompanies = true;
     }
 
@@ -109,26 +96,6 @@ public class WarsawStockExchangeParser implements QuotesParser {
         }
     }
 
-    private void prepareStockList() {
-        parsedStocks = "";
-
-        for (Company company : Companies) {
-            parsedStocks += company.toString() + "\n";
-        }
-    }
-
-    private void writeResultToFile() {
-        try {
-            FileWriter outputFileWriter = new FileWriter(outputFile);
-            outputFileWriter.write(title);
-            outputFileWriter.write(parsedStocks);
-
-            outputFileWriter.close();
-        } catch (IOException e) {
-            System.out.print(e.getMessage());
-            e.printStackTrace();
-        }
-    }
     
     @Override
     public Vector<Company> parseQuotes() {
@@ -145,9 +112,6 @@ public class WarsawStockExchangeParser implements QuotesParser {
             parseLastTransactionPrice(sourceDocument);
             parsePercentageChange(sourceDocument);
             parseLastTransactionTime(sourceDocument);
-            
-            prepareStockList();
-            writeResultToFile();
 
         } catch (IOException e) {
             System.out.print(e.getMessage());

@@ -4,7 +4,7 @@ import java.util.Vector;
 
 public interface StockExchange {
     
-    SessionStatistics getSessionStatistics();
-    void updateQuotes(Vector<Company> parsedCompanies);
+    SessionStatistics makeSessionStatistics(boolean dumpResultToFile);
+    void updateQuotes(Vector<Company> parsedCompanies, boolean dumpResultToFile);
 
 }

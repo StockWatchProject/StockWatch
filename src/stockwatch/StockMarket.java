@@ -20,10 +20,12 @@ public class StockMarket extends TimerTask {
 
     @Override
     public void run() {
+        
         for (StockExchange stockExchange : stockExchanges) {
-            stockExchange.updateQuotes(quotesParser.parseQuotes());
-            stockExchange.getSessionStatistics();
+            stockExchange.updateQuotes(quotesParser.parseQuotes(), true);
+            stockExchange.makeSessionStatistics(true);
         }
+
     }
 
     @Override

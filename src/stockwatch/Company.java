@@ -70,7 +70,7 @@ public class Company {
 
     public String sessionResult() {
         return String.format(OUTPUT_STRING_FORMAT, companyName) + " "
-                + String.format(OUTPUT_STRING_FORMAT, percentageChange);
+                + String.format(OUTPUT_STRING_FORMAT, percentageChange) + "%";
     }
 
 }

@@ -6,7 +6,7 @@ import java.util.Vector;
 
 public class SessionStatistics {
 
-    private final static int UNDEFINED_VALUE = 9999;
+    private final static int UNDEFINED_VALUE = -1;
 
     private int numberOfGrowingStocks;
     private int numberOfFallingStocks;
@@ -15,9 +15,9 @@ public class SessionStatistics {
     private Vector<Company> sortedCompanies;
     private Vector<Company> topUp;
     private Vector<Company> topDown;
-    
+
     private CompanyComparator companyComparator;
-    
+
     public SessionStatistics() {
         topUp = new Vector<Company>();
         topDown = new Vector<Company>();
@@ -68,8 +68,13 @@ public class SessionStatistics {
     private void getTenTopStocks(Vector<Company> companies) {
         topUp.clear();
 
-        for (int i = 0; i < 10; i++) {
-            topUp.add(sortedCompanies.get(i));
+        try {
+            for (int i = 0; i < 10; i++) {
+                topUp.add(sortedCompanies.get(i));
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
     }
@@ -77,8 +82,13 @@ public class SessionStatistics {
     private void getTenTopBottomStocks(Vector<Company> companies) {
         topDown.clear();
 
-        for (int i = companies.size() - 1; i > companies.size() - 11; i--) {
-            topDown.add(sortedCompanies.get(i));
+        try {
+            for (int i = companies.size() - 1; i > companies.size() - 11; i--) {
+                topDown.add(sortedCompanies.get(i));
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
