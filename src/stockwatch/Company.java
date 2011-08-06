@@ -23,22 +23,23 @@ public class Company {
     }
 
     public void setLastTransactionPrice(String closePrice) {
-        lastTransactionPrice = closePrice.equals("--") ? UNDEFINED_VALUE : Double.parseDouble(closePrice.trim()
-                .replace(',', '.'));
+        lastTransactionPrice = 
+            closePrice.equals("--") ? UNDEFINED_VALUE : Double.parseDouble(closePrice.trim().replace(',', '.'));
     }
 
     public void setOpenPrice(String openPrice) {
-        this.openPrice = openPrice.equals("--") ? UNDEFINED_VALUE : Double.parseDouble(openPrice.trim().replace(',',
-                '.'));
+        this.openPrice = 
+            openPrice.equals("--") ? UNDEFINED_VALUE : Double.parseDouble(openPrice.trim().replace(',','.'));
     }
 
     public void setPercentageChange(String percentageChange) {
-        this.percentageChange = percentageChange.equals("--") ? 0 : Double.parseDouble(percentageChange.trim().replace(
-                ',', '.'));
+        this.percentageChange = 
+            percentageChange.equals("--") ? 0 : Double.parseDouble(percentageChange.trim().replace(',', '.'));
     }
 
     public void setCompanyId(String companyId) {
-        this.companyId = companyId.equals("--") ? UNDEFINED_VALUE : Integer.parseInt(companyId.trim());
+        this.companyId = 
+            companyId.equals("--") ? UNDEFINED_VALUE : Integer.parseInt(companyId.trim());
     }
 
     public void setLastChanged(String when) {
