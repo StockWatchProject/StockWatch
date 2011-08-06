@@ -17,6 +17,16 @@ public class SessionStatistics {
     private Vector<Company> topDown;
     
     private CompanyComparator companyComparator;
+    
+    public SessionStatistics() {
+        topUp = new Vector<Company>();
+        topDown = new Vector<Company>();
+        sortedCompanies = new Vector<Company>();
+        companyComparator = new CompanyComparator();
+
+        numberOfGrowingStocks = 0;
+        numberOfFallingStocks = 0;
+    }
 
     private class CompanyComparator implements Comparator<Company> {
 
@@ -33,16 +43,6 @@ public class SessionStatistics {
                 return 0;
         }
 
-    }
-
-    SessionStatistics() {
-        topUp = new Vector<Company>();
-        topDown = new Vector<Company>();
-        sortedCompanies = new Vector<Company>();
-        companyComparator = new CompanyComparator();
-
-        numberOfGrowingStocks = 0;
-        numberOfFallingStocks = 0;
     }
 
     private void CountGrowingCompanies(Vector<Company> companies) {

@@ -26,10 +26,11 @@ public class WarsawStockExchangeParser implements QuotesParser {
     private String title;
     private boolean parseCompanies;
     
-    WarsawStockExchangeParser() {
+    public WarsawStockExchangeParser() {
         Companies = new Vector<Company>();
 
-        title = String.format(outputStringFormat, "STOCK") + " " + String.format(outputStringFormat, "OPEN") + " "
+        title = String.format(outputStringFormat, "STOCK") + " " 
+                + String.format(outputStringFormat, "OPEN") + " "
                 + String.format(outputStringFormat, "LAST TR. PRICE") + " "
                 + String.format(outputStringFormat, "LAST TR. TIME") + " "
                 + String.format(outputStringFormat, "CHANGE [%]") + "\n";
