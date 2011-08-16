@@ -8,9 +8,10 @@ public class WarsawStockExchange implements StockExchange {
     private Vector<Company> companies;
     private StockExchangeDumper stockExchangeDumper;
 
-    public WarsawStockExchange() {
+    public WarsawStockExchange(ConfigParser parser) {
         companies = new Vector<Company>();
         sessionStatistics = new SessionStatistics();
+        stockExchangeDumper = new StockExchangeDumper(parser);
     }
 
     @Override
@@ -18,7 +19,6 @@ public class WarsawStockExchange implements StockExchange {
         sessionStatistics.makeStatistics(companies);
         
         if (dumpResultToFile) {
-            stockExchangeDumper = new StockExchangeDumper();
             stockExchangeDumper.dumpStatisticsToFile(sessionStatistics.toString());
         }
         
@@ -30,7 +30,6 @@ public class WarsawStockExchange implements StockExchange {
         companies = parsedCompanies;
 
         if (dumpResultToFile) {
-            stockExchangeDumper = new StockExchangeDumper();
             stockExchangeDumper.dumpQuotesToFile(companies);
         }
 

@@ -15,7 +15,8 @@ public class StockMarket extends TimerTask {
     }
 
     private void addStockMarkets() {
-        stockExchanges.add(new WarsawStockExchange());
+    	ConfigParser parser = new ConfigParser("dotConfig");
+        stockExchanges.add(new WarsawStockExchange(parser));
     }
 
     @Override
