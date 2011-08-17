@@ -10,6 +10,7 @@ public class StockExchangeDumper {
 
     private FileWriter quotesFile;
     private FileWriter statisticsFile;
+
     private String outputQuotesFile;
     private String outputStatisticsFile;
     private String title;

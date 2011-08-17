@@ -4,6 +4,7 @@
 package stockwatch;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.util.Vector;
 
 import org.jsoup.Jsoup;
@@ -113,10 +114,13 @@ public class WarsawStockExchangeParser implements QuotesParser {
             parsePercentageChange(sourceDocument);
             parseLastTransactionTime(sourceDocument);
 
-        } catch (IOException e) {
+        } catch (SocketTimeoutException e) {
             System.out.print(e.getMessage());
             e.printStackTrace();
         } catch (ParserException e) {
+            System.out.print(e.getMessage());
+            e.printStackTrace();
+        } catch (IOException e) {
             System.out.print(e.getMessage());
             e.printStackTrace();
         }
