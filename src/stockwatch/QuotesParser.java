@@ -1,10 +1,11 @@
 package stockwatch;
 
+import java.util.Map;
 import java.util.Vector;
 
 public interface QuotesParser {
     
-    Vector<Company> parseQuotes();
+    Map<String, Vector<Company>> parseQuotes();
     void parseInfo();
 
 }

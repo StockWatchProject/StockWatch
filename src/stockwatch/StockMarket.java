@@ -15,13 +15,13 @@ public class StockMarket extends TimerTask {
     }
 
     private void addStockMarkets() {
-    	ConfigParser parser = new ConfigParser("dotConfig");
+        ConfigParser parser = new ConfigParser("dotConfig");
         stockExchanges.add(new WarsawStockExchange(parser));
     }
 
     @Override
     public void run() {
-        
+
         for (StockExchange stockExchange : stockExchanges) {
             stockExchange.updateQuotes(quotesParser.parseQuotes(), true);
             stockExchange.makeSessionStatistics(true);

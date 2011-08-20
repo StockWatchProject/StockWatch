@@ -2,6 +2,7 @@ package stockwatch;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Map;
 import java.util.Vector;
 
 public class StockExchangeDumper {
@@ -26,11 +27,16 @@ public class StockExchangeDumper {
         outputStatisticsFile = parser.getStatisticsDataFilePath();
     }
 
-    void dumpQuotesToFile(Vector<Company> companies) {
+    void dumpQuotesToFile(Map<String, Vector<Company>> companies) {
         String stockList = "";
 
-        for (Company company : companies) {
-            stockList += company.toString() + "\n";
+        // Iterate over all markets and write it's quotes it to stockList
+        WseMarketTypes allMarkets[] = WseMarketTypes.values();
+        for (WseMarketTypes market : allMarkets) {
+            stockList += "\n" + market.name().toUpperCase() + "\n";
+            for (Company company : companies.get(market.name())) {
+                stockList += company.toString() + "\n";
+            }
         }
 
         try {
