@@ -27,14 +27,14 @@ public class StockExchangeDumper {
         outputStatisticsFile = parser.getStatisticsDataFilePath();
     }
 
-    void dumpQuotesToFile(Map<String, Vector<Company>> companies) {
+    void dumpQuotesToFile(Map<String, Vector<Security>> companies) {
         String stockList = "";
 
         // Iterate over all markets and write it's quotes it to stockList
         WseMarketTypes allMarkets[] = WseMarketTypes.values();
         for (WseMarketTypes market : allMarkets) {
             stockList += "\n" + market.name().toUpperCase() + "\n";
-            for (Company company : companies.get(market.name())) {
+            for (Security company : companies.get(market.name())) {
                 stockList += company.toString() + "\n";
             }
         }

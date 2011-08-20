@@ -12,25 +12,25 @@ public class SessionStatistics {
     private int numberOfFallingStocks;
     private double avgReturn;
 
-    private Vector<Company> sortedCompanies;
-    private Vector<Company> topUp;
-    private Vector<Company> topDown;
+    private Vector<Security> sortedCompanies;
+    private Vector<Security> topUp;
+    private Vector<Security> topDown;
     private CompanyComparator companyComparator;
 
     public SessionStatistics() {
-        topUp = new Vector<Company>();
-        topDown = new Vector<Company>();
-        sortedCompanies = new Vector<Company>();
+        topUp = new Vector<Security>();
+        topDown = new Vector<Security>();
+        sortedCompanies = new Vector<Security>();
         companyComparator = new CompanyComparator();
 
         numberOfGrowingStocks = 0;
         numberOfFallingStocks = 0;
     }
 
-    private class CompanyComparator implements Comparator<Company> {
+    private class CompanyComparator implements Comparator<Security> {
 
         @Override
-        public int compare(Company o1, Company o2) {
+        public int compare(Security o1, Security o2) {
 
             if (o1.getChange() < o2.getChange())
                 return 1;
@@ -44,27 +44,27 @@ public class SessionStatistics {
 
     }
 
-    private void CountGrowingCompanies(Vector<Company> companies) {
+    private void CountGrowingCompanies(Vector<Security> companies) {
         numberOfGrowingStocks = 0;
 
-        for (Company company : companies) {
+        for (Security company : companies) {
             if (company.getChange() > 0) {
                 ++numberOfGrowingStocks;
             }
         }
     }
 
-    private void CountFallingCompanies(Vector<Company> companies) {
+    private void CountFallingCompanies(Vector<Security> companies) {
         numberOfFallingStocks = 0;
 
-        for (Company company : companies) {
+        for (Security company : companies) {
             if (company.getChange() < 0) {
                 ++numberOfFallingStocks;
             }
         }
     }
 
-    private void getTenTopStocks(Vector<Company> companies) {
+    private void getTenTopStocks(Vector<Security> companies) {
         topUp.clear();
 
         try {
@@ -78,7 +78,7 @@ public class SessionStatistics {
 
     }
 
-    private void getTenTopBottomStocks(Vector<Company> companies) {
+    private void getTenTopBottomStocks(Vector<Security> companies) {
         topDown.clear();
 
         try {
@@ -91,9 +91,9 @@ public class SessionStatistics {
         }
     }
 
-    private void countAvgReturn(Vector<Company> companies) {
+    private void countAvgReturn(Vector<Security> companies) {
         int avg = 0;
-        for (Company company : companies) {
+        for (Security company : companies) {
             avg += company.getChange();
         }
 
@@ -102,7 +102,7 @@ public class SessionStatistics {
         }
     }
 
-    public void makeStatistics(Vector<Company> companies) {
+    public void makeStatistics(Vector<Security> companies) {
         sortedCompanies.setSize(companies.size());
         Collections.copy(sortedCompanies, companies);
         Collections.sort(sortedCompanies, companyComparator);
@@ -114,7 +114,7 @@ public class SessionStatistics {
         countAvgReturn(sortedCompanies);
     }
 
-    public Vector<Company> getSortedCompanies() {
+    public Vector<Security> getSortedCompanies() {
         return sortedCompanies;
     }
 
@@ -135,12 +135,12 @@ public class SessionStatistics {
         stats += "Amount of falling stocks: " + numberOfFallingStocks + "\n";
 
         stats += "\nTop ten growing stocks: \n\n";
-        for (Company company : topUp) {
+        for (Security company : topUp) {
             stats += company.sessionResult() + "\n";
         }
 
         stats += "\nTop ten falling stocks: \n\n";
-        for (Company company : topDown) {
+        for (Security company : topDown) {
             stats += company.sessionResult() + "\n";
         }
 

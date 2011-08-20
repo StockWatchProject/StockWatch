@@ -1,17 +1,13 @@
 package stockwatch;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Vector;
-
 public class WarsawStockExchange implements StockExchange {
 
     private SessionStatistics sessionStatistics;
-    private Map<String, Vector<Company>> companies;
+    private InternalMarkets wseInternalMarkets;
     private StockExchangeDumper stockExchangeDumper;
 
     public WarsawStockExchange(ConfigParser parser) {
-        companies = new HashMap<String, Vector<Company>>();
+        wseInternalMarkets = new WSEInternalMarkets();
         sessionStatistics = new SessionStatistics();
         stockExchangeDumper = new StockExchangeDumper(parser);
     }
@@ -20,7 +16,7 @@ public class WarsawStockExchange implements StockExchange {
     public void makeSessionStatistics(boolean dumpResultToFile) {
         WseMarketTypes allMarkets[] = WseMarketTypes.values();
         for (WseMarketTypes market : allMarkets) {
-            sessionStatistics.makeStatistics(companies.get(market.name()));
+            sessionStatistics.makeStatistics(wseInternalMarkets.getQuotes().get(market.name()));
 
             if (dumpResultToFile) {
                 stockExchangeDumper.dumpStatisticsToFile(sessionStatistics.toString());
@@ -29,11 +25,11 @@ public class WarsawStockExchange implements StockExchange {
     }
 
     @Override
-    public void updateQuotes(Map<String, Vector<Company>> parsedCompanies, boolean dumpResultToFile) {
-        companies = parsedCompanies;
+    public void updateQuotes(InternalMarkets parsedSecurites, boolean dumpResultToFile) {
+        wseInternalMarkets = parsedSecurites;
 
         if (dumpResultToFile) {
-            stockExchangeDumper.dumpQuotesToFile(companies);
+            stockExchangeDumper.dumpQuotesToFile(wseInternalMarkets.getQuotes());
         }
 
     }

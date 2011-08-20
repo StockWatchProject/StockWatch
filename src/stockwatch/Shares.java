@@ -2,7 +2,7 @@ package stockwatch;
 
 import java.sql.Time;
 
-public class Company {
+public class Shares implements Security {
 
     private final static String OUTPUT_STRING_FORMAT = "%15s";
     private final static int UNDEFINED_VALUE = -1;
@@ -14,11 +14,11 @@ public class Company {
     private double lastTransactionPrice;
     private Time lastChanged;
 
-    public Company() {
+    public Shares() {
         companyName = "";
     }
 
-    public Company(String companyName, 
+    public Shares(String companyName, 
                    int companyId, 
                    double change, 
                    double openPrice, 
@@ -32,31 +32,37 @@ public class Company {
         this.lastChanged = lastChanged; 
     }
 
-    public void setCompanyName(String companyName) {
+    @Override
+    public void setSecurityName(String companyName) {
         this.companyName = companyName;
     }
 
+    @Override
     public void setLastTransactionPrice(String closePrice) {
         lastTransactionPrice = 
             closePrice.equals("--") ? UNDEFINED_VALUE : Double.parseDouble(closePrice.trim().replace(',', '.'));
     }
 
+    @Override
     public void setOpenPrice(String openPrice) {
         this.openPrice = 
             openPrice.equals("--") ? UNDEFINED_VALUE : Double.parseDouble(openPrice.trim().replace(',','.'));
     }
 
+    @Override
     public void setPercentageChange(String percentageChange) {
         this.percentageChange = 
             percentageChange.equals("--") ? 0 : Double.parseDouble(percentageChange.trim().replace(',', '.'));
     }
 
-    public void setCompanyId(String companyId) {
+    @Override
+    public void setSecurityId(String companyId) {
         this.companyId = 
             companyId.equals("--") ? UNDEFINED_VALUE : Integer.parseInt(companyId.trim());
     }
 
-    public void setLastChanged(String when) {
+    @Override
+    public void setLastChangedTime(String when) {
         when += ":00";
         try {
             this.lastChanged = Time.valueOf(when);
@@ -65,10 +71,11 @@ public class Company {
         }
     }
 
-    public int getCompanyId() {
+    public int getSecurityId() {
         return companyId;
     }
 
+    @Override
     public double getChange() {
         return percentageChange;
     }
@@ -82,6 +89,7 @@ public class Company {
             + String.format(OUTPUT_STRING_FORMAT, percentageChange);
     }
 
+    @Override
     public String sessionResult() {
         return String.format(OUTPUT_STRING_FORMAT, companyName) + " "
             + String.format(OUTPUT_STRING_FORMAT, percentageChange) + "%";

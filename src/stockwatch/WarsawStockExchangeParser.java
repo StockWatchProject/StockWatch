@@ -5,8 +5,6 @@ package stockwatch;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Vector;
 
 import org.jsoup.Jsoup;
@@ -18,47 +16,42 @@ import ParserExceptions.ParserException;
 
 public class WarsawStockExchangeParser implements QuotesParser {
 
-    private Map<String, Vector<Company>> wseMarkets;
+    WSEInternalMarkets wseInternalMarkets;
     private boolean parseSecuritiesNames;
 
     public WarsawStockExchangeParser() {
-        wseMarkets = new HashMap<String, Vector<Company>>();
-        WseMarketTypes allMarkets[] = WseMarketTypes.values();
-        for (WseMarketTypes market : allMarkets) {
-            wseMarkets.put(market.name(), new Vector<Company>());
-        }
-
+        wseInternalMarkets = new WSEInternalMarkets();
         parseSecuritiesNames = true;
     }
 
-    void checkConsistency(Elements parsedElems, Vector<Company> companies) throws ParserException {
+    void checkConsistency(Elements parsedElems, Vector<Security> companies) throws ParserException {
         if (parsedElems.size() != companies.size()) {
             throw new ParserException("Difference beetween parsed elements size and companies number");
         }
     }
 
-    private void parseCompanies(Document parsedDocument, Vector<Company> market) {
+    private void parseCompanies(Document parsedDocument, Vector<Security> market) {
         Elements companies = parsedDocument.getElementsByClass("nazwa");
         for (Element company : companies) {
-            Company newCompany = new Company();
-            newCompany.setCompanyName(company.text());
+            Shares newCompany = new Shares();
+            newCompany.setSecurityName(company.text());
             market.addElement(newCompany);
         }
     }
 
-    private void parseComapaniesIds(Document parsedDocument, Vector<Company> market) {
+    private void parseComapaniesIds(Document parsedDocument, Vector<Security> market) {
         Elements l_params = parsedDocument.getElementsByAttribute("onClick");
         int i = 0;
         for (Element src : l_params) {
             String[] l_id = src.attributes().get("onClick").split("'");
             if (l_id.length > 4) {
-                market.elementAt(i).setCompanyId(l_id[5]);
+                market.elementAt(i).setSecurityId(l_id[5]);
             }
             i++;
         }
     }
 
-    private void parseLastTransactionPrice(Document parsedDocument, Vector<Company> market) throws ParserException {
+    private void parseLastTransactionPrice(Document parsedDocument, Vector<Security> market) throws ParserException {
         Elements closePrices = parsedDocument.getElementsByClass("c");
         checkConsistency(closePrices, market);
 
@@ -69,7 +62,7 @@ public class WarsawStockExchangeParser implements QuotesParser {
         }
     }
 
-    private void parseOpenPrice(Document parsedDocument, Vector<Company> market) throws ParserException {
+    private void parseOpenPrice(Document parsedDocument, Vector<Security> market) throws ParserException {
         Elements openPrices = parsedDocument.getElementsByClass("o");
         checkConsistency(openPrices, market);
 
@@ -80,7 +73,7 @@ public class WarsawStockExchangeParser implements QuotesParser {
         }
     }
 
-    private void parsePercentageChange(Document parsedDocument, Vector<Company> market) throws ParserException {
+    private void parsePercentageChange(Document parsedDocument, Vector<Security> market) throws ParserException {
         Elements percentageChanges = parsedDocument.getElementsByClass("zmiana");
         checkConsistency(percentageChanges, market);
 
@@ -91,18 +84,18 @@ public class WarsawStockExchangeParser implements QuotesParser {
         }
     }
 
-    private void parseLastTransactionTime(Document parsedDocument, Vector<Company> market) throws ParserException {
+    private void parseLastTransactionTime(Document parsedDocument, Vector<Security> market) throws ParserException {
         Elements lastTimeTransaction = parsedDocument.getElementsByClass("czas");
         checkConsistency(lastTimeTransaction, market);
 
         int i = 0;
         for (Element time : lastTimeTransaction) {
-            market.elementAt(i).setLastChanged(time.ownText());
+            market.elementAt(i).setLastChangedTime(time.ownText());
             i++;
         }
     }
 
-    private void parse(Vector<Company> market, String pageAddr) {
+    private void parse(Vector<Security> market, String pageAddr) {
         try {
             Document sourceDocument = Jsoup.connect(pageAddr).get();
 
@@ -129,15 +122,15 @@ public class WarsawStockExchangeParser implements QuotesParser {
     }
 
     @Override
-    public Map<String, Vector<Company>> parseQuotes() {
+    public InternalMarkets parseQuotes() {
         
         // Iterate over all internal markets of WSE and parse it's quotes.
         WseMarketTypes allMarkets[] = WseMarketTypes.values();
         for (WseMarketTypes market : allMarkets) {
-            parse(wseMarkets.get(market.name()), market.getAddress());
+            parse(wseInternalMarkets.getQuotes().get(market.name()), market.getAddress());
         }
         parseSecuritiesNames = false;
-        return wseMarkets;
+        return wseInternalMarkets;
     }
 
     @Override

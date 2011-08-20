@@ -1,11 +1,8 @@
 package stockwatch;
 
-import java.util.Map;
-import java.util.Vector;
-
 public interface StockExchange {
     
-    void makeSessionStatistics(boolean dumpResultToFile);
-    void updateQuotes(Map<String, Vector<Company>> parsedCompanies, boolean dumpResultToFile);
+    public abstract void makeSessionStatistics(boolean dumpResultToFile);
+    public abstract void updateQuotes(InternalMarkets parsedSecurites, boolean dumpResultToFile);
 
 }
