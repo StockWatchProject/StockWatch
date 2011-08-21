@@ -1,91 +1,60 @@
 package stockwatch;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
+import java.util.List;
 import java.util.Vector;
 
 public class SessionStatistics {
 
-    private final static int UNDEFINED_VALUE = -1;
+    private final static int NUMBER_OF_TOP_STOCKS = 10;
 
     private int numberOfGrowingStocks;
     private int numberOfFallingStocks;
     private double avgReturn;
 
-    private Vector<Security> sortedCompanies;
-    private Vector<Security> topUp;
-    private Vector<Security> topDown;
-    private CompanyComparator companyComparator;
+    private Vector<Security> sortedSecurities;
+    private List<Security> topUp;
+    private List<Security> topDown;
 
     public SessionStatistics() {
-        topUp = new Vector<Security>();
-        topDown = new Vector<Security>();
-        sortedCompanies = new Vector<Security>();
-        companyComparator = new CompanyComparator();
+        topUp = new ArrayList<Security>();
+        topDown = new ArrayList<Security>();
+        sortedSecurities = new Vector<Security>();
 
         numberOfGrowingStocks = 0;
         numberOfFallingStocks = 0;
-    }
-
-    private class CompanyComparator implements Comparator<Security> {
-
-        @Override
-        public int compare(Security o1, Security o2) {
-
-            if (o1.getChange() < o2.getChange())
-                return 1;
-            else if (o1.getChange() > o2.getChange())
-                return -1;
-            else if (o1.getChange() == UNDEFINED_VALUE || o2.getChange() == UNDEFINED_VALUE)
-                return 0;
-            else
-                return 0;
-        }
-
     }
 
     private void CountGrowingCompanies(Vector<Security> companies) {
-        numberOfGrowingStocks = 0;
-
-        for (Security company : companies) {
-            if (company.getChange() > 0) {
-                ++numberOfGrowingStocks;
-            }
-        }
+        numberOfGrowingStocks = Utils.countIf(companies, new Utils.Up());
     }
 
     private void CountFallingCompanies(Vector<Security> companies) {
-        numberOfFallingStocks = 0;
-
-        for (Security company : companies) {
-            if (company.getChange() < 0) {
-                ++numberOfFallingStocks;
-            }
-        }
+        numberOfFallingStocks = Utils.countIf(companies, new Utils.Down());
     }
 
-    private void getTenTopStocks(Vector<Security> companies) {
-        topUp.clear();
-
+    private void getTenTopStocks() {
         try {
-            for (int i = 0; i < 10; i++) {
-                topUp.add(sortedCompanies.get(i));
-            }
+            topUp = sortedSecurities.subList(0, NUMBER_OF_TOP_STOCKS);
         } catch (ArrayIndexOutOfBoundsException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        } catch (IllegalArgumentException e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
         }
 
     }
 
-    private void getTenTopBottomStocks(Vector<Security> companies) {
-        topDown.clear();
-
+    private void getTenTopBottomStocks() {
         try {
-            for (int i = companies.size() - 1; i > companies.size() - 11; i--) {
-                topDown.add(sortedCompanies.get(i));
-            }
+            topDown = sortedSecurities.subList(sortedSecurities.size() - NUMBER_OF_TOP_STOCKS, sortedSecurities.size());
+            Collections.reverse(topDown);
         } catch (ArrayIndexOutOfBoundsException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        } catch (IllegalArgumentException e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
         }
@@ -93,29 +62,29 @@ public class SessionStatistics {
 
     private void countAvgReturn(Vector<Security> companies) {
         int avg = 0;
+        if (companies.size() == 0)
+            return;
+
         for (Security company : companies) {
             avg += company.getChange();
         }
-
-        if (companies.size() != 0) {
-            avgReturn = avg / companies.size();
-        }
+        avgReturn = avg / companies.size();
     }
 
     public void makeStatistics(Vector<Security> companies) {
-        sortedCompanies.setSize(companies.size());
-        Collections.copy(sortedCompanies, companies);
-        Collections.sort(sortedCompanies, companyComparator);
+        sortedSecurities.setSize(companies.size());
+        Collections.copy(sortedSecurities, companies);
+        Collections.sort(sortedSecurities, new Utils.CompanyComparator());
 
-        CountGrowingCompanies(sortedCompanies);
-        CountFallingCompanies(sortedCompanies);
-        getTenTopStocks(sortedCompanies);
-        getTenTopBottomStocks(sortedCompanies);
-        countAvgReturn(sortedCompanies);
+        CountGrowingCompanies(sortedSecurities);
+        CountFallingCompanies(sortedSecurities);
+        getTenTopStocks();
+        getTenTopBottomStocks();
+        countAvgReturn(sortedSecurities);
     }
 
     public Vector<Security> getSortedCompanies() {
-        return sortedCompanies;
+        return sortedSecurities;
     }
 
     public int getNumberOfGrowingStocks() {
