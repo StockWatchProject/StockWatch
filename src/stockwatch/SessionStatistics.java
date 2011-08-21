@@ -61,7 +61,7 @@ public class SessionStatistics {
     }
 
     private void countAvgReturn(Vector<Security> companies) {
-        int avg = 0;
+        double avg = 0;
         if (companies.size() == 0)
             return;
 
@@ -112,8 +112,8 @@ public class SessionStatistics {
         for (Security company : topDown) {
             stats += company.sessionResult() + "\n";
         }
-
-        stats += "\nAverage return of stocks: " + avgReturn + " [%]";
+        
+        stats += "\nAverage return of stocks: " + avgReturn + " [%]" + "\n\n";
 
         return stats;
     }

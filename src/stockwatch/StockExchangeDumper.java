@@ -33,7 +33,7 @@ public class StockExchangeDumper {
         // Iterate over all markets and write it's quotes it to stockList
         WseMarketTypes allMarkets[] = WseMarketTypes.values();
         for (WseMarketTypes market : allMarkets) {
-            stockList += "\n" + market.name().toUpperCase() + "\n";
+            stockList += market.name().toUpperCase() + "\n";
             for (Security company : companies.get(market.name())) {
                 stockList += company.toString() + "\n";
             }

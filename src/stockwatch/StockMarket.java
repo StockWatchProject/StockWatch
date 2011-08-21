@@ -24,7 +24,6 @@ public class StockMarket extends TimerTask {
 
         for (StockExchange stockExchange : stockExchanges) {
             stockExchange.updateQuotes(quotesParser.parseQuotes(), true);
-            stockExchange.makeSessionStatistics(true);
         }
 
     }

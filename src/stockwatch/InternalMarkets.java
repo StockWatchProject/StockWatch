@@ -13,4 +13,6 @@ import java.util.Vector;
  */
 public interface InternalMarkets {
     public abstract Map<String, Vector<Security>> getQuotes();
+    public abstract Map<String, SessionStatistics> getStatistics();
+    public abstract void updateMarkets(InternalMarkets updatedMarkets);
 }

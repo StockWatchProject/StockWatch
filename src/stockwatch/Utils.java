@@ -8,7 +8,7 @@ public class Utils {
     public final static int UNDEFINED_VALUE = -1;
     
     private interface Predicate {
-        public boolean test(Object obj);
+        abstract public boolean test(Object obj);
     }
 
     static public class Up implements Predicate {
@@ -28,8 +28,9 @@ public class Utils {
     static public <T> int countIf(Collection<T> coll, Predicate p) {
         int countedPred = 0;
         for (T elem : coll) {
-            if (p.test(elem))
+            if (p.test(elem)) {
                 ++countedPred;
+            }
         }
         return countedPred;
     }
