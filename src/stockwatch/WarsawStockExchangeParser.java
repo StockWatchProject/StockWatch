@@ -17,11 +17,9 @@ import ParserExceptions.ParserException;
 public class WarsawStockExchangeParser implements QuotesParser {
 
     WSEInternalMarkets wseInternalMarkets;
-    private boolean parseSecuritiesNames;
 
     public WarsawStockExchangeParser() {
         wseInternalMarkets = new WSEInternalMarkets();
-        parseSecuritiesNames = true;
     }
 
     void checkConsistency(Elements parsedElems, Vector<Security> companies) throws ParserException {
@@ -32,6 +30,12 @@ public class WarsawStockExchangeParser implements QuotesParser {
 
     private void parseCompanies(Document parsedDocument, Vector<Security> market) {
         Elements companies = parsedDocument.getElementsByClass("nazwa");
+        
+        if(market.size() == companies.size())
+            return;
+        
+        market.clear();
+        
         for (Element company : companies) {
             Shares newCompany = new Shares();
             newCompany.setSecurityName(company.text());
@@ -41,6 +45,10 @@ public class WarsawStockExchangeParser implements QuotesParser {
 
     private void parseComapaniesIds(Document parsedDocument, Vector<Security> market) {
         Elements l_params = parsedDocument.getElementsByAttribute("onClick");
+        
+        if(market.size() == l_params.size())
+            return;
+        
         int i = 0;
         for (Element src : l_params) {
             String[] l_id = src.attributes().get("onClick").split("'");
@@ -99,11 +107,8 @@ public class WarsawStockExchangeParser implements QuotesParser {
         try {
             Document sourceDocument = Jsoup.connect(pageAddr).get();
 
-            if (parseSecuritiesNames) {
-                parseCompanies(sourceDocument, market);
-                parseComapaniesIds(sourceDocument, market);
-            }
-
+            parseCompanies(sourceDocument, market);
+            parseComapaniesIds(sourceDocument, market);
             parseOpenPrice(sourceDocument, market);
             parseLastTransactionPrice(sourceDocument, market);
             parsePercentageChange(sourceDocument, market);
@@ -129,7 +134,6 @@ public class WarsawStockExchangeParser implements QuotesParser {
         for (WseMarketTypes market : allMarkets) {
             parse(wseInternalMarkets.getQuotes().get(market.name()), market.getAddress());
         }
-        parseSecuritiesNames = false;
         return wseInternalMarkets;
     }
 
