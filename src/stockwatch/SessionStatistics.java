@@ -36,7 +36,9 @@ public class SessionStatistics {
 
     private void getTenTopStocks() {
         try {
-            topUp = sortedSecurities.subList(0, NUMBER_OF_TOP_STOCKS);
+            if (sortedSecurities.size() >= NUMBER_OF_TOP_STOCKS) {
+                topUp = sortedSecurities.subList(0, NUMBER_OF_TOP_STOCKS);
+            }
         } catch (ArrayIndexOutOfBoundsException e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
@@ -49,7 +51,8 @@ public class SessionStatistics {
 
     private void getTenTopBottomStocks() {
         try {
-            topDown = sortedSecurities.subList(sortedSecurities.size() - NUMBER_OF_TOP_STOCKS, sortedSecurities.size());
+            topDown = sortedSecurities.subList(sortedSecurities.size()
+                    - NUMBER_OF_TOP_STOCKS, sortedSecurities.size());
             Collections.reverse(topDown);
         } catch (ArrayIndexOutOfBoundsException e) {
             e.printStackTrace();
@@ -112,7 +115,7 @@ public class SessionStatistics {
         for (Security company : topDown) {
             stats += company.sessionResult() + "\n";
         }
-        
+
         stats += "\nAverage return of stocks: " + avgReturn + " [%]" + "\n\n";
 
         return stats;

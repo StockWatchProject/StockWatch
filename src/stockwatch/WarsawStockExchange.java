@@ -3,11 +3,15 @@ package stockwatch;
 public class WarsawStockExchange implements StockExchange {
 
     private InternalMarkets wseInternalMarkets;
-    private StockExchangeDumper stockExchangeDumper;
+    private QuotesWriter quotestWriter;
+    private StatisticsWriter statisticsWriter;
 
     public WarsawStockExchange(ConfigParser parser) {
         wseInternalMarkets = new WSEInternalMarkets();
-        stockExchangeDumper = new StockExchangeDumper(parser);
+
+        StockExchangeContextBuilder builder = new StockExchangeContextBuilder(parser);
+        quotestWriter = builder.buildQuotesWriter();
+        statisticsWriter = builder.buildStatisticsWriter();
     }
 
     @Override
@@ -15,8 +19,8 @@ public class WarsawStockExchange implements StockExchange {
         wseInternalMarkets.updateMarkets(parsedSecurites);
 
         if (dumpResultToFile) {
-            stockExchangeDumper.dumpQuotesToFile(wseInternalMarkets.getQuotes());
-            stockExchangeDumper.dumpStatisticsToFile(wseInternalMarkets.getStatistics().toString());
+            quotestWriter.write(wseInternalMarkets.getQuotes());
+            statisticsWriter.write(wseInternalMarkets.getStatistics().toString());
         }
 
     }
