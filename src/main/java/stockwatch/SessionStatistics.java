@@ -27,11 +27,11 @@ public class SessionStatistics {
     }
 
     private void CountGrowingCompanies(Vector<Security> companies) {
-        numberOfGrowingStocks = Utils.countIf(companies, new Utils.Up());
+        numberOfGrowingStocks = Utils.countIf(companies, Utils.isUp);
     }
 
     private void CountFallingCompanies(Vector<Security> companies) {
-        numberOfFallingStocks = Utils.countIf(companies, new Utils.Down());
+        numberOfFallingStocks = Utils.countIf(companies, Utils.isDown);
     }
 
     private void getTenTopStocks() {

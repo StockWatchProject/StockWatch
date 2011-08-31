@@ -3,32 +3,30 @@ package stockwatch;
 import java.util.Collection;
 import java.util.Comparator;
 
+import com.google.common.base.Predicate;
+
 public class Utils {
 
     public final static int UNDEFINED_VALUE = -1;
     
-    private interface Predicate {
-        abstract public boolean test(Object obj);
-    }
-
-    static public class Up implements Predicate {
-        public boolean test(Object obj) {
-            Security sec = (Security) obj;
-            return sec.getChange() > 0 ? true : false;
+    static public Predicate<Security> isUp = new Predicate<Security>() {
+        @Override
+        public boolean apply(Security arg) {
+            return arg.getChange() > 0 ? true : false;
         }
-    }
-
-    static public class Down implements Predicate {
-        public boolean test(Object obj) {
-            Security sec = (Security) obj;
-            return sec.getChange() < 0 ? true : false;
+    };
+    
+    static public Predicate<Security> isDown = new Predicate<Security>() {
+        @Override
+        public boolean apply(Security arg) {
+            return arg.getChange() < 0 ? true : false;
         }
-    }
+    };
 
-    static public <T> int countIf(Collection<T> coll, Predicate p) {
+    static public <T> int countIf(Collection<T> coll, Predicate<T> p) {
         int countedPred = 0;
         for (T elem : coll) {
-            if (p.test(elem)) {
+            if (p.apply(elem)) {
                 ++countedPred;
             }
         }
@@ -50,6 +48,15 @@ public class Utils {
                 return 0;
         }
 
+    }
+    
+    public static <T extends Enum<T>> String[] enumToStringArray(T[] values) {  
+        int i = 0;  
+        String[] result = new String[values.length];  
+        for (T value: values) {  
+            result[i++] = value.name();  
+        }  
+        return result;  
     }
 
 }
