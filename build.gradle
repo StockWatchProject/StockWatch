@@ -6,4 +6,5 @@ repositories {
 
 dependencies {
 	compile group: 'org.jsoup', name: 'jsoup', version: '1.6.1'
+	compile group: 'com.google.guava', name: 'guava', version: 'r09'
 }
