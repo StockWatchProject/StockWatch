@@ -2,28 +2,27 @@ package stockwatch;
 
 import java.sql.Time;
 
-public class Shares implements Security {
+public class Share implements Security {
 
-    private final static String OUTPUT_STRING_FORMAT = "%15s";
-    private final static int UNDEFINED_VALUE = -1;
+    String companyName;
+    String companyId;
+    double percentageChange;
+    double openPrice;
+    double lastTransactionPrice;
+    double high;
+    double low;
+    Time lastChanged;
 
-    private String companyName;
-    private int companyId;
-    private double percentageChange;
-    private double openPrice;
-    private double lastTransactionPrice;
-    private Time lastChanged;
-
-    public Shares() {
+    public Share() {
         companyName = "";
     }
 
-    public Shares(String companyName, 
-                   int companyId, 
-                   double change, 
-                   double openPrice, 
-                   double lastPrice,
-                   Time lastChanged) {
+    public Share(String companyName, 
+                  String companyId, 
+                  double change, 
+                  double openPrice, 
+                  double lastPrice,
+                  Time lastChanged) {
         this.companyName = companyName;
         this.companyId = companyId;
         this.percentageChange = change;
@@ -39,7 +38,7 @@ public class Shares implements Security {
 
     @Override
     public void setLastTransactionPrice(String closePrice) {
-        lastTransactionPrice = 
+        this.lastTransactionPrice = 
             closePrice.equals("--") ? UNDEFINED_VALUE : Double.parseDouble(closePrice.trim().replace(',', '.'));
     }
 
@@ -52,26 +51,39 @@ public class Shares implements Security {
     @Override
     public void setPercentageChange(String percentageChange) {
         this.percentageChange = 
-            percentageChange.equals("--") ? 0 : Double.parseDouble(percentageChange.trim().replace(',', '.'));
+            percentageChange.equals("--") ? UNDEFINED_VALUE : Double.parseDouble(percentageChange.trim().replace(',', '.'));
     }
 
     @Override
     public void setSecurityId(String companyId) {
-        this.companyId = 
-            companyId.equals("--") ? UNDEFINED_VALUE : Integer.parseInt(companyId.trim());
+        this.companyId = companyId;
     }
 
     @Override
     public void setLastChangedTime(String when) {
-        when += ":00";
         try {
-            this.lastChanged = Time.valueOf(when);
+            String time = when.equals("--") ? "00:00:00" : when + ":00";
+            this.lastChanged = Time.valueOf(time);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
+            System.out.println(when);
         }
     }
+    
+    @Override
+    public void setHigh(String high) {
+        this.high =
+            high.equals("--") ? UNDEFINED_VALUE : Double.parseDouble(high.trim().replace(',', '.'));
+    }
 
-    public int getSecurityId() {
+    @Override
+    public void setLow(String low) {
+        this.low =
+            low.equals("--") ? UNDEFINED_VALUE : Double.parseDouble(low.trim().replace(',', '.'));
+    }
+    
+    @Override
+    public String getSecurityId() {
         return companyId;
     }
 
@@ -94,5 +106,17 @@ public class Shares implements Security {
         return String.format(OUTPUT_STRING_FORMAT, companyName) + " "
             + String.format(OUTPUT_STRING_FORMAT, percentageChange) + "%";
     }
+
+    @Override
+    public void setLop(String lop) {}
+
+    @Override
+    public void setLopChange(String lopChange) {}
+
+    @Override
+    public void setVolume(String volume) {}
+
+    @Override
+    public void setExpirationDate(String date) {}
 
 }

@@ -7,12 +7,12 @@ import java.util.Vector;
 
 import stockwatch.WseMarketTypes.EWseMarketTypes;
 
-public class WSEInternalMarkets implements InternalMarkets {
+public class WseInternalMarkets implements InternalMarkets {
 
     private Map<String, Vector<Security>> internalMarkets;
     private Map<String, SessionStatistics> marketsStatistics;
 
-    public WSEInternalMarkets() {
+    public WseInternalMarkets() {
         internalMarkets = new HashMap<String, Vector<Security>>();
         marketsStatistics = new HashMap<String, SessionStatistics>();
         
