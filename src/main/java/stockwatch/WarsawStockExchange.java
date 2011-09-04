@@ -7,7 +7,7 @@ public class WarsawStockExchange implements StockExchange {
     private StatisticsWriter statisticsWriter;
 
     public WarsawStockExchange(ConfigParser parser) {
-        wseInternalMarkets = new WSEInternalMarkets();
+        wseInternalMarkets = new WseInternalMarkets();
 
         StockExchangeContextBuilder builder = new StockExchangeContextBuilder(parser);
         quotestWriter = builder.buildQuotesWriter();

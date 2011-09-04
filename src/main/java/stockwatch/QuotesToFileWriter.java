@@ -7,7 +7,7 @@ import stockwatch.WseMarketTypes.EWseMarketTypes;
 
 public class QuotesToFileWriter implements QuotesWriter {
 
-    private final static String outputStringFormat = "%15s";
+    private final static String outputStringFormat = "%20s";
     private DataStoreHolder dataStoreHolder;
 
     public QuotesToFileWriter(DataStoreHolder holder) {

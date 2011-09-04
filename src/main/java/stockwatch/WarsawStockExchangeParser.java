@@ -1,6 +1,3 @@
-/**
- * 
- */
 package stockwatch;
 
 import java.io.IOException;
@@ -18,81 +15,94 @@ import com.google.common.base.Preconditions;
 
 public class WarsawStockExchangeParser implements QuotesParser {
 
-    WSEInternalMarkets wseInternalMarkets;
-    CallbackFactory<Security, Element> callbackFactory;
+    private static final String reqex = "[A-Z][A-Z].{10}";
+    private WseInternalMarkets wseInternalMarkets;
+    private CallbackFactory<Security, Element> callbackFactory;
+    private SecurtiesFactory securityFactory;
 
     public WarsawStockExchangeParser() {
-        wseInternalMarkets = new WSEInternalMarkets();
+        wseInternalMarkets = new WseInternalMarkets();
         callbackFactory = new WseParserCallbackFactory();
+        securityFactory = new SecurtiesFactory();
     }
 
-    private void addCompanies(Document parsedDocument, Vector<Security> market) {
-        Elements companies = parsedDocument.getElementsByClass("nazwa");
-
-        if (market.size() == companies.size())
+    private void addSecurities(final Elements parsedSecurities, Vector<Security> market, EWseMarketTypes marketType) {
+        if (market.size() == parsedSecurities.size())
             return;
 
         market.clear();
 
-        for (Element company : companies) {
-            Shares newCompany = new Shares();
-            newCompany.setSecurityName(company.text());
-            market.addElement(newCompany);
-        }
-    }
-
-    private void addComapaniesIds(Document parsedDocument, Vector<Security> market) {
-        Elements l_params = parsedDocument.getElementsByAttribute("onClick");
-
-        if (market.size() == l_params.size())
-            return;
-
-        int i = 0;
-        for (Element src : l_params) {
-            String[] l_id = src.attributes().get("onClick").split("'");
-            if (l_id.length > 4) {
-                market.elementAt(i).setSecurityId(l_id[5]);
+        for (Element security : parsedSecurities) {
+            Elements securityName = security.getElementsByClass("nazwa");
+            try {
+                Security newSecurity = securityFactory.getSecurity(marketType);
+                newSecurity.setSecurityName(securityName.last().text());
+                market.addElement(newSecurity);
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
             }
-            i++;
+        }
+
+    }
+
+    private void addSecuritiesId(final Elements parsedSecurities, Vector<Security> market) {
+        int i = 0;
+        for (Element security : parsedSecurities) {
+            Elements securityName = security.getElementsByAttribute("id");
+            market.elementAt(i).setSecurityId(securityName.last().id());
+            ++i;
         }
     }
     
-    void initMarket(Document parsedDocument, Vector<Security> market) {
-        addCompanies(parsedDocument, market);
-        addComapaniesIds(parsedDocument, market);
+    private void initMarket(final Elements parsedSecurities, Vector<Security> market, EWseMarketTypes marketType) {
+        addSecurities(parsedSecurities, market, marketType);
+        addSecuritiesId(parsedSecurities, market);
     }
-    
-    void parseTag(Document parsedDocument, Vector<Security> market, String tag) {
-        Elements parsedElems = parsedDocument.getElementsByClass(tag);
-        
+
+    private void parseTag(final Elements parsedSecurities, Vector<Security> market, String tag) {
         try {
-            Preconditions.checkArgument(parsedElems.size() == market.size(),
-                    "Size incorectness: Parsed elements: %d , Market: %d", parsedElems.size(), market.size());
+            Preconditions.checkArgument(parsedSecurities.size() == market.size(),
+                    "Size incorectness: Parsed elements: %d , Market: %d", parsedSecurities.size(), market.size());
+
+            int i = 0;
+            for (Element elem : parsedSecurities) {
+                Elements elemValue = elem.getElementsByClass(tag);
+                callbackFactory.get(tag).call(market.elementAt(i), elemValue.last());
+                i++;
+            }
+
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
-        
-        int i = 0;
-        for (Element elem : parsedElems) {
-            callbackFactory.get(tag).call(market.elementAt(i), elem);
-            i++;
+
+    }
+
+    private void parseTags(final Elements parsedSecurities, Vector<Security> market, String[] tagList) {
+        for (String tag : tagList) {
+            parseTag(parsedSecurities, market, tag);
         }
     }
 
-    void parseTags(Document parsedDocument, Vector<Security> market, String[] tagList) {
-        for (String tag : tagList) {
-            parseTag(parsedDocument, market, tag);
-        }
-    }
-    
-    void parse(Vector<Security> market, String pageAddr, String[] tagList) {
+    private Elements getAllSecurities(String pageAddr) {
         try {
             Document sourceDocument = Jsoup.connect(pageAddr).get();
-            initMarket(sourceDocument, market);
-            parseTags(sourceDocument, market, tagList);
+            Elements parsedElems = sourceDocument.getElementsByAttributeValueMatching("id", reqex);
+            return parsedElems;
         } catch (SocketTimeoutException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    private void parse(Vector<Security> market, String pageAddr, String[] tagList, EWseMarketTypes marketType) {
+        try {
+            final Elements allSecurities = getAllSecurities(pageAddr);
+            Preconditions.checkNotNull(allSecurities);
+            initMarket(allSecurities, market, marketType);
+            parseTags(allSecurities, market, tagList);
+        } catch (NullPointerException e) {
             e.printStackTrace();
         }
 
@@ -103,7 +113,7 @@ public class WarsawStockExchangeParser implements QuotesParser {
         // Iterate over all internal markets of WSE and parse it's quotes.
         EWseMarketTypes allMarkets[] = EWseMarketTypes.values();
         for (EWseMarketTypes market : allMarkets) {
-            parse(wseInternalMarkets.getQuotes().get(market.name()), market.getAddress(), market.getTags());
+            parse(wseInternalMarkets.getQuotes().get(market.name()), market.getAddress(), market.getTags(), market);
         }
         return wseInternalMarkets;
     }

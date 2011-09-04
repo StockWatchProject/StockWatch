@@ -32,6 +32,48 @@ public class WseParserCallbackFactory implements CallbackFactory <Security, Elem
                     type.setLastTransactionPrice(arg.text());
                 }
             };
+        } else if (tag == "h") {
+            return new Callback<Security, Element>() {
+                @Override
+                public void call(Security type, Element arg) {
+                    type.setHigh(arg.text());
+                }
+            };
+        } else if (tag == "l") {
+            return new Callback<Security, Element>() {
+                @Override
+                public void call(Security type, Element arg) {
+                    type.setLow(arg.text());
+                }
+            };
+        } else if (tag == "lop") {
+            return new Callback<Security, Element>() {
+                @Override
+                public void call(Security type, Element arg) {
+                    type.setLop(arg.text());
+                }
+            };
+        } else if (tag == "zmiana_lop") {
+            return new Callback<Security, Element>() {
+                @Override
+                public void call(Security type, Element arg) {
+                    type.setLopChange(arg.text());
+                }
+            };
+        } else if (tag == "obrot") {
+            return new Callback<Security, Element>() {
+                @Override
+                public void call(Security type, Element arg) {
+                    type.setVolume(arg.text());
+                }
+            };
+        } else if (tag == "czas_wygasniecia") {
+            return new Callback<Security, Element>() {
+                @Override
+                public void call(Security type, Element arg) {
+                    type.setExpirationDate(arg.text());
+                }
+            };
         } else {
             throw new IllegalArgumentException("Wrong tag: " + tag);
         }
