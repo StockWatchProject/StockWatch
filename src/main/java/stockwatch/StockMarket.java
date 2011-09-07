@@ -1,15 +1,15 @@
 package stockwatch;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.TimerTask;
 import java.util.Vector;
 
 public class StockMarket extends TimerTask {
 
     private Vector<StockExchange> stockExchanges;
-    private QuotesParser quotesParser;
 
     public StockMarket() {
-        quotesParser = new WarsawStockExchangeParser();
         stockExchanges = new Vector<StockExchange>();
         addStockMarkets();
     }
@@ -21,11 +21,9 @@ public class StockMarket extends TimerTask {
 
     @Override
     public void run() {
-
         for (StockExchange stockExchange : stockExchanges) {
-            stockExchange.updateQuotes(quotesParser.parseQuotes(), true);
+            stockExchange.updateQuotes().save();
         }
-
     }
 
     @Override

@@ -3,26 +3,30 @@ package stockwatch;
 public class WarsawStockExchange implements StockExchange {
 
     private InternalMarkets wseInternalMarkets;
+    
     private QuotesWriter quotestWriter;
     private StatisticsWriter statisticsWriter;
+    private QuotesParser quotesParser;
 
     public WarsawStockExchange(ConfigParser parser) {
         wseInternalMarkets = new WseInternalMarkets();
+        quotesParser = new WarsawStockExchangeParser();
 
         StockExchangeContextBuilder builder = new StockExchangeContextBuilder(parser);
         quotestWriter = builder.buildQuotesWriter();
         statisticsWriter = builder.buildStatisticsWriter();
     }
+    
+    @Override
+    public void save() {
+        quotestWriter.write(wseInternalMarkets.getQuotes());
+        statisticsWriter.write(wseInternalMarkets.getStatistics().toString());
+    }
 
     @Override
-    public void updateQuotes(InternalMarkets parsedSecurites, boolean dumpResultToFile) {
-        wseInternalMarkets.updateMarkets(parsedSecurites);
-
-        if (dumpResultToFile) {
-            quotestWriter.write(wseInternalMarkets.getQuotes());
-            statisticsWriter.write(wseInternalMarkets.getStatistics().toString());
-        }
-
+    public StockExchange updateQuotes() {
+        wseInternalMarkets.updateMarkets(quotesParser.parseQuotes());
+        return this;
     }
 
 }
