@@ -18,12 +18,12 @@ public class WarsawStockExchangeParser implements QuotesParser {
     private static final String reqex = "[A-Z][A-Z].{10}";
     private WseInternalMarkets wseInternalMarkets;
     private CallbackFactory<Security, Element> callbackFactory;
-    private SecurtiesFactory securityFactory;
+    private SecuritiesFactory securityFactory;
 
     public WarsawStockExchangeParser() {
         wseInternalMarkets = new WseInternalMarkets();
         callbackFactory = new WseParserCallbackFactory();
-        securityFactory = new SecurtiesFactory();
+        securityFactory = new SecuritiesFactory();
     }
 
     private void addSecurities(final Elements parsedSecurities, Vector<Security> market, EWseMarketTypes marketType) {

@@ -2,7 +2,7 @@ package stockwatch;
 
 import stockwatch.WseMarketTypes.EWseMarketTypes;
 
-public class SecurtiesFactory {
+public class SecuritiesFactory {
 
     Security getSecurity(EWseMarketTypes type) throws IllegalArgumentException {
         switch (type) {
