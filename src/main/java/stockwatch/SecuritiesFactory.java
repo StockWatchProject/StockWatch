@@ -4,7 +4,7 @@ import stockwatch.WseMarketTypes.EWseMarketTypes;
 
 public class SecuritiesFactory {
 
-    Security getSecurity(EWseMarketTypes type) throws IllegalArgumentException {
+    public Security getSecurity(EWseMarketTypes type) throws IllegalArgumentException {
         switch (type) {
             case MainMarket:
                 return getStock();
