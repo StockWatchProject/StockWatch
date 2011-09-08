@@ -2,6 +2,8 @@ package stockwatch;
 
 import java.util.Vector;
 
+import com.google.common.annotations.VisibleForTesting;
+
 public class StockExchangeContextBuilder {
     private ConfigParser configParser;
     
@@ -19,7 +21,8 @@ public class StockExchangeContextBuilder {
         return stockmarket;
     }
     
-    public Vector<QuotesWriter> buildQuotesWriter(DataStoreHolder dataHolder) {
+    @VisibleForTesting
+    Vector<QuotesWriter> buildQuotesWriter(DataStoreHolder dataHolder) {
         Vector<QuotesWriter> quotesWriters = new Vector<QuotesWriter>();
         if (configParser.dumpToFile()) 
             quotesWriters.add(new QuotesToFileWriter(dataHolder));
@@ -28,7 +31,8 @@ public class StockExchangeContextBuilder {
         return quotesWriters;
     }
 
-    public Vector<StatisticsWriter> buildStatisticsWriter(DataStoreHolder dataHolder) {
+    @VisibleForTesting
+    Vector<StatisticsWriter> buildStatisticsWriter(DataStoreHolder dataHolder) {
         Vector<StatisticsWriter> statsWriters = new Vector<StatisticsWriter>();
         if (configParser.dumpToFile()) 
             statsWriters.add(new StatisticsToFileWriter(dataHolder));
