@@ -1,18 +1,39 @@
 package stockwatch;
 
+import java.util.Vector;
+
 public class StockExchangeContextBuilder {
-    private DataStoreHolder dataStoreHolder;
-
-    StockExchangeContextBuilder(ConfigParser parser) {
-        dataStoreHolder = new DataFileHolder(parser.getQuotesDataFilePath(),
-                                             parser.getStatisticsDataFilePath());
+    private ConfigParser configParser;
+    
+    StockExchangeContextBuilder() {
+        configParser = new ConfigParser();
     }
 
-    public QuotesWriter buildQuotesWriter() {
-        return new QuotesToFileWriter(dataStoreHolder);
+    public StockExchange buildStockMarket(WarsawStockExchange stockmarket) {
+        DataStoreHolder dataStoreHolder = 
+                new DataFileHolder(configParser.getDirectoryPath() + stockmarket.getClass().getSimpleName());
+        
+        stockmarket.setQuotestWriter(buildQuotesWriter(dataStoreHolder));
+        stockmarket.setStatisticsWriter(buildStatisticsWriter(dataStoreHolder));
+        
+        return stockmarket;
+    }
+    
+    public Vector<QuotesWriter> buildQuotesWriter(DataStoreHolder dataHolder) {
+        Vector<QuotesWriter> quotesWriters = new Vector<QuotesWriter>();
+        if (configParser.dumpToFile()) 
+            quotesWriters.add(new QuotesToFileWriter(dataHolder));
+        if (configParser.dumpToDatabase());
+            // add quotes to database writer 
+        return quotesWriters;
     }
 
-    public StatisticsWriter buildStatisticsWriter() {
-        return new StatisticsToFileWriter(dataStoreHolder);
+    public Vector<StatisticsWriter> buildStatisticsWriter(DataStoreHolder dataHolder) {
+        Vector<StatisticsWriter> statsWriters = new Vector<StatisticsWriter>();
+        if (configParser.dumpToFile()) 
+            statsWriters.add(new StatisticsToFileWriter(dataHolder));
+        if (configParser.dumpToDatabase());
+            // add stats to database writer
+        return statsWriters;
     }
 }

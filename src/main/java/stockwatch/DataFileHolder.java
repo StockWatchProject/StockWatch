@@ -8,9 +8,9 @@ public class DataFileHolder implements DataStoreHolder {
     private String quotesStorePath;
     private String statisticsStorePath;
 
-    public DataFileHolder(String quotesFilePath, String statistiscFilePath) {
+    public DataFileHolder(String quotesFilePath) {
         quotesStorePath = new String(quotesFilePath);
-        statisticsStorePath = new String(statistiscFilePath);
+        statisticsStorePath = new String(quotesFilePath+"Stats");
     }
 
     public void writeQuotes(String value) {

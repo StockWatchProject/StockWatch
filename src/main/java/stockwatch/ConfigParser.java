@@ -1,54 +1,51 @@
 package stockwatch;
 
-import java.io.FileReader;
-import java.io.LineNumberReader;
-import java.util.Map;
-import java.util.HashMap;
-import java.io.IOException;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 public class ConfigParser {
+    private final static String fileName = "dotConfig";
 
-    private final static String separator = "=";
-    private final static String quotes = "quotes";
-    private final static String statistics = "statystics";
+    private Properties appProperties;
+    private InputStream propertiesFile;
+    
+    private String directoryPath;
+    
+    private boolean dumpToFile;
+    private boolean dumpToDatabase;
 
-    private Map<String, String> params;
-
-    public ConfigParser(String filePath) {
+    public ConfigParser() {
         try {
-            params = new HashMap<String, String>();
-            FileReader file = new FileReader(filePath);
-            LineNumberReader lineNumber = new LineNumberReader(file);
-
-            String line;
-            String records[];
-            while ((line = lineNumber.readLine()) != null) {
-                records = line.split(separator);
-                if (records.length == 2) {
-                    params.put(records[0].trim(), records[1].trim());
-                }
-            }
-        } catch (FileNotFoundException x) {
-            x.printStackTrace();
-            System.out.println(x.getMessage());
-        } catch (IOException y) {
-            y.printStackTrace();
-            System.out.println(y.getMessage());
+            appProperties = new Properties();
+            propertiesFile = new FileInputStream(fileName);
+            
+            appProperties.load(propertiesFile);
+            
+            dumpToFile = Boolean.parseBoolean(appProperties.getProperty("app.dumpToFile"));
+            dumpToDatabase = Boolean.parseBoolean(appProperties.getProperty("app.dumpToDatabase"));
+            
+            directoryPath = appProperties.getProperty("app.directoryPath");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            System.exit(-1);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(-1);
         }
     }
 
-    public String getQuotesDataFilePath() {
-        if (params.containsKey(quotes)) {
-            return params.get(quotes);
-        }
-        return null;
+    public String getDirectoryPath() {
+        return directoryPath;
     }
-
-    public String getStatisticsDataFilePath() {
-        if (params.containsKey(statistics)) {
-            return params.get(statistics);
-        }
-        return null;
+    
+    public boolean dumpToFile() {
+        return dumpToFile;
+    }
+    
+    public boolean dumpToDatabase() {
+        return dumpToDatabase;
     }
 }

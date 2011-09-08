@@ -1,22 +1,22 @@
 package stockwatch;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.TimerTask;
 import java.util.Vector;
 
 public class StockMarket extends TimerTask {
 
     private Vector<StockExchange> stockExchanges;
+    StockExchangeContextBuilder builder;
 
     public StockMarket() {
         stockExchanges = new Vector<StockExchange>();
+        builder = new StockExchangeContextBuilder();
+        
         addStockMarkets();
     }
 
     private void addStockMarkets() {
-        ConfigParser parser = new ConfigParser("dotConfig");
-        stockExchanges.add(new WarsawStockExchange(parser));
+        stockExchanges.add(builder.buildStockMarket(new WarsawStockExchange()));
     }
 
     @Override

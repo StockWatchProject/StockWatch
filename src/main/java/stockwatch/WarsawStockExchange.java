@@ -1,26 +1,44 @@
 package stockwatch;
 
+import java.util.Vector;
+
 public class WarsawStockExchange implements StockExchange {
 
     private InternalMarkets wseInternalMarkets;
     
-    private QuotesWriter quotestWriter;
-    private StatisticsWriter statisticsWriter;
+    private Vector<QuotesWriter> quotesWriters;
+    private Vector<StatisticsWriter> statisticsWriters;
     private QuotesParser quotesParser;
 
-    public WarsawStockExchange(ConfigParser parser) {
+    public WarsawStockExchange() {
         wseInternalMarkets = new WseInternalMarkets();
         quotesParser = new WarsawStockExchangeParser();
+    }
+    
+    private void saveQuotes() {
+        for (QuotesWriter quotesWriter : quotesWriters) {
+            quotesWriter.write(wseInternalMarkets.getQuotes());
+        }
+    }
+    
+    private void saveStats() {
+        for (StatisticsWriter statisticsWriter : statisticsWriters) {
+            statisticsWriter.write(wseInternalMarkets.getStatistics().toString());
+        }
+    }
+    
+    void setQuotestWriter(Vector<QuotesWriter> quotestWriter) {
+        this.quotesWriters = quotestWriter;
+    }
 
-        StockExchangeContextBuilder builder = new StockExchangeContextBuilder(parser);
-        quotestWriter = builder.buildQuotesWriter();
-        statisticsWriter = builder.buildStatisticsWriter();
+    void setStatisticsWriter(Vector<StatisticsWriter> statisticsWriter) {
+        this.statisticsWriters = statisticsWriter;
     }
     
     @Override
     public void save() {
-        quotestWriter.write(wseInternalMarkets.getQuotes());
-        statisticsWriter.write(wseInternalMarkets.getStatistics().toString());
+        saveQuotes();
+        saveStats();
     }
 
     @Override
