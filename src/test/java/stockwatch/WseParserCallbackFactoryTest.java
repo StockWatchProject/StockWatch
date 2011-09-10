@@ -1,4 +1,4 @@
-package stockwatchTests;
+package stockwatch;
 
 import static org.mockito.Mockito.*;
 import junit.framework.TestCase;
