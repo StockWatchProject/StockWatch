@@ -16,7 +16,7 @@ public class StockMarket extends TimerTask {
     }
 
     private void addStockMarkets() {
-        stockExchanges.add(builder.buildStockMarket(new WarsawStockExchange()));
+        stockExchanges.add(builder.buildStockMarket(new StockExchange("Warsaw", new WarsawStockExchangeParser())));
     }
 
     @Override

@@ -1,18 +1,44 @@
 package stockwatch;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
-/*
- * Interface used for describing all internal markets which are part of given stock exchange.
- * For e.g Warsaw Stock Exchange contains:
- * - main market
- * - newconnect
- * - catalyst
- * - futures
- */
-public interface InternalMarkets {
-    public abstract Map<String, Vector<Security>> getQuotes();
-    public abstract Map<String, SessionStatistics> getStatistics();
-    public abstract void updateMarkets(InternalMarkets updatedMarkets);
+import stockwatch.WseMarketTypes.EWseMarketTypes;
+
+public class InternalMarkets{
+
+    private Map<String, Vector<Security>> internalMarkets;
+    private Map<String, SessionStatistics> marketsStatistics;
+
+    public InternalMarkets() {
+        internalMarkets = new HashMap<String, Vector<Security>>();
+        marketsStatistics = new HashMap<String, SessionStatistics>();
+        
+        EWseMarketTypes allMarkets[] = EWseMarketTypes.values();
+        for (EWseMarketTypes market : allMarkets) {
+            internalMarkets.put(market.name(), new Vector<Security>());
+            marketsStatistics.put(market.name(), new SessionStatistics());
+        }
+    }
+    
+    public Map<String, Vector<Security>> getQuotes() {
+        return Collections.unmodifiableMap(internalMarkets);
+    }
+    
+    public Map<String, SessionStatistics> getStatistics() {
+        Collections.unmodifiableMap(marketsStatistics);
+        return Collections.unmodifiableMap(marketsStatistics);
+    }
+    
+    public void updateMarkets(InternalMarkets updatedMarkets){
+        this.internalMarkets = updatedMarkets.getQuotes();
+        
+        EWseMarketTypes allMarkets[] = EWseMarketTypes.values();
+        for (EWseMarketTypes market : allMarkets) {
+            marketsStatistics.get(market.name()).makeStatistics(internalMarkets.get(market.name()));
+        }
+        
+    }
 }

@@ -16,12 +16,12 @@ import com.google.common.base.Preconditions;
 public class WarsawStockExchangeParser implements QuotesParser {
 
     private static final String reqex = "[A-Z][A-Z].{10}";
-    private WseInternalMarkets wseInternalMarkets;
+    private InternalMarkets wseInternalMarkets;
     private CallbackFactory<Security, Element> callbackFactory;
     private SecuritiesFactory securityFactory;
 
     public WarsawStockExchangeParser() {
-        wseInternalMarkets = new WseInternalMarkets();
+        wseInternalMarkets = new InternalMarkets();
         callbackFactory = new WseParserCallbackFactory();
         securityFactory = new SecuritiesFactory();
     }

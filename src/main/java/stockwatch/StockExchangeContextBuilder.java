@@ -11,9 +11,9 @@ public class StockExchangeContextBuilder {
         configParser = new ConfigParser();
     }
 
-    public StockExchange buildStockMarket(WarsawStockExchange stockmarket) {
+    public StockExchange buildStockMarket(StockExchange stockmarket) {
         DataStoreHolder dataStoreHolder = 
-                new DataFileHolder(configParser.getDirectoryPath() + stockmarket.getClass().getSimpleName());
+                new DataFileHolder(configParser.getDirectoryPath() + stockmarket.getName());
         
         stockmarket.setQuotestWriter(buildQuotesWriter(dataStoreHolder));
         stockmarket.setStatisticsWriter(buildStatisticsWriter(dataStoreHolder));

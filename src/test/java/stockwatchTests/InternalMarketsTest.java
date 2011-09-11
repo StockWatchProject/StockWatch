@@ -17,35 +17,35 @@ import org.junit.Test;
 import stockwatch.InternalMarkets;
 import stockwatch.Security;
 import stockwatch.Share;
-import stockwatch.WseInternalMarkets;
+import stockwatch.InternalMarkets;
 import stockwatch.WseMarketTypes.EWseMarketTypes;
 
-public class WseInternalMarketsTest extends TestCase {
+public class InternalMarketsTest extends TestCase {
 
-    WseInternalMarkets wseInternalMarkets;
+    InternalMarkets internalMarkets;
     
     @Before
     public void setUp() throws Exception {
-        wseInternalMarkets = new WseInternalMarkets();
+        internalMarkets = new InternalMarkets();
     }
 
     @Test
     public void testGetQuotes() {
         EWseMarketTypes allMarkets[] = EWseMarketTypes.values();
-        assertEquals(allMarkets.length, wseInternalMarkets.getQuotes().size());
+        assertEquals(allMarkets.length, internalMarkets.getQuotes().size());
     }
 
     @Test
     public void testGetStatistics() {
         EWseMarketTypes allMarkets[] = EWseMarketTypes.values();
-        assertEquals(allMarkets.length, wseInternalMarkets.getStatistics().size());
+        assertEquals(allMarkets.length, internalMarkets.getStatistics().size());
     }
 
     @Test
     public void testUpdateMarkets() {
         InternalMarkets mockedIntMarkets = mock(InternalMarkets.class);
         
-        Map<String, Vector<Security>> internalMarkets = new HashMap<String, Vector<Security>>();
+        Map<String, Vector<Security>> internalMarketsTest = new HashMap<String, Vector<Security>>();
         Vector<Security> securities = new Vector<Security>();
 
         for (int i = 0; i < 10; i++)
@@ -53,12 +53,12 @@ public class WseInternalMarketsTest extends TestCase {
         
         EWseMarketTypes allMarkets[] = EWseMarketTypes.values();
         for (EWseMarketTypes market : allMarkets) {
-            internalMarkets.put(market.name(), securities);
+            internalMarketsTest.put(market.name(), securities);
         }
         
-        when(mockedIntMarkets.getQuotes()).thenReturn(internalMarkets);
+        when(mockedIntMarkets.getQuotes()).thenReturn(internalMarketsTest);
         
-        wseInternalMarkets.updateMarkets(mockedIntMarkets);
+        internalMarkets.updateMarkets(mockedIntMarkets);
         
         verify(mockedIntMarkets, only()).getQuotes();
     }
