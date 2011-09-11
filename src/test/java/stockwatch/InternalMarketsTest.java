@@ -1,4 +1,4 @@
-package stockwatchTests;
+package stockwatch;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.only;
@@ -14,10 +14,6 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
-import stockwatch.InternalMarkets;
-import stockwatch.Security;
-import stockwatch.Share;
-import stockwatch.InternalMarkets;
 import stockwatch.WseMarketTypes.EWseMarketTypes;
 
 public class InternalMarketsTest extends TestCase {
