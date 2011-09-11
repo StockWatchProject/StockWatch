@@ -1,6 +1,5 @@
 package stockwatch;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
@@ -24,12 +23,11 @@ public class InternalMarkets{
     }
     
     public Map<String, Vector<Security>> getQuotes() {
-        return Collections.unmodifiableMap(internalMarkets);
+        return internalMarkets;
     }
     
     public Map<String, SessionStatistics> getStatistics() {
-        Collections.unmodifiableMap(marketsStatistics);
-        return Collections.unmodifiableMap(marketsStatistics);
+        return marketsStatistics;
     }
     
     public void updateMarkets(InternalMarkets updatedMarkets){

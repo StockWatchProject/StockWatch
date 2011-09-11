@@ -12,7 +12,6 @@ public class StockExchange {
     private QuotesParser quotesParser;
     
     public StockExchange(String name, QuotesParser quotesParser){
-        internalMarkets = new InternalMarkets();
         this.quotesParser = quotesParser;
         this.name = name;
     }
@@ -47,7 +46,7 @@ public class StockExchange {
     }
 
     public StockExchange updateQuotes() {
-        internalMarkets.updateMarkets(quotesParser.parseQuotes());
+        internalMarkets = quotesParser.parseQuotes();
         return this;
     }
 
