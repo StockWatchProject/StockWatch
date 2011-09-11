@@ -1,4 +1,4 @@
-package stockwatchTests;
+package stockwatch;
 
 import junit.framework.TestCase;
 
