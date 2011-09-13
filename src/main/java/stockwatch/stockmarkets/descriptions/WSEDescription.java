@@ -1,6 +1,6 @@
-package stockwatch;
+package stockwatch.stockmarkets.descriptions;
 
-public class WseMarketTypes {
+public class WSEDescription {
     
     static private final String[] mainMarketTags = { "zmiana", "czas", "o", "c", "h", "l"};
     static private final String[] newConnectTags = { "zmiana", "czas", "o", "c", "h", "l"};

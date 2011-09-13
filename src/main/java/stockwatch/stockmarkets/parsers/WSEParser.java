@@ -1,4 +1,4 @@
-package stockwatch;
+package stockwatch.stockmarkets.parsers;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
@@ -9,20 +9,23 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import stockwatch.WseMarketTypes.EWseMarketTypes;
+import stockwatch.securities.SecuritiesFactory;
+import stockwatch.securities.Security;
+import stockwatch.stockmarkets.InternalMarkets;
+import stockwatch.stockmarkets.descriptions.WSEDescription.EWseMarketTypes;
 
 import com.google.common.base.Preconditions;
 
-public class WarsawStockExchangeParser implements QuotesParser {
+public class WSEParser implements QuotesParser {
 
     private static final String reqex = "[A-Z][A-Z].{10}";
     private InternalMarkets wseInternalMarkets;
     private CallbackFactory<Security, Element> callbackFactory;
     private SecuritiesFactory securityFactory;
 
-    public WarsawStockExchangeParser() {
+    public WSEParser() {
         wseInternalMarkets = new InternalMarkets();
-        callbackFactory = new WseParserCallbackFactory();
+        callbackFactory = new WSEParserCallbackFactory();
         securityFactory = new SecuritiesFactory();
     }
 

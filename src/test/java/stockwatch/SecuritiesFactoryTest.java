@@ -5,14 +5,14 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
-import stockwatch.Bond;
-import stockwatch.FutureContract;
-import stockwatch.Index;
-import stockwatch.Option;
-import stockwatch.SecuritiesFactory;
-import stockwatch.Security;
-import stockwatch.Share;
-import stockwatch.WseMarketTypes.EWseMarketTypes;
+import stockwatch.securities.Bond;
+import stockwatch.securities.FutureContract;
+import stockwatch.securities.Index;
+import stockwatch.securities.Option;
+import stockwatch.securities.SecuritiesFactory;
+import stockwatch.securities.Security;
+import stockwatch.securities.Share;
+import stockwatch.stockmarkets.descriptions.WSEDescription.EWseMarketTypes;
 
 public class SecuritiesFactoryTest extends TestCase {
 

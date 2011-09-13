@@ -1,4 +1,6 @@
-package stockwatch;
+package stockwatch.stockmarkets.parsers;
+
+import stockwatch.stockmarkets.InternalMarkets;
 
 
 public interface QuotesParser {

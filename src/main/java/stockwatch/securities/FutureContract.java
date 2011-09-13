@@ -1,6 +1,7 @@
-package stockwatch;
+package stockwatch.securities;
 
 import java.sql.Time;
+
 
 public class FutureContract implements Security {
 

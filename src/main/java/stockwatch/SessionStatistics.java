@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 
+import stockwatch.securities.Security;
+
 public class SessionStatistics {
 
     private final static int NUMBER_OF_TOP_STOCKS = 10;

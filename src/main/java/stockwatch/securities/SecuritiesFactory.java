@@ -1,6 +1,6 @@
-package stockwatch;
+package stockwatch.securities;
 
-import stockwatch.WseMarketTypes.EWseMarketTypes;
+import stockwatch.stockmarkets.descriptions.WSEDescription.EWseMarketTypes;
 
 public class SecuritiesFactory {
 

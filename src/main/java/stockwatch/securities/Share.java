@@ -1,19 +1,40 @@
-package stockwatch;
+package stockwatch.securities;
 
 import java.sql.Time;
 
-public class Bond implements Security {
 
-    String bondName;
-    String bondId;
+public class Share implements Security {
+
+    String companyName;
+    String companyId;
     double percentageChange;
     double openPrice;
     double lastTransactionPrice;
+    double high;
+    double low;
     Time lastChanged;
 
+    public Share() {
+        companyName = "";
+    }
+
+    public Share(String companyName, 
+                  String companyId, 
+                  double change, 
+                  double openPrice, 
+                  double lastPrice,
+                  Time lastChanged) {
+        this.companyName = companyName;
+        this.companyId = companyId;
+        this.percentageChange = change;
+        this.openPrice = openPrice;
+        this.lastTransactionPrice = lastPrice;
+        this.lastChanged = lastChanged; 
+    }
+
     @Override
-    public void setSecurityName(String securityName) {
-        this.bondName = securityName;
+    public void setSecurityName(String companyName) {
+        this.companyName = companyName;
     }
 
     @Override
@@ -31,12 +52,12 @@ public class Bond implements Security {
     @Override
     public void setPercentageChange(String percentageChange) {
         this.percentageChange = 
-             percentageChange.equals("--") ? 0 : Double.parseDouble(percentageChange.trim().replace(',', '.'));
+            percentageChange.equals("--") ? UNDEFINED_VALUE : Double.parseDouble(percentageChange.trim().replace(',', '.'));
     }
 
     @Override
-    public void setSecurityId(String securityId) {
-        this.bondId = securityId;
+    public void setSecurityId(String companyId) {
+        this.companyId = companyId;
     }
 
     @Override
@@ -49,6 +70,23 @@ public class Bond implements Security {
             System.out.println(when);
         }
     }
+    
+    @Override
+    public void setHigh(String high) {
+        this.high =
+            high.equals("--") ? UNDEFINED_VALUE : Double.parseDouble(high.trim().replace(',', '.'));
+    }
+
+    @Override
+    public void setLow(String low) {
+        this.low =
+            low.equals("--") ? UNDEFINED_VALUE : Double.parseDouble(low.trim().replace(',', '.'));
+    }
+    
+    @Override
+    public String getSecurityId() {
+        return companyId;
+    }
 
     @Override
     public double getChange() {
@@ -56,23 +94,18 @@ public class Bond implements Security {
     }
 
     @Override
-    public String getSecurityId() {
-        return bondId;
-    }
-    
-    @Override
     public String toString() {
-        return String.format(OUTPUT_STRING_FORMAT, bondName) + " " 
+        return String.format(OUTPUT_STRING_FORMAT, companyName) + " " 
             + String.format(OUTPUT_STRING_FORMAT, openPrice) + " " 
             + String.format(OUTPUT_STRING_FORMAT, lastTransactionPrice) + " "
             + String.format(OUTPUT_STRING_FORMAT, lastChanged) + " "
             + String.format(OUTPUT_STRING_FORMAT, percentageChange);
     }
-    
+
     @Override
     public String sessionResult() {
-        return String.format(OUTPUT_STRING_FORMAT, bondName) + " "
-                + String.format(OUTPUT_STRING_FORMAT, lastTransactionPrice) + "%";
+        return String.format(OUTPUT_STRING_FORMAT, companyName) + " "
+            + String.format(OUTPUT_STRING_FORMAT, percentageChange) + "%";
     }
 
     @Override
@@ -83,12 +116,6 @@ public class Bond implements Security {
 
     @Override
     public void setVolume(String volume) {}
-    
-    @Override
-    public void setHigh(String high) {}
-
-    @Override
-    public void setLow(String low) {}
 
     @Override
     public void setExpirationDate(String date) {}

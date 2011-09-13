@@ -1,10 +1,12 @@
-package stockwatch;
+package stockwatch.stockmarkets;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
-import stockwatch.WseMarketTypes.EWseMarketTypes;
+import stockwatch.SessionStatistics;
+import stockwatch.securities.Security;
+import stockwatch.stockmarkets.descriptions.WSEDescription.EWseMarketTypes;
 
 public class InternalMarkets{
 

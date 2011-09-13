@@ -1,4 +1,4 @@
-package stockwatch;
+package stockwatch.securities;
 
 public interface Security {
 

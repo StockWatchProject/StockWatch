@@ -1,8 +1,10 @@
-package stockwatch;
+package stockwatch.stockmarkets.parsers;
 
 import org.jsoup.nodes.Element;
 
-public class WseParserCallbackFactory implements CallbackFactory <Security, Element> {
+import stockwatch.securities.Security;
+
+public class WSEParserCallbackFactory implements CallbackFactory <Security, Element> {
     public Callback<Security, Element> get(String tag) throws IllegalArgumentException {
         if (tag == "zmiana") {
             return new Callback<Security, Element>() {

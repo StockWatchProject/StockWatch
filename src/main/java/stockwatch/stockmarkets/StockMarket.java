@@ -1,8 +1,12 @@
-package stockwatch;
+package stockwatch.stockmarkets;
 
 import java.util.Vector;
 
-public class StockExchange {
+import stockwatch.QuotesWriter;
+import stockwatch.StatisticsWriter;
+import stockwatch.stockmarkets.parsers.QuotesParser;
+
+public class StockMarket {
 
     private String name;
     private InternalMarkets internalMarkets;
@@ -11,7 +15,7 @@ public class StockExchange {
     private Vector<StatisticsWriter> statisticsWriters;
     private QuotesParser quotesParser;
     
-    public StockExchange(String name, QuotesParser quotesParser){
+    public StockMarket(String name, QuotesParser quotesParser){
         this.quotesParser = quotesParser;
         this.name = name;
     }
@@ -45,7 +49,7 @@ public class StockExchange {
         saveStats();
     }
 
-    public StockExchange updateQuotes() {
+    public StockMarket updateQuotes() {
         internalMarkets = quotesParser.parseQuotes();
         return this;
     }

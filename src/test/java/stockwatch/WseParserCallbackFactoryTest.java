@@ -7,17 +7,17 @@ import org.jsoup.nodes.Element;
 import org.junit.Before;
 import org.junit.Test;
 
-import stockwatch.Security;
-import stockwatch.Share;
-import stockwatch.WseParserCallbackFactory;
+import stockwatch.securities.Security;
+import stockwatch.securities.Share;
+import stockwatch.stockmarkets.parsers.WSEParserCallbackFactory;
 
 public class WseParserCallbackFactoryTest extends TestCase {
 
-    private WseParserCallbackFactory callbackFactory;
+    private WSEParserCallbackFactory callbackFactory;
     
     @Before
     protected void setUp() throws Exception {
-        callbackFactory = new WseParserCallbackFactory();
+        callbackFactory = new WSEParserCallbackFactory();
     }
 
     @Test
