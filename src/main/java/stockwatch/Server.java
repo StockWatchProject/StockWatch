@@ -9,11 +9,8 @@ public class Server {
     private static final int INIT_DELAY = 0;
 
     public static void main(String args[]) {
-    	System.setProperty( "proxySet", "true" );
-    	System.setProperty( "http.proxyHost", "10.144.1.10" );
-    	System.setProperty( "http.proxyPort", Integer.toString( 8080 ) );
         Timer timer = new Timer();
-        // refresh quotes every 5 minutes
+        // refresh quotes every 30 minutes
         timer.schedule(new WorldWideMarket(), INIT_DELAY, REPEAT_AFTER);
     }
 }

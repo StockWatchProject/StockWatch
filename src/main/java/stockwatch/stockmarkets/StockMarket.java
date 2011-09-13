@@ -2,8 +2,9 @@ package stockwatch.stockmarkets;
 
 import java.util.Vector;
 
-import stockwatch.QuotesWriter;
-import stockwatch.StatisticsWriter;
+import datasaving.QuotesWriter;
+import datasaving.StatisticsWriter;
+
 import stockwatch.stockmarkets.parsers.QuotesParser;
 
 public class StockMarket {

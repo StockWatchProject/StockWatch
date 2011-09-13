@@ -1,4 +1,4 @@
-package stockwatch;
+package datasaving;
 
 public class StatisticsToFileWriter implements StatisticsWriter {
     private DataStoreHolder dataFileHolder;

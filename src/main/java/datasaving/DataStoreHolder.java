@@ -1,4 +1,4 @@
-package stockwatch;
+package datasaving;
 
 public interface DataStoreHolder {
     public void writeQuotes(String value);

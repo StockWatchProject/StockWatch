@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
-import stockwatch.SessionStatistics;
 import stockwatch.securities.Security;
 import stockwatch.stockmarkets.descriptions.WSEDescription.EWseMarketTypes;
 

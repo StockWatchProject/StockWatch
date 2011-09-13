@@ -2,15 +2,16 @@ package stockwatch.stockmarkets;
 
 import java.util.Vector;
 
-import stockwatch.ConfigParser;
-import stockwatch.DataFileHolder;
-import stockwatch.DataStoreHolder;
-import stockwatch.QuotesToFileWriter;
-import stockwatch.QuotesWriter;
-import stockwatch.StatisticsToFileWriter;
-import stockwatch.StatisticsWriter;
 
 import com.google.common.annotations.VisibleForTesting;
+
+import config.ConfigParser;
+import datasaving.DataFileHolder;
+import datasaving.DataStoreHolder;
+import datasaving.QuotesToFileWriter;
+import datasaving.QuotesWriter;
+import datasaving.StatisticsToFileWriter;
+import datasaving.StatisticsWriter;
 
 public class StockMarketBuilder {
     private ConfigParser configParser;
