@@ -26,6 +26,7 @@ public class InternalMarkets{
         return internalMarkets;
     }
     
+    
     public Map<String, SessionStatistics> getStatistics() {
         return marketsStatistics;
     }
