@@ -62,17 +62,18 @@ public class Bond implements Security {
     
     @Override
     public String toString() {
-        return String.format(OUTPUT_STRING_FORMAT, bondName) + " " 
-            + String.format(OUTPUT_STRING_FORMAT, openPrice) + " " 
-            + String.format(OUTPUT_STRING_FORMAT, lastTransactionPrice) + " "
-            + String.format(OUTPUT_STRING_FORMAT, lastChanged) + " "
-            + String.format(OUTPUT_STRING_FORMAT, percentageChange);
+        return String.format(OUTPUT_FORMAT, bondName) + " " 
+            + String.format(OUTPUT_FORMAT, bondId) + " " 
+            + String.format(OUTPUT_FORMAT, openPrice) + " " 
+            + String.format(OUTPUT_FORMAT, lastTransactionPrice) + " "
+            + String.format(OUTPUT_FORMAT, lastChanged) + " "
+            + String.format(OUTPUT_FORMAT, percentageChange);
     }
     
     @Override
     public String sessionResult() {
-        return String.format(OUTPUT_STRING_FORMAT, bondName) + " "
-                + String.format(OUTPUT_STRING_FORMAT, lastTransactionPrice) + "%";
+        return String.format(OUTPUT_FORMAT, bondName) + " "
+                + String.format(OUTPUT_FORMAT, lastTransactionPrice) + "%";
     }
 
     @Override

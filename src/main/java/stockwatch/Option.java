@@ -23,11 +23,15 @@ public class Option extends FutureContract {
     
     @Override
     public String toString() {
-        return String.format(OUTPUT_STRING_FORMAT, super.futureContractName) + " " 
-            + String.format(OUTPUT_STRING_FORMAT, dateFormat.format(expirationDate)) + " "
-            + String.format(OUTPUT_STRING_FORMAT, super.openPrice) + " " 
-            + String.format(OUTPUT_STRING_FORMAT, super.lastTransactionPrice) + " "
-            + String.format(OUTPUT_STRING_FORMAT, super.lastChanged) + " "
-            + String.format(OUTPUT_STRING_FORMAT, super.percentageChange);
+        return String.format(OUTPUT_FORMAT, super.securityName) + " " 
+            + String.format(OUTPUT_FORMAT, super.securityId) + " " 
+            + String.format(OUTPUT_FORMAT, dateFormat.format(expirationDate)) + " "
+            + String.format(OUTPUT_FORMAT, super.openPrice) + " " 
+            + String.format(OUTPUT_FORMAT, super.lastTransactionPrice) + " "
+            + String.format(OUTPUT_FORMAT, super.lastChanged) + " "
+            + String.format(OUTPUT_FORMAT, super.lop) + " "
+            + String.format(OUTPUT_FORMAT, super.lopChange) + " "
+            + String.format(OUTPUT_FORMAT, super.volume) + " "
+            + String.format(OUTPUT_FORMAT, super.percentageChange) + "%";
     }
 }
