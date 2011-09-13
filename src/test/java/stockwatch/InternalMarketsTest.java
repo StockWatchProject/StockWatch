@@ -54,7 +54,6 @@ public class InternalMarketsTest extends TestCase {
         
         when(mockedIntMarkets.getQuotes()).thenReturn(internalMarketsTest);
         
-        internalMarkets.updateMarkets(mockedIntMarkets);
         
         verify(mockedIntMarkets, only()).getQuotes();
     }

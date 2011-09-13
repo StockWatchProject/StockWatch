@@ -115,6 +115,7 @@ public class WarsawStockExchangeParser implements QuotesParser {
         for (EWseMarketTypes market : allMarkets) {
             parse(wseInternalMarkets.getQuotes().get(market.name()), market.getAddress(), market.getTags(), market);
         }
+        wseInternalMarkets.makeStatistics();
         return wseInternalMarkets;
     }
 

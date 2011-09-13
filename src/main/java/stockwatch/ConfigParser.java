@@ -7,7 +7,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class ConfigParser {
-    private final static String fileName = "dotConfig";
+    private final static String fileName = System.getProperty("user.home") + "/.dotConfig";
 
     private Properties appProperties;
     private InputStream propertiesFile;

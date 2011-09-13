@@ -30,9 +30,7 @@ public class InternalMarkets{
         return marketsStatistics;
     }
     
-    public void updateMarkets(InternalMarkets updatedMarkets){
-        this.internalMarkets = updatedMarkets.getQuotes();
-        
+    public void makeStatistics(){
         EWseMarketTypes allMarkets[] = EWseMarketTypes.values();
         for (EWseMarketTypes market : allMarkets) {
             marketsStatistics.get(market.name()).makeStatistics(internalMarkets.get(market.name()));
