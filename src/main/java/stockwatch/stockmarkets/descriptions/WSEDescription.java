@@ -2,8 +2,8 @@ package stockwatch.stockmarkets.descriptions;
 
 public class WSEDescription {
     
-    static private final String[] mainMarketTags = { "zmiana", "czas", "o", "c", "h", "l"};
-    static private final String[] newConnectTags = { "zmiana", "czas", "o", "c", "h", "l"};
+    static private final String[] mainMarketTags = { "zmiana", "czas", "o", "c", "h", "l", "obrot"};
+    static private final String[] newConnectTags = { "zmiana", "czas", "o", "c", "h", "l", "obrot"};
     static private final String[] catalystTags = { "zmiana", "czas", "c" };
     static private final String[] futuresTags = { "zmiana", "czas", "o", "c", "lop", "obrot", "zmiana_lop", "l", "h"}; 
     static private final String[] optionsTags = { "zmiana", "czas", "o", "c", "lop", "obrot", "zmiana_lop", "l", "h", "czas_wygasniecia"};
