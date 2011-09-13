@@ -3,6 +3,8 @@ package stockwatch;
 import java.util.Collection;
 import java.util.Comparator;
 
+import stockwatch.securities.Security;
+
 import com.google.common.base.Predicate;
 
 public class Utils {

@@ -1,9 +1,10 @@
-package stockwatch;
+package datasaving;
 
 import java.util.Map;
 import java.util.Vector;
 
-import stockwatch.WseMarketTypes.EWseMarketTypes;
+import stockwatch.securities.Security;
+import stockwatch.stockmarkets.descriptions.WSEDescription.EWseMarketTypes;
 
 public class QuotesToFileWriter implements QuotesWriter {
 

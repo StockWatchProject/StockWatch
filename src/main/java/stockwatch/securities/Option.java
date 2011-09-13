@@ -1,4 +1,4 @@
-package stockwatch;
+package stockwatch.securities;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

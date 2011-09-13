@@ -1,17 +1,26 @@
-package stockwatch;
+package stockwatch.stockmarkets;
 
 import java.util.Vector;
 
+
 import com.google.common.annotations.VisibleForTesting;
 
-public class StockExchangeContextBuilder {
+import config.ConfigParser;
+import datasaving.DataFileHolder;
+import datasaving.DataStoreHolder;
+import datasaving.QuotesToFileWriter;
+import datasaving.QuotesWriter;
+import datasaving.StatisticsToFileWriter;
+import datasaving.StatisticsWriter;
+
+public class StockMarketBuilder {
     private ConfigParser configParser;
     
-    StockExchangeContextBuilder() {
+    StockMarketBuilder() {
         configParser = new ConfigParser();
     }
 
-    public StockExchange buildStockMarket(StockExchange stockmarket) {
+    public StockMarket buildStockMarket(StockMarket stockmarket) {
         DataStoreHolder dataStoreHolder = 
                 new DataFileHolder(configParser.getDirectoryPath() + stockmarket.getName());
         

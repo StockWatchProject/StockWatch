@@ -14,7 +14,10 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
-import stockwatch.WseMarketTypes.EWseMarketTypes;
+import stockwatch.securities.Security;
+import stockwatch.securities.Share;
+import stockwatch.stockmarkets.InternalMarkets;
+import stockwatch.stockmarkets.descriptions.WSEDescription.EWseMarketTypes;
 
 public class InternalMarketsTest extends TestCase {
 
@@ -54,7 +57,6 @@ public class InternalMarketsTest extends TestCase {
         
         when(mockedIntMarkets.getQuotes()).thenReturn(internalMarketsTest);
         
-        internalMarkets.updateMarkets(mockedIntMarkets);
         
         verify(mockedIntMarkets, only()).getQuotes();
     }
