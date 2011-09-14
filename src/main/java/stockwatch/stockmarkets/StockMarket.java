@@ -2,52 +2,57 @@ package stockwatch.stockmarkets;
 
 import java.util.Vector;
 
+import stockwatch.stockmarkets.descriptions.IStockMarketDescription;
+import stockwatch.stockmarkets.parsers.QuotesParser;
 import datasaving.QuotesWriter;
 import datasaving.StatisticsWriter;
 
-import stockwatch.stockmarkets.parsers.QuotesParser;
-
 public class StockMarket {
 
-    private String name;
+    private MarketNames name;
     private InternalMarkets internalMarkets;
     
-    private Vector<QuotesWriter> quotesWriters;
-    private Vector<StatisticsWriter> statisticsWriters;
+    private Vector<InternalMarket> internalMarkets2;
+    
+    private QuotesWriter quotesWriter;
+    private StatisticsWriter statisticsWriter;
     private QuotesParser quotesParser;
     
-    public StockMarket(String name, QuotesParser quotesParser){
-        this.quotesParser = quotesParser;
+    public StockMarket(IStockMarketDescription description){
+        StockMarketBuilder.getInstnce().buildStockMarket(this, description);
+    }
+    
+    void setName(MarketNames name) {
         this.name = name;
     }
     
-    public String getName(){
+    void setQuotestWriter(QuotesWriter quotestWriter) {
+        this.quotesWriter = quotestWriter;
+    }
+
+    void setStatisticsWriter(StatisticsWriter statisticsWriter) {
+        this.statisticsWriter = statisticsWriter;
+    }
+    
+    void setParser(QuotesParser parser) {
+        this.quotesParser = parser;
+    }
+    
+    void setInternalMarkets(InternalMarkets markets) {
+        this.internalMarkets = markets;
+    }
+    
+    void setInternalMarkets2(Vector<InternalMarket> internal) {
+        internalMarkets2 = internal;
+    }
+    
+    public MarketNames getName(){
     	return name;
     }
     
-    private void saveQuotes() {
-        for (QuotesWriter quotesWriter : quotesWriters) {
-            quotesWriter.write(internalMarkets.getQuotes());
-        }
-    }
-    
-    private void saveStats() {
-        for (StatisticsWriter statisticsWriter : statisticsWriters) {
-            statisticsWriter.write(internalMarkets.getStatistics().toString());
-        }
-    }
-    
-    void setQuotestWriter(Vector<QuotesWriter> quotestWriter) {
-        this.quotesWriters = quotestWriter;
-    }
-
-    void setStatisticsWriter(Vector<StatisticsWriter> statisticsWriter) {
-        this.statisticsWriters = statisticsWriter;
-    }
-    
     public void save() {
-        saveQuotes();
-        saveStats();
+        quotesWriter.write(internalMarkets.getQuotes());
+        statisticsWriter.write(internalMarkets.getStatistics().toString());
     }
 
     public StockMarket updateQuotes() {

@@ -17,7 +17,7 @@ import org.junit.Test;
 import stockwatch.securities.Security;
 import stockwatch.securities.Share;
 import stockwatch.stockmarkets.InternalMarkets;
-import stockwatch.stockmarkets.descriptions.WSEDescription.EWseMarketTypes;
+import stockwatch.stockmarkets.descriptions.WSEDescription.MarketTypes;
 
 public class InternalMarketsTest extends TestCase {
 
@@ -30,13 +30,13 @@ public class InternalMarketsTest extends TestCase {
 
     @Test
     public void testGetQuotes() {
-        EWseMarketTypes allMarkets[] = EWseMarketTypes.values();
+        MarketTypes allMarkets[] = MarketTypes.values();
         assertEquals(allMarkets.length, internalMarkets.getQuotes().size());
     }
 
     @Test
     public void testGetStatistics() {
-        EWseMarketTypes allMarkets[] = EWseMarketTypes.values();
+        MarketTypes allMarkets[] = MarketTypes.values();
         assertEquals(allMarkets.length, internalMarkets.getStatistics().size());
     }
 
@@ -50,8 +50,8 @@ public class InternalMarketsTest extends TestCase {
         for (int i = 0; i < 10; i++)
             securities.add(new Share());
         
-        EWseMarketTypes allMarkets[] = EWseMarketTypes.values();
-        for (EWseMarketTypes market : allMarkets) {
+        MarketTypes allMarkets[] = MarketTypes.values();
+        for (MarketTypes market : allMarkets) {
             internalMarketsTest.put(market.name(), securities);
         }
         

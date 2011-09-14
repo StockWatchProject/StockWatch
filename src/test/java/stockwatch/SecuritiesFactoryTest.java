@@ -12,7 +12,7 @@ import stockwatch.securities.Option;
 import stockwatch.securities.SecuritiesFactory;
 import stockwatch.securities.Security;
 import stockwatch.securities.Share;
-import stockwatch.stockmarkets.descriptions.WSEDescription.EWseMarketTypes;
+import stockwatch.stockmarkets.descriptions.WSEDescription.MarketTypes;
 
 public class SecuritiesFactoryTest extends TestCase {
 
@@ -25,37 +25,37 @@ public class SecuritiesFactoryTest extends TestCase {
 
     @Test
     public void testGetSecurity() {
-        Security newSecurity = securitiesFactory.getSecurity(EWseMarketTypes.MainMarket);
+        Security newSecurity = securitiesFactory.getSecurity(MarketTypes.MainMarket);
         assertTrue(newSecurity instanceof Share);
     }
 
     @Test
     public void testGetStock() {
-        Security newSecurity = securitiesFactory.getSecurity(EWseMarketTypes.NewConnect);
+        Security newSecurity = securitiesFactory.getSecurity(MarketTypes.NewConnect);
         assertTrue(newSecurity instanceof Share);
     }
 
     @Test
     public void testGetBond() {
-        Security newSecurity = securitiesFactory.getSecurity(EWseMarketTypes.Catalyst);
+        Security newSecurity = securitiesFactory.getSecurity(MarketTypes.Catalyst);
         assertTrue(newSecurity instanceof Bond);
     }
 
     @Test
     public void testGetFutureContract() {
-        Security newSecurity = securitiesFactory.getSecurity(EWseMarketTypes.Futures);
+        Security newSecurity = securitiesFactory.getSecurity(MarketTypes.Futures);
         assertTrue(newSecurity instanceof FutureContract);
     }
 
     @Test
     public void testGetOption() {
-        Security newSecurity = securitiesFactory.getSecurity(EWseMarketTypes.Options);
+        Security newSecurity = securitiesFactory.getSecurity(MarketTypes.Options);
         assertTrue(newSecurity instanceof Option);
     }
 
     @Test
     public void testGetIndex() {
-        Security newSecurity = securitiesFactory.getSecurity(EWseMarketTypes.Indexes);
+        Security newSecurity = securitiesFactory.getSecurity(MarketTypes.Indexes);
         assertTrue(newSecurity instanceof Index);
     }
 

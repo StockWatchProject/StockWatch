@@ -12,7 +12,7 @@ import org.jsoup.select.Elements;
 import stockwatch.securities.SecuritiesFactory;
 import stockwatch.securities.Security;
 import stockwatch.stockmarkets.InternalMarkets;
-import stockwatch.stockmarkets.descriptions.WSEDescription.EWseMarketTypes;
+import stockwatch.stockmarkets.descriptions.WSEDescription.MarketTypes;
 
 import com.google.common.base.Preconditions;
 
@@ -23,13 +23,13 @@ public class WSEParser implements QuotesParser {
     private CallbackFactory<Security, Element> callbackFactory;
     private SecuritiesFactory securityFactory;
 
-    public WSEParser() {
-        wseInternalMarkets = new InternalMarkets();
-        callbackFactory = new WSEParserCallbackFactory();
-        securityFactory = new SecuritiesFactory();
+    public WSEParser(InternalMarkets markets) {
+        this.wseInternalMarkets = markets;
+        this.callbackFactory = new WSEParserCallbackFactory();
+        this.securityFactory = new SecuritiesFactory();
     }
 
-    private void addSecurities(final Elements parsedSecurities, Vector<Security> market, EWseMarketTypes marketType) {
+    private void addSecurities(final Elements parsedSecurities, Vector<Security> market, MarketTypes marketType) {
         if (market.size() == parsedSecurities.size())
             return;
 
@@ -57,7 +57,7 @@ public class WSEParser implements QuotesParser {
         }
     }
     
-    private void initMarket(final Elements parsedSecurities, Vector<Security> market, EWseMarketTypes marketType) {
+    private void initMarket(final Elements parsedSecurities, Vector<Security> market, MarketTypes marketType) {
         addSecurities(parsedSecurities, market, marketType);
         addSecuritiesId(parsedSecurities, market);
     }
@@ -99,7 +99,7 @@ public class WSEParser implements QuotesParser {
         return null;
     }
     
-    private void parse(Vector<Security> market, String pageAddr, String[] tagList, EWseMarketTypes marketType) {
+    private void parse(Vector<Security> market, String pageAddr, String[] tagList, MarketTypes marketType) {
         try {
             final Elements allSecurities = getAllSecurities(pageAddr);
             Preconditions.checkNotNull(allSecurities);
@@ -110,12 +110,13 @@ public class WSEParser implements QuotesParser {
         }
 
     }
-
+    
     @Override
     public InternalMarkets parseQuotes() {
         // Iterate over all internal markets of WSE and parse it's quotes.
-        EWseMarketTypes allMarkets[] = EWseMarketTypes.values();
-        for (EWseMarketTypes market : allMarkets) {
+        Preconditions.checkNotNull(wseInternalMarkets);
+        MarketTypes allMarkets[] = MarketTypes.values();
+        for (MarketTypes market : allMarkets) {
             parse(wseInternalMarkets.getQuotes().get(market.name()), market.getAddress(), market.getTags(), market);
         }
         wseInternalMarkets.makeStatistics();

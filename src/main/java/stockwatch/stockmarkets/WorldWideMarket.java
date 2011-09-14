@@ -3,22 +3,19 @@ package stockwatch.stockmarkets;
 import java.util.TimerTask;
 import java.util.Vector;
 
-import stockwatch.stockmarkets.parsers.WSEParser;
+import stockwatch.stockmarkets.descriptions.WSEDescription;
 
 public class WorldWideMarket extends TimerTask {
 
     private Vector<StockMarket> stockExchanges;
-    StockMarketBuilder builder;
 
     public WorldWideMarket() {
         stockExchanges = new Vector<StockMarket>();
-        builder = new StockMarketBuilder();
-        
         addStockMarkets();
     }
 
     private void addStockMarkets() {
-        stockExchanges.add(builder.buildStockMarket(new StockMarket("Warsaw", new WSEParser())));
+        stockExchanges.add(new StockMarket(new WSEDescription()));
     }
 
     @Override
@@ -27,11 +24,4 @@ public class WorldWideMarket extends TimerTask {
             stockExchange.updateQuotes().save();
         }
     }
-
-    @Override
-    public boolean cancel() {
-        // TODO Auto-generated method stub
-        return super.cancel();
-    }
-
 }

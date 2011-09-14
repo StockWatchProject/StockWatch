@@ -1,10 +1,10 @@
 package stockwatch.securities;
 
-import stockwatch.stockmarkets.descriptions.WSEDescription.EWseMarketTypes;
+import stockwatch.stockmarkets.descriptions.WSEDescription.MarketTypes;
 
 public class SecuritiesFactory {
 
-    public Security getSecurity(EWseMarketTypes type) throws IllegalArgumentException {
+    public Security getSecurity(MarketTypes type) throws IllegalArgumentException {
         switch (type) {
             case MainMarket:
                 return getStock();

@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Vector;
 
 import stockwatch.securities.Security;
-import stockwatch.stockmarkets.descriptions.WSEDescription.EWseMarketTypes;
+import stockwatch.stockmarkets.descriptions.WSEDescription.MarketTypes;
 
 public class InternalMarkets{
 
@@ -15,26 +15,19 @@ public class InternalMarkets{
     public InternalMarkets() {
         internalMarkets = new HashMap<String, Vector<Security>>();
         marketsStatistics = new HashMap<String, SessionStatistics>();
-        
-        EWseMarketTypes allMarkets[] = EWseMarketTypes.values();
-        for (EWseMarketTypes market : allMarkets) {
-            internalMarkets.put(market.name(), new Vector<Security>());
-            marketsStatistics.put(market.name(), new SessionStatistics());
-        }
     }
     
     public Map<String, Vector<Security>> getQuotes() {
         return internalMarkets;
     }
-    
-    
+
     public Map<String, SessionStatistics> getStatistics() {
         return marketsStatistics;
     }
     
     public void makeStatistics(){
-        EWseMarketTypes allMarkets[] = EWseMarketTypes.values();
-        for (EWseMarketTypes market : allMarkets) {
+        MarketTypes allMarkets[] = MarketTypes.values();
+        for (MarketTypes market : allMarkets) {
             marketsStatistics.get(market.name()).makeStatistics(internalMarkets.get(market.name()));
         }
         

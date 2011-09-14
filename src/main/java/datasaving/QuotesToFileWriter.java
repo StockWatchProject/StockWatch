@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.Vector;
 
 import stockwatch.securities.Security;
-import stockwatch.stockmarkets.descriptions.WSEDescription.EWseMarketTypes;
+import stockwatch.stockmarkets.descriptions.WSEDescription.MarketTypes;
 
 public class QuotesToFileWriter implements QuotesWriter {
 
@@ -32,8 +32,8 @@ public class QuotesToFileWriter implements QuotesWriter {
         String stockList = "";
 
         // Iterate over all markets and write its quotes to stockList
-        EWseMarketTypes allMarkets[] = EWseMarketTypes.values();
-        for (EWseMarketTypes market : allMarkets) {
+        MarketTypes allMarkets[] = MarketTypes.values();
+        for (MarketTypes market : allMarkets) {
             stockList += market.name().toUpperCase() + "\n";
             for (Security company : companies.get(market.name())) {
                 stockList += company.toString() + "\n";
