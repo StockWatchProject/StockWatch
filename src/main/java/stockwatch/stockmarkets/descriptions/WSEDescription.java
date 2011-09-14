@@ -30,7 +30,7 @@ public class WSEDescription implements IStockMarketDescription {
             this.tags = tags;
         }
 
-        public String getAddress() {
+        public String getPageAddress() {
             return pageAddr;
         }
         
@@ -42,7 +42,7 @@ public class WSEDescription implements IStockMarketDescription {
             return this.name();
         }
         
-        public MarketTypes getType() {
+        public IMarketTypes getType() {
             return this;
         }
 

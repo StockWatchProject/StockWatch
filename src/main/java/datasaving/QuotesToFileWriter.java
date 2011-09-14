@@ -1,10 +1,9 @@
 package datasaving;
 
-import java.util.Map;
 import java.util.Vector;
 
 import stockwatch.securities.Security;
-import stockwatch.stockmarkets.descriptions.WSEDescription.MarketTypes;
+import stockwatch.stockmarkets.InternalMarket;
 
 public class QuotesToFileWriter implements QuotesWriter {
 
@@ -15,9 +14,9 @@ public class QuotesToFileWriter implements QuotesWriter {
         dataStoreHolder = holder;
     }
 
-    public void write(Map<String, Vector<Security>> companies) {
+    public void write(Vector<InternalMarket> internalMarkets) {
         dataStoreHolder.writeQuotes(createTitle());
-        dataStoreHolder.writeQuotes(createStockList(companies));
+        dataStoreHolder.writeQuotes(createStockList(internalMarkets));
     }
 
     private String createTitle() {
@@ -28,14 +27,12 @@ public class QuotesToFileWriter implements QuotesWriter {
                 + String.format(outputStringFormat, "CHANGE [%]") + "\n";
     }
 
-    private String createStockList(Map<String, Vector<Security>> companies) {
+    private String createStockList(Vector<InternalMarket> internalMarkets) {
         String stockList = "";
 
-        // Iterate over all markets and write its quotes to stockList
-        MarketTypes allMarkets[] = MarketTypes.values();
-        for (MarketTypes market : allMarkets) {
-            stockList += market.name().toUpperCase() + "\n";
-            for (Security company : companies.get(market.name())) {
+        for (InternalMarket market : internalMarkets) {
+            stockList += market.getName().toString() + "\n";
+            for (Security company : market.getSecurities()) {
                 stockList += company.toString() + "\n";
             }
         }

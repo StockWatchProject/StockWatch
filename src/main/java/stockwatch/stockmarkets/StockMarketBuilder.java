@@ -2,12 +2,10 @@ package stockwatch.stockmarkets;
 
 import java.util.Vector;
 
-import stockwatch.securities.Security;
-import stockwatch.stockmarkets.descriptions.IStockMarketDescription;
 import stockwatch.stockmarkets.descriptions.IMarketTypes;
+import stockwatch.stockmarkets.descriptions.IStockMarketDescription;
 import stockwatch.stockmarkets.parsers.QuotesParser;
 import stockwatch.stockmarkets.parsers.WSEParser;
-
 
 import com.google.common.annotations.VisibleForTesting;
 
@@ -32,15 +30,15 @@ public class StockMarketBuilder {
     }
 
     @VisibleForTesting
-    InternalMarkets initMarkets(IStockMarketDescription description) {
-        InternalMarkets markets = new InternalMarkets();
+    Vector<InternalMarket> initMarkets(IStockMarketDescription marketDesc) {
+        Vector<InternalMarket> internalMarkets = new Vector<InternalMarket>();
         
-        IMarketTypes allMarket[] = description.getInternalMarkets();
+        IMarketTypes allMarket[] = marketDesc.getInternalMarkets();
         for (IMarketTypes market : allMarket) {
-            markets.getQuotes().put(market.getName(), new Vector<Security>());
-            markets.getStatistics().put(market.getName(), new SessionStatistics());
+            InternalMarket newInternalMarket = new InternalMarket(market.getType());
+            internalMarkets.add(newInternalMarket);
         }
-        return markets;
+        return internalMarkets;
     }
     
     @VisibleForTesting
@@ -56,19 +54,12 @@ public class StockMarketBuilder {
     }
     
     public StockMarket buildStockMarket(StockMarket stockmarket, IStockMarketDescription marketDesc) {
-        InternalMarkets markets = initMarkets(marketDesc);
-        //TODO: use self factoring reflection factory
-        QuotesParser parser = new WSEParser(markets);
+        Vector<InternalMarket> internalMarkets = initMarkets(marketDesc);
+        stockmarket.setInternalMarkets(internalMarkets);
         
-        //TODO: check this out
-        Vector<InternalMarket> internalMarketCheck = new Vector<InternalMarket>();
-        IMarketTypes allMarket[] = marketDesc.getInternalMarkets();
-        for (IMarketTypes market : allMarket) {
-            InternalMarket newInternalMarket = new InternalMarket(market.getType());
-        }
-        stockmarket.setInternalMarkets2(internalMarketCheck);
+        //TODO: use factory
+        QuotesParser parser = new WSEParser(internalMarkets);
         
-        stockmarket.setInternalMarkets(markets);
         stockmarket.setParser(parser);
         stockmarket.setName(marketDesc.getName());
         

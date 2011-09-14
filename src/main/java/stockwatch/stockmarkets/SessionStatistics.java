@@ -106,20 +106,20 @@ public class SessionStatistics {
 
         String stats = "\n";
 
-        stats += "Amount of growing stocks: " + numberOfGrowingStocks + "\n";
-        stats += "Amount of falling stocks: " + numberOfFallingStocks + "\n";
+        stats += "Amount of growing securities: " + numberOfGrowingStocks + "\n";
+        stats += "Amount of falling securities: " + numberOfFallingStocks + "\n";
 
-        stats += "\nTop ten growing stocks: \n\n";
+        stats += "\nTop ten growing securities: \n\n";
         for (Security company : topUp) {
             stats += company.sessionResult() + "\n";
         }
 
-        stats += "\nTop ten falling stocks: \n\n";
+        stats += "\nTop ten falling securities: \n\n";
         for (Security company : topDown) {
             stats += company.sessionResult() + "\n";
         }
 
-        stats += "\nAverage return of stocks: " + avgReturn + " [%]" + "\n\n";
+        stats += "\nAverage return of securities: " + avgReturn + " [%]" + "\n";
 
         return stats;
     }

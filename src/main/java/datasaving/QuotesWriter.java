@@ -1,10 +1,10 @@
 package datasaving;
 
-import java.util.Map;
 import java.util.Vector;
 
-import stockwatch.securities.Security;
+import stockwatch.stockmarkets.InternalMarket;
+
 
 public interface QuotesWriter {
-    public void write(Map<String, Vector<Security>> companies);
+    public void write(Vector<InternalMarket> markets);
 }

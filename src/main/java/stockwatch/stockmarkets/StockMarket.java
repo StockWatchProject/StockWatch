@@ -10,10 +10,7 @@ import datasaving.StatisticsWriter;
 public class StockMarket {
 
     private MarketNames name;
-    private InternalMarkets internalMarkets;
-    
-    private Vector<InternalMarket> internalMarkets2;
-    
+    private Vector<InternalMarket> internalMarkets;
     private QuotesWriter quotesWriter;
     private StatisticsWriter statisticsWriter;
     private QuotesParser quotesParser;
@@ -38,12 +35,8 @@ public class StockMarket {
         this.quotesParser = parser;
     }
     
-    void setInternalMarkets(InternalMarkets markets) {
-        this.internalMarkets = markets;
-    }
-    
-    void setInternalMarkets2(Vector<InternalMarket> internal) {
-        internalMarkets2 = internal;
+    void setInternalMarkets(Vector<InternalMarket> internalMarkets) {
+        this.internalMarkets = internalMarkets;
     }
     
     public MarketNames getName(){
@@ -51,8 +44,8 @@ public class StockMarket {
     }
     
     public void save() {
-        quotesWriter.write(internalMarkets.getQuotes());
-        statisticsWriter.write(internalMarkets.getStatistics().toString());
+        quotesWriter.write(internalMarkets);
+        statisticsWriter.write(internalMarkets);
     }
 
     public StockMarket updateQuotes() {

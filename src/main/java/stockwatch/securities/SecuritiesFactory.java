@@ -1,11 +1,14 @@
 package stockwatch.securities;
 
+import stockwatch.stockmarkets.descriptions.IMarketTypes;
 import stockwatch.stockmarkets.descriptions.WSEDescription.MarketTypes;
 
 public class SecuritiesFactory {
 
-    public Security getSecurity(MarketTypes type) throws IllegalArgumentException {
-        switch (type) {
+    public Security getSecurity(IMarketTypes type) throws IllegalArgumentException {
+        //TODO: get rid of this horrible casting :[
+        MarketTypes marketType = (MarketTypes) type;
+        switch (marketType) {
             case MainMarket:
                 return getStock();
             case NewConnect:

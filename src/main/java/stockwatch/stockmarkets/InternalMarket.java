@@ -16,19 +16,23 @@ public class InternalMarket {
         stats = new SessionStatistics();
     }
     
-    IMarketTypes getName() {
+    public IMarketTypes getName() {
         return marketType;
     }
     
-    void addSecurity(Security security) {
-        securities.add(security);
+    public Vector<Security> getSecurities() {
+        return securities;
     }
     
-    void clearSecurities() {
+    public SessionStatistics getStats() {
+        return stats;
+    }
+    
+    public void clearSecurities() {
         securities.clear();
     }
     
-    void makeStatistics() {
+    public void makeStatistics() {
         stats.makeStatistics(securities);
     }
 }
