@@ -1,5 +1,6 @@
 package stockwatch.stockmarkets.descriptions;
 
+import stockwatch.securities.SecurityTypes;
 import stockwatch.stockmarkets.MarketNames;
 
 public class WSEDescription implements IStockMarketDescription {
@@ -18,16 +19,17 @@ public class WSEDescription implements IStockMarketDescription {
      * Exchange. Additional info (page address is given for parsing purposes)
      */
     static public enum MarketTypes implements IMarketTypes {
-        MainMarket("http://www.parkiet.com/temat/63.html", mainMarketTags),
-        NewConnect("http://www.parkiet.com/temat/68.html", newConnectTags),
-        Catalyst("http://www.parkiet.com/temat/952893.html", catalystTags),
-        Futures("http://www.parkiet.com/temat/71.html", futuresTags),
-        Options("http://www.parkiet.com/temat/75.html", optionsTags),
-        Indexes("http://www.parkiet.com/temat/73.html", indexesTags);
+        MainMarket  (   "http://www.parkiet.com/temat/63.html",     mainMarketTags, SecurityTypes.Stock             ),
+        NewConnect  (   "http://www.parkiet.com/temat/68.html",     newConnectTags, SecurityTypes.Stock             ),
+        Catalyst    (   "http://www.parkiet.com/temat/952893.html", catalystTags,   SecurityTypes.Bond              ),
+        Futures     (   "http://www.parkiet.com/temat/71.html",     futuresTags,    SecurityTypes.FuturesContract   ),
+        Options     (   "http://www.parkiet.com/temat/75.html",     optionsTags,    SecurityTypes.Option            ),
+        Indexes     (   "http://www.parkiet.com/temat/73.html",     indexesTags,    SecurityTypes.Index             );
 
-        private MarketTypes(String pageAddr, String[] tags) {
+        private MarketTypes(String pageAddr, String[] tags, SecurityTypes type) {
             this.pageAddr = pageAddr;
             this.tags = tags;
+            this.securityType = type;
         }
 
         public String getPageAddress() {
@@ -46,8 +48,13 @@ public class WSEDescription implements IStockMarketDescription {
             return this;
         }
 
+        public SecurityTypes getSecurityType() {
+            return securityType;
+        }
+
         private String pageAddr;
         private String[] tags;
+        private SecurityTypes securityType;
 
     }
 

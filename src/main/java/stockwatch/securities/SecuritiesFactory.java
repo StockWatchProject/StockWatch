@@ -1,25 +1,21 @@
 package stockwatch.securities;
 
 import stockwatch.stockmarkets.descriptions.IMarketTypes;
-import stockwatch.stockmarkets.descriptions.WSEDescription.MarketTypes;
 
 public class SecuritiesFactory {
 
     public Security getSecurity(IMarketTypes type) throws IllegalArgumentException {
-        //TODO: get rid of this horrible casting :[
-        MarketTypes marketType = (MarketTypes) type;
-        switch (marketType) {
-            case MainMarket:
+        SecurityTypes securityType = type.getSecurityType();
+        switch (securityType) {
+            case Stock:
                 return getStock();
-            case NewConnect:
-                return getStock();
-            case Catalyst:
+            case Bond:
                 return getBond();
-            case Futures:
+            case FuturesContract:
                 return getFutureContract();
-            case Options:
+            case Option:
                 return getOption();
-            case Indexes:
+            case Index:
                 return getIndex();
             default:
                 throw new IllegalArgumentException("Wrong market type " + type);

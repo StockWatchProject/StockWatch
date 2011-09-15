@@ -4,8 +4,8 @@ import java.util.Vector;
 
 import stockwatch.stockmarkets.descriptions.IMarketTypes;
 import stockwatch.stockmarkets.descriptions.IStockMarketDescription;
+import stockwatch.stockmarkets.parsers.QuotesParsersFactory;
 import stockwatch.stockmarkets.parsers.QuotesParser;
-import stockwatch.stockmarkets.parsers.WSEParser;
 
 import com.google.common.annotations.VisibleForTesting;
 
@@ -58,7 +58,7 @@ public class StockMarketBuilder {
         stockmarket.setInternalMarkets(internalMarkets);
         
         //TODO: use factory
-        QuotesParser parser = new WSEParser(internalMarkets);
+        QuotesParser parser = QuotesParsersFactory.getParser(marketDesc, internalMarkets);// new WSEParser(internalMarkets);
         
         stockmarket.setParser(parser);
         stockmarket.setName(marketDesc.getName());
