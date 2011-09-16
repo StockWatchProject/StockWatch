@@ -57,9 +57,7 @@ public class StockMarketBuilder {
         Vector<InternalMarket> internalMarkets = initMarkets(marketDesc);
         stockmarket.setInternalMarkets(internalMarkets);
         
-        //TODO: use factory
-        QuotesParser parser = QuotesParsersFactory.getParser(marketDesc, internalMarkets);// new WSEParser(internalMarkets);
-        
+        QuotesParser parser = QuotesParsersFactory.getParser(marketDesc, internalMarkets);
         stockmarket.setParser(parser);
         stockmarket.setName(marketDesc.getName());
         
