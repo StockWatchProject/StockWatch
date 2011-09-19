@@ -17,7 +17,8 @@ public class Option extends FutureContract {
         try {
             this.expirationDate = dateFormat.parse(expirationDate);
         } catch (ParseException e) {
-            e.printStackTrace();
+            this.expirationDate = new Date();
+            this.expirationDate.setTime(0);
         }
     }
     
