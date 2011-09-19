@@ -3,8 +3,6 @@ package stockwatch.stockmarkets;
 import java.util.TimerTask;
 import java.util.Vector;
 
-import stockwatch.stockmarkets.descriptions.WSEDescription;
-
 public class WorldWideMarket extends TimerTask {
 
     private Vector<StockMarket> stockExchanges;
@@ -15,7 +13,10 @@ public class WorldWideMarket extends TimerTask {
     }
 
     private void addStockMarkets() {
-        stockExchanges.add(new StockMarket(new WSEDescription()));
+        MarketNames[] allMarketNames = MarketNames.values();
+        for(MarketNames aMarket : allMarketNames){
+            stockExchanges.add(new StockMarket(aMarket));
+        }
     }
 
     @Override

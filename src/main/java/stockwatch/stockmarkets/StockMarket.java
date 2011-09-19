@@ -2,6 +2,7 @@ package stockwatch.stockmarkets;
 
 import java.util.Vector;
 
+import stockwatch.stockmarkets.descriptions.DescriptionsFactory;
 import stockwatch.stockmarkets.descriptions.IStockMarketDescription;
 import stockwatch.stockmarkets.parsers.QuotesParser;
 import datasaving.QuotesWriter;
@@ -15,7 +16,8 @@ public class StockMarket {
     private StatisticsWriter statisticsWriter;
     private QuotesParser quotesParser;
     
-    public StockMarket(IStockMarketDescription description){
+    public StockMarket(MarketNames mName){
+        IStockMarketDescription description = DescriptionsFactory.getDescription(mName);
         StockMarketBuilder.getInstnce().buildStockMarket(this, description);
     }
     
