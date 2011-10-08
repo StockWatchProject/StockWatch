@@ -2,28 +2,19 @@ package stockwatch.stockmarkets;
 
 import java.util.Vector;
 
+import org.apache.log4j.Logger;
+
 import stockwatch.stockmarkets.descriptions.IMarketTypes;
 import stockwatch.stockmarkets.descriptions.IStockMarketDescription;
-import stockwatch.stockmarkets.parsers.QuotesParsersFactory;
 import stockwatch.stockmarkets.parsers.QuotesParser;
+import stockwatch.stockmarkets.parsers.QuotesParsersFactory;
 
 import com.google.common.annotations.VisibleForTesting;
-
-import config.ConfigParser;
-import datasaving.DataFileHolder;
-import datasaving.DataStoreHolder;
-import datasaving.QuotesToFileWriter;
-import datasaving.QuotesWriter;
-import datasaving.StatisticsToFileWriter;
-import datasaving.StatisticsWriter;
+import com.google.common.base.Preconditions;
 
 public class StockMarketBuilder {
+    private static final Logger logger = Logger.getLogger(StockMarketBuilder.class);
     private static StockMarketBuilder instance = new StockMarketBuilder();
-    private ConfigParser configParser;
-    
-    private StockMarketBuilder() {
-        configParser = new ConfigParser();
-    }
     
     public static StockMarketBuilder getInstnce() {
         return instance;
@@ -37,34 +28,22 @@ public class StockMarketBuilder {
         for (IMarketTypes market : allMarket) {
             InternalMarket newInternalMarket = new InternalMarket(market.getType());
             internalMarkets.add(newInternalMarket);
+            logger.debug("Added internal market: " +  market.getName());
         }
         return internalMarkets;
     }
     
-    @VisibleForTesting
-    QuotesWriter buildQuotesWriter(DataStoreHolder dataHolder) {
-        QuotesWriter quotesWriter = new QuotesToFileWriter(dataHolder);
-        return quotesWriter;
-    }
-
-    @VisibleForTesting
-    StatisticsWriter buildStatisticsWriter(DataStoreHolder dataHolder) {
-        StatisticsWriter statsWriters = new StatisticsToFileWriter(dataHolder);
-        return statsWriters;
-    }
-    
     public StockMarket buildStockMarket(StockMarket stockmarket, IStockMarketDescription marketDesc) {
+        stockmarket.setName(marketDesc.getName());
+        
         Vector<InternalMarket> internalMarkets = initMarkets(marketDesc);
         stockmarket.setInternalMarkets(internalMarkets);
         
         QuotesParser parser = QuotesParsersFactory.getParser(marketDesc, internalMarkets);
+        Preconditions.checkNotNull(parser);
         stockmarket.setParser(parser);
-        stockmarket.setName(marketDesc.getName());
         
-        DataStoreHolder dataStoreHolder = new DataFileHolder(configParser.getDirectoryPath() + stockmarket.getName());
-        stockmarket.setQuotestWriter(buildQuotesWriter(dataStoreHolder));
-        stockmarket.setStatisticsWriter(buildStatisticsWriter(dataStoreHolder));
-        
+        logger.debug(stockmarket.getName().name() + " built succesfully.");
         return stockmarket;
     }
 }

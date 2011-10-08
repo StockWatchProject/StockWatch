@@ -2,18 +2,17 @@ package stockwatch.stockmarkets;
 
 import java.util.Vector;
 
+import org.apache.log4j.Logger;
+
+import stockwatch.exceptions.SecuritiesParsingException;
 import stockwatch.stockmarkets.descriptions.DescriptionsFactory;
 import stockwatch.stockmarkets.descriptions.IStockMarketDescription;
 import stockwatch.stockmarkets.parsers.QuotesParser;
-import datasaving.QuotesWriter;
-import datasaving.StatisticsWriter;
 
 public class StockMarket {
-
+    private static final Logger logger = Logger.getLogger(StockMarket.class);
     private MarketNames name;
     private Vector<InternalMarket> internalMarkets;
-    private QuotesWriter quotesWriter;
-    private StatisticsWriter statisticsWriter;
     private QuotesParser quotesParser;
     
     public StockMarket(MarketNames mName){
@@ -23,14 +22,6 @@ public class StockMarket {
     
     void setName(MarketNames name) {
         this.name = name;
-    }
-    
-    void setQuotestWriter(QuotesWriter quotestWriter) {
-        this.quotesWriter = quotestWriter;
-    }
-
-    void setStatisticsWriter(StatisticsWriter statisticsWriter) {
-        this.statisticsWriter = statisticsWriter;
     }
     
     void setParser(QuotesParser parser) {
@@ -46,12 +37,20 @@ public class StockMarket {
     }
     
     public void save() {
-        quotesWriter.write(internalMarkets);
-        statisticsWriter.write(internalMarkets);
+        // should save quotes to database
+        logger.debug("Database updated");
     }
-
+    
     public StockMarket updateQuotes() {
-        internalMarkets = quotesParser.parseQuotes();
+        try {
+            internalMarkets = quotesParser.parseQuotes();
+            // update also statistics for every market
+            for (InternalMarket market : internalMarkets) {
+                market.makeStatistics();
+            }
+        } catch (SecuritiesParsingException e) {
+            logger.error("Couldn't update quotes, cause: " + e.getMessage(), e);
+        }
         return this;
     }
 

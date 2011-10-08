@@ -5,11 +5,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 
+import org.apache.log4j.Logger;
+
 import stockwatch.Utils;
 import stockwatch.securities.Security;
 
 public class SessionStatistics {
-
+    private static final Logger logger = Logger.getLogger(SessionStatistics.class);
     private final static int NUMBER_OF_TOP_STOCKS = 10;
 
     private int numberOfGrowingStocks;
@@ -43,11 +45,9 @@ public class SessionStatistics {
                 topUp = sortedSecurities.subList(0, NUMBER_OF_TOP_STOCKS);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
+            logger.error(e);
         } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
+            logger.error(e);
         }
 
     }
@@ -58,11 +58,9 @@ public class SessionStatistics {
                     - NUMBER_OF_TOP_STOCKS, sortedSecurities.size());
             Collections.reverse(topDown);
         } catch (ArrayIndexOutOfBoundsException e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
+            logger.error(e);
         } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
+            logger.error(e);
         }
     }
 

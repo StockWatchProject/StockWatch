@@ -35,4 +35,19 @@ public class InternalMarket {
     public void makeStatistics() {
         stats.makeStatistics(securities);
     }
+
+    @Override
+    public String toString() {
+        String stats = "";
+        stats += this.getStats().toString();
+        
+        String stockList = "\n";
+        stockList += this.getName() + " quotes:\n";
+        for (Security company : securities) {
+            stockList += company.toString() + "\n";
+        }
+        
+        return stockList + stats;
+    }
+    
 }
