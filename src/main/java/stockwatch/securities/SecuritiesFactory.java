@@ -4,7 +4,7 @@ import stockwatch.stockmarkets.descriptions.IMarketTypes;
 
 public class SecuritiesFactory {
 
-    public Security getSecurity(IMarketTypes type) throws IllegalArgumentException {
+    public ISecurity getSecurity(IMarketTypes type) throws IllegalArgumentException {
         SecurityTypes securityType = type.getSecurityType();
         switch (securityType) {
             case Stock:
@@ -22,23 +22,23 @@ public class SecuritiesFactory {
         }
     }
 
-    Security getStock() {
+    ISecurity getStock() {
         return new Share();
     }
 
-    Security getBond() {
+    ISecurity getBond() {
         return new Bond();
     }
 
-    Security getFutureContract() {
+    ISecurity getFutureContract() {
         return new FutureContract();
     }
     
-    Security getOption() {
+    ISecurity getOption() {
         return new Option();
     }
     
-    Security getIndex() {
+    ISecurity getIndex() {
         return new Index();
     }
 }

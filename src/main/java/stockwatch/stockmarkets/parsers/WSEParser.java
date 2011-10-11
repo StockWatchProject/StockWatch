@@ -3,6 +3,7 @@ package stockwatch.stockmarkets.parsers;
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import org.apache.log4j.Logger;
@@ -13,8 +14,8 @@ import org.jsoup.select.Elements;
 
 import stockwatch.exceptions.SecuritiesGettingException;
 import stockwatch.exceptions.SecuritiesParsingException;
+import stockwatch.securities.ISecurity;
 import stockwatch.securities.SecuritiesFactory;
-import stockwatch.securities.Security;
 import stockwatch.stockmarkets.InternalMarket;
 import stockwatch.stockmarkets.descriptions.IMarketTypes;
 
@@ -23,17 +24,17 @@ import com.google.common.base.Preconditions;
 public class WSEParser implements QuotesParser {
     private static final Logger logger = Logger.getLogger(WSEParser.class);
     private static final String reqex = "[A-Z][A-Z].{10}";
-    private Vector<InternalMarket> wseInternalMarkets;
-    private CallbackFactory<Security, Element> callbackFactory;
+    private ArrayList<InternalMarket> wseInternalMarkets;
+    private CallbackFactory<ISecurity, Element> callbackFactory;
     private SecuritiesFactory securityFactory;
     
-    public WSEParser(Vector<InternalMarket> markets) {
+    public WSEParser(ArrayList<InternalMarket> markets) {
         this.wseInternalMarkets = markets;
         this.callbackFactory = new WSEParserCallbackFactory();
         this.securityFactory = new SecuritiesFactory();
     }
     
-    private void addSecurities(final Elements parsedSecurities, Vector<Security> market, IMarketTypes marketType) 
+    private void addSecurities(final Elements parsedSecurities, Vector<ISecurity> market, IMarketTypes marketType) 
             throws IllegalArgumentException {
         // add new securities only if there are new 
         if (market.size() == parsedSecurities.size())
@@ -43,13 +44,13 @@ public class WSEParser implements QuotesParser {
         
         for (Element security : parsedSecurities) {
             Elements securityName = security.getElementsByClass("nazwa");
-            Security newSecurity = securityFactory.getSecurity(marketType);
+            ISecurity newSecurity = securityFactory.getSecurity(marketType);
             newSecurity.setSecurityName(securityName.last().text());
             market.addElement(newSecurity);
         }
     }
     
-    private void addSecuritiesId(final Elements parsedSecurities, Vector<Security> market) {
+    private void addSecuritiesId(final Elements parsedSecurities, Vector<ISecurity> market) {
         int i = 0;
         for (Element security : parsedSecurities) {
             Elements securityName = security.getElementsByAttribute("id");
@@ -58,13 +59,13 @@ public class WSEParser implements QuotesParser {
         }
     }
     
-    private void initMarket(final Elements parsedSecurities, Vector<Security> market, IMarketTypes marketType) 
+    private void initMarket(final Elements parsedSecurities, Vector<ISecurity> market, IMarketTypes marketType) 
             throws IllegalArgumentException {
         addSecurities(parsedSecurities, market, marketType);
         addSecuritiesId(parsedSecurities, market);
     }
     
-    private void parseTag(final Elements parsedSecurities, Vector<Security> market, String tag) 
+    private void parseTag(final Elements parsedSecurities, Vector<ISecurity> market, String tag) 
             throws IllegalArgumentException {
         Preconditions.checkArgument(parsedSecurities.size() == market.size(),
                 "Parsed too much stuff! Check parsed web site for changes. Parsed elements: %d , Market: %d", parsedSecurities.size(), market.size());
@@ -76,7 +77,7 @@ public class WSEParser implements QuotesParser {
         }
     }
     
-    private void parseTags(final Elements parsedSecurities, Vector<Security> market, String[] tagList) {
+    private void parseTags(final Elements parsedSecurities, Vector<ISecurity> market, String[] tagList) {
         for (String tag : tagList) {
             parseTag(parsedSecurities, market, tag);
         }
@@ -98,7 +99,7 @@ public class WSEParser implements QuotesParser {
         }
     }
     
-    private void parse(Vector<Security> market, String pageAddr, String[] tagList, IMarketTypes marketType) 
+    private void parse(Vector<ISecurity> market, String pageAddr, String[] tagList, IMarketTypes marketType) 
             throws SecuritiesParsingException {
         try {
             Elements allSecurities = getAllSecurities(pageAddr);
@@ -110,10 +111,10 @@ public class WSEParser implements QuotesParser {
     }
     
     @Override
-    public Vector<InternalMarket> parseQuotes() throws SecuritiesParsingException {
+    public ArrayList<InternalMarket> parseQuotes() throws SecuritiesParsingException {
         // Iterate over all internal markets of WSE and parse it's quotes.
         for (InternalMarket market : wseInternalMarkets) {
-            IMarketTypes marketType = market.getName();
+            IMarketTypes marketType = market.getMarketType();
             parse(market.getSecurities(), marketType.getPageAddress(), marketType.getTags(), marketType);
             logger.trace(market.toString());
         }

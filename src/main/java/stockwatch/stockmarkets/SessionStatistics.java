@@ -8,7 +8,7 @@ import java.util.Vector;
 import org.apache.log4j.Logger;
 
 import stockwatch.Utils;
-import stockwatch.securities.Security;
+import stockwatch.securities.ISecurity;
 
 public class SessionStatistics {
     private static final Logger logger = Logger.getLogger(SessionStatistics.class);
@@ -18,24 +18,21 @@ public class SessionStatistics {
     private int numberOfFallingStocks;
     private double avgReturn;
 
-    private Vector<Security> sortedSecurities;
-    private List<Security> topUp;
-    private List<Security> topDown;
+    private Vector<ISecurity> sortedSecurities;
+    private List<ISecurity> topUp;
+    private List<ISecurity> topDown;
 
     public SessionStatistics() {
-        topUp = new ArrayList<Security>();
-        topDown = new ArrayList<Security>();
-        sortedSecurities = new Vector<Security>();
-
-        numberOfGrowingStocks = 0;
-        numberOfFallingStocks = 0;
+        topUp = new ArrayList<ISecurity>();
+        topDown = new ArrayList<ISecurity>();
+        sortedSecurities = new Vector<ISecurity>();
     }
 
-    private void CountGrowingCompanies(Vector<Security> companies) {
+    private void CountGrowingCompanies(Vector<ISecurity> companies) {
         numberOfGrowingStocks = Utils.countIf(companies, Utils.isUp);
     }
 
-    private void CountFallingCompanies(Vector<Security> companies) {
+    private void CountFallingCompanies(Vector<ISecurity> companies) {
         numberOfFallingStocks = Utils.countIf(companies, Utils.isDown);
     }
 
@@ -64,18 +61,18 @@ public class SessionStatistics {
         }
     }
 
-    private void countAvgReturn(Vector<Security> companies) {
+    private void countAvgReturn(Vector<ISecurity> companies) {
         double avg = 0;
         if (companies.size() == 0)
             return;
 
-        for (Security company : companies) {
+        for (ISecurity company : companies) {
             avg += company.getChange();
         }
         avgReturn = avg / companies.size();
     }
 
-    public void makeStatistics(Vector<Security> companies) {
+    public void makeStatistics(Vector<ISecurity> companies) {
         sortedSecurities.setSize(companies.size());
         Collections.copy(sortedSecurities, companies);
         Collections.sort(sortedSecurities, new Utils.CompanyComparator());
@@ -87,7 +84,7 @@ public class SessionStatistics {
         countAvgReturn(sortedSecurities);
     }
 
-    public Vector<Security> getSortedCompanies() {
+    public Vector<ISecurity> getSortedCompanies() {
         return sortedSecurities;
     }
 
@@ -108,12 +105,12 @@ public class SessionStatistics {
         stats += "Amount of falling securities: " + numberOfFallingStocks + "\n";
 
         stats += "\nTop ten growing securities: \n\n";
-        for (Security company : topUp) {
+        for (ISecurity company : topUp) {
             stats += company.sessionResult() + "\n";
         }
 
         stats += "\nTop ten falling securities: \n\n";
-        for (Security company : topDown) {
+        for (ISecurity company : topDown) {
             stats += company.sessionResult() + "\n";
         }
 

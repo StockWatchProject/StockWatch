@@ -1,7 +1,7 @@
 package stockwatch.stockmarkets.parsers;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Vector;
+import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 
@@ -11,11 +11,11 @@ import stockwatch.stockmarkets.descriptions.IStockMarketDescription;
 public class QuotesParsersFactory {
     private static final Logger logger = Logger.getLogger(QuotesParsersFactory.class);
     
-    static public QuotesParser getParser(IStockMarketDescription marketDesc,Vector<InternalMarket> im) {
+    static public QuotesParser getParser(IStockMarketDescription marketDesc, ArrayList<InternalMarket> im) {
         String parserClassName = "stockwatch.stockmarkets.parsers." + marketDesc.getName().name() + "Parser";
         
         @SuppressWarnings("rawtypes")
-        Class[] aTypes = { Vector.class };
+        Class[] aTypes = { ArrayList.class };
         Object[] aArgs = { im };
         
         //TODO: After migration to jdk7 change this chain of catch to only one exception:  ReflectiveOperationException

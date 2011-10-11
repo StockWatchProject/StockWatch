@@ -2,25 +2,25 @@ package stockwatch.stockmarkets;
 
 import java.util.Vector;
 
-import stockwatch.securities.Security;
+import stockwatch.securities.ISecurity;
 import stockwatch.stockmarkets.descriptions.IMarketTypes;
 
 public class InternalMarket {
     private IMarketTypes marketType;
-    private Vector<Security> securities;
+    private Vector<ISecurity> securities;
     private SessionStatistics stats;
     
     public InternalMarket(IMarketTypes type) {
         this.marketType = type;
-        securities = new Vector<Security>();
+        securities = new Vector<ISecurity>();
         stats = new SessionStatistics();
     }
     
-    public IMarketTypes getName() {
+    public IMarketTypes getMarketType() {
         return marketType;
     }
     
-    public Vector<Security> getSecurities() {
+    public Vector<ISecurity> getSecurities() {
         return securities;
     }
     
@@ -42,9 +42,9 @@ public class InternalMarket {
         stats += this.getStats().toString();
         
         String stockList = "\n";
-        stockList += this.getName() + " quotes:\n";
-        for (Security company : securities) {
-            stockList += company.toString() + "\n";
+        stockList += this.getMarketType() + " quotes:\n";
+        for (ISecurity security : securities) {
+            stockList += security.toString() + "\n";
         }
         
         return stockList + stats;

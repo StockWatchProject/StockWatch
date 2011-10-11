@@ -3,7 +3,7 @@ package stockwatch;
 import java.util.Collection;
 import java.util.Comparator;
 
-import stockwatch.securities.Security;
+import stockwatch.securities.ISecurity;
 
 import com.google.common.base.Predicate;
 
@@ -11,16 +11,16 @@ public class Utils {
 
     public final static int UNDEFINED_VALUE = -1;
     
-    static public Predicate<Security> isUp = new Predicate<Security>() {
+    static public Predicate<ISecurity> isUp = new Predicate<ISecurity>() {
         @Override
-        public boolean apply(Security arg) {
+        public boolean apply(ISecurity arg) {
             return arg.getChange() > 0 ? true : false;
         }
     };
     
-    static public Predicate<Security> isDown = new Predicate<Security>() {
+    static public Predicate<ISecurity> isDown = new Predicate<ISecurity>() {
         @Override
-        public boolean apply(Security arg) {
+        public boolean apply(ISecurity arg) {
             return arg.getChange() < 0 ? true : false;
         }
     };
@@ -35,10 +35,10 @@ public class Utils {
         return countedPred;
     }
 
-    static public class CompanyComparator implements Comparator<Security> {
+    static public class CompanyComparator implements Comparator<ISecurity> {
 
         @Override
-        public int compare(Security o1, Security o2) {
+        public int compare(ISecurity o1, ISecurity o2) {
 
             if (o1.getChange() < o2.getChange())
                 return 1;

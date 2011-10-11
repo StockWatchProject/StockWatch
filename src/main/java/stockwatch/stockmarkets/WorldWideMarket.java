@@ -6,8 +6,7 @@ import java.util.Vector;
 import org.apache.log4j.Logger;
 
 public class WorldWideMarket extends TimerTask {
-
-    static final Logger logger = Logger.getLogger(WorldWideMarket.class);
+    private static final Logger logger = Logger.getLogger(WorldWideMarket.class);
     private Vector<StockMarket> stockExchanges;
     
     public WorldWideMarket() {

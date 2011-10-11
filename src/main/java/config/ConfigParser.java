@@ -10,9 +10,9 @@ import org.apache.log4j.PropertyConfigurator;
 
 public class ConfigParser {
     private final static String fileName = System.getProperty("user.home") + "/.dotConfig";
-
     private Properties appProperties;
     private InputStream propertiesFile;
+    private int refreshRate;
 
     public ConfigParser() {
         try {
@@ -22,12 +22,15 @@ public class ConfigParser {
             appProperties.load(propertiesFile);
             PropertyConfigurator.configure(fileName);
             
+            refreshRate = Integer.parseInt(appProperties.getProperty("StockWatch.refreshRate"));
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
             System.exit(-1);
         } catch (IOException e) {
-            e.printStackTrace();
             System.exit(-1);
         }
+    }
+    
+    public int getRefreshRate() {
+        return refreshRate;
     }
 }
