@@ -28,10 +28,6 @@ public class InternalMarket {
         return stats;
     }
     
-    public void clearSecurities() {
-        securities.clear();
-    }
-    
     public void makeStatistics() {
         stats.makeStatistics(securities);
     }

@@ -51,9 +51,11 @@ public class SessionStatistics {
 
     private void getTenTopBottomStocks() {
         try {
-            topDown = sortedSecurities.subList(sortedSecurities.size()
-                    - NUMBER_OF_TOP_STOCKS, sortedSecurities.size());
-            Collections.reverse(topDown);
+            if (sortedSecurities.size() >= NUMBER_OF_TOP_STOCKS) {
+                topDown = sortedSecurities.subList(sortedSecurities.size()
+                        - NUMBER_OF_TOP_STOCKS, sortedSecurities.size());
+                Collections.reverse(topDown);
+            }
         } catch (ArrayIndexOutOfBoundsException e) {
             logger.error(e);
         } catch (IllegalArgumentException e) {
@@ -73,6 +75,7 @@ public class SessionStatistics {
     }
 
     public void makeStatistics(Vector<ISecurity> companies) {
+        sortedSecurities.clear();
         sortedSecurities.setSize(companies.size());
         Collections.copy(sortedSecurities, companies);
         Collections.sort(sortedSecurities, new Utils.CompanyComparator());

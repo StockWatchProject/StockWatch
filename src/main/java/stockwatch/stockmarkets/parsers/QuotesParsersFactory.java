@@ -2,6 +2,7 @@ package stockwatch.stockmarkets.parsers;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -11,7 +12,7 @@ import stockwatch.stockmarkets.descriptions.IStockMarketDescription;
 public class QuotesParsersFactory {
     private static final Logger logger = Logger.getLogger(QuotesParsersFactory.class);
     
-    static public QuotesParser getParser(IStockMarketDescription marketDesc, ArrayList<InternalMarket> im) {
+    static public QuotesParser getParser(IStockMarketDescription marketDesc, List<InternalMarket> im) {
         String parserClassName = "stockwatch.stockmarkets.parsers." + marketDesc.getName().name() + "Parser";
         
         @SuppressWarnings("rawtypes")

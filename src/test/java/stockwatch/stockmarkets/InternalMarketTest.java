@@ -5,7 +5,6 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
-import stockwatch.securities.Share;
 import stockwatch.stockmarkets.descriptions.IMarketTypes;
 import stockwatch.stockmarkets.descriptions.WSEDescription;
 
@@ -34,14 +33,5 @@ public class InternalMarketTest extends TestCase {
     @Test
     public void testGetStats() {
         assertNotNull(internalMarket.getStats());
-    }
-    
-    @Test
-    public void testClearSecurities() {
-        assertTrue(internalMarket.getSecurities().isEmpty());
-        internalMarket.getSecurities().add(new Share());
-        assertEquals(internalMarket.getSecurities().size(), 1);
-        internalMarket.clearSecurities();
-        assertTrue(internalMarket.getSecurities().isEmpty());
     }
 }

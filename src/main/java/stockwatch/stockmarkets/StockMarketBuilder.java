@@ -1,6 +1,7 @@
 package stockwatch.stockmarkets;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -20,8 +21,8 @@ public class StockMarketBuilder {
     }
 
     @VisibleForTesting
-    ArrayList<InternalMarket> initMarkets(IStockMarketDescription marketDesc) {
-        ArrayList<InternalMarket> internalMarkets = new ArrayList<InternalMarket>();
+    List<InternalMarket> initMarkets(IStockMarketDescription marketDesc) {
+        List<InternalMarket> internalMarkets = new ArrayList<InternalMarket>();
         
         IMarketTypes allMarket[] = marketDesc.getInternalMarkets();
         for (IMarketTypes market : allMarket) {
@@ -35,7 +36,7 @@ public class StockMarketBuilder {
     public StockMarket buildStockMarket(StockMarket stockmarket, IStockMarketDescription marketDesc) {
         stockmarket.setName(marketDesc.getName());
         
-        ArrayList<InternalMarket> internalMarkets = initMarkets(marketDesc);
+        List<InternalMarket> internalMarkets = initMarkets(marketDesc);
         stockmarket.setInternalMarkets(internalMarkets);
         
         QuotesParser parser = QuotesParsersFactory.getParser(marketDesc, internalMarkets);

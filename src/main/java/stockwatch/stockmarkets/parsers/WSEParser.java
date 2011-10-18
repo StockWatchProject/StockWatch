@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 import org.apache.log4j.Logger;
@@ -37,9 +38,11 @@ public class WSEParser implements QuotesParser {
     private void addSecurities(final Elements parsedSecurities, Vector<ISecurity> market, IMarketTypes marketType) 
             throws IllegalArgumentException {
         // add new securities only if there are new 
-        if (market.size() == parsedSecurities.size())
+        if (market.size() == parsedSecurities.size()) {
+            logger.debug("Security list is up to date.");
             return;
-        
+        }
+
         market.clear();
         
         for (Element security : parsedSecurities) {
@@ -111,7 +114,7 @@ public class WSEParser implements QuotesParser {
     }
     
     @Override
-    public ArrayList<InternalMarket> parseQuotes() throws SecuritiesParsingException {
+    public List<InternalMarket>  parseQuotes() throws SecuritiesParsingException {
         // Iterate over all internal markets of WSE and parse it's quotes.
         for (InternalMarket market : wseInternalMarkets) {
             IMarketTypes marketType = market.getMarketType();

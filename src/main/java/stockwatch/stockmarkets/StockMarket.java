@@ -1,6 +1,6 @@
 package stockwatch.stockmarkets;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -12,7 +12,7 @@ import stockwatch.stockmarkets.parsers.QuotesParser;
 public class StockMarket {
     private static final Logger logger = Logger.getLogger(StockMarket.class);
     private MarketNames name;
-    private ArrayList<InternalMarket> internalMarkets;
+    private List<InternalMarket> internalMarkets;
     private QuotesParser quotesParser;
     
     public StockMarket(MarketNames mName){
@@ -28,7 +28,7 @@ public class StockMarket {
         this.quotesParser = parser;
     }
     
-    void setInternalMarkets(ArrayList<InternalMarket> internalMarkets) {
+    void setInternalMarkets(List<InternalMarket> internalMarkets) {
         this.internalMarkets = internalMarkets;
     }
     

@@ -13,11 +13,6 @@ public abstract class SecurityImpl implements ISecurity {
     int volume;
     Time lastChanged;
 
-    public SecurityImpl() {
-        securityName = new String();
-        securityId = new String();
-    }
-
     @Override
     public void setSecurityName(String companyName) {
         this.securityName = companyName;
@@ -52,7 +47,7 @@ public abstract class SecurityImpl implements ISecurity {
             String time = when.equals("--") ? "00:00:00" : when + ":00";
             this.lastChanged = Time.valueOf(time);
         } catch (IllegalArgumentException e) {
-            e.printStackTrace();
+            this.lastChanged = Time.valueOf("00:00:00");
         }
     }
     
