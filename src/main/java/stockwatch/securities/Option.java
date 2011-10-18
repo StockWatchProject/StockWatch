@@ -7,10 +7,6 @@ import java.util.Date;
 public class Option extends FutureContract {
     Date expirationDate;
     static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    
-    public Date getExpirationDate() {
-        return expirationDate;
-    }
 
     @Override
     public void setExpirationDate(String expirationDate) {
@@ -21,6 +17,8 @@ public class Option extends FutureContract {
             this.expirationDate.setTime(0);
         }
     }
+    
+    public String getExpirationDate() { return expirationDate.toString(); }
     
     @Override
     public String toString() {

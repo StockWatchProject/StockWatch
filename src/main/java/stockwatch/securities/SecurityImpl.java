@@ -14,22 +14,17 @@ public abstract class SecurityImpl implements ISecurity {
     Time lastChanged;
 
     @Override
-    public void setSecurityName(String companyName) {
-        this.securityName = companyName;
-    }
+    public void setSecurityName(String companyName) { this.securityName = companyName; }
+    
+    @Override
+    public String getSecurityName() { return this.securityName; }
 
     @Override
-    public void setLastTransactionPrice(String closePrice) {
-        this.lastTransactionPrice = 
-            closePrice.equals("--") ? UNDEFINED_VALUE : Double.parseDouble(closePrice.trim().replace(',', '.'));
-    }
+    public void setSecurityId(String companyId) { this.securityId = companyId; }
 
     @Override
-    public void setOpenPrice(String openPrice) {
-        this.openPrice = 
-            openPrice.equals("--") ? UNDEFINED_VALUE : Double.parseDouble(openPrice.trim().replace(',','.'));
-    }
-
+    public String getSecurityId() { return securityId; }
+    
     @Override
     public void setPercentageChange(String percentageChange) {
         this.percentageChange = 
@@ -37,10 +32,53 @@ public abstract class SecurityImpl implements ISecurity {
     }
 
     @Override
-    public void setSecurityId(String companyId) {
-        this.securityId = companyId;
+    public double getPercentageChange() { return percentageChange; }
+    
+    @Override
+    public void setOpenPrice(String openPrice) {
+        this.openPrice = 
+            openPrice.equals("--") ? UNDEFINED_VALUE : Double.parseDouble(openPrice.trim().replace(',','.'));
     }
 
+    @Override
+    public double getOpenPrice() { return this.openPrice; }
+    
+    @Override
+    public void setLastTransactionPrice(String closePrice) {
+        this.lastTransactionPrice = 
+            closePrice.equals("--") ? UNDEFINED_VALUE : Double.parseDouble(closePrice.trim().replace(',', '.'));
+    }
+    
+    @Override
+    public double getLastTransactionPrice() { return this.lastTransactionPrice; }
+
+    @Override
+    public void setHigh(String high) {
+        this.high =
+            high.equals("--") ? UNDEFINED_VALUE : Double.parseDouble(high.trim().replace(',', '.'));
+    }
+
+    @Override
+    public double getHigh() { return this.high; }
+    
+    @Override
+    public void setLow(String low) {
+        this.low =
+            low.equals("--") ? UNDEFINED_VALUE : Double.parseDouble(low.trim().replace(',', '.'));
+    }
+    
+    @Override
+    public double getLow() { return this.low; }
+    
+    @Override
+    public void setVolume(String volume) {
+        this.volume = 
+             volume.equals("--") ? UNDEFINED_VALUE : Integer.parseInt(volume.replace(" ", ""));
+    }
+    
+    @Override
+    public int getVolume() { return this.volume; }
+    
     @Override
     public void setLastChangedTime(String when) {
         try {
@@ -52,32 +90,7 @@ public abstract class SecurityImpl implements ISecurity {
     }
     
     @Override
-    public void setHigh(String high) {
-        this.high =
-            high.equals("--") ? UNDEFINED_VALUE : Double.parseDouble(high.trim().replace(',', '.'));
-    }
-
-    @Override
-    public void setLow(String low) {
-        this.low =
-            low.equals("--") ? UNDEFINED_VALUE : Double.parseDouble(low.trim().replace(',', '.'));
-    }
-    
-    @Override
-    public void setVolume(String volume) {
-        this.volume = 
-             volume.equals("--") ? UNDEFINED_VALUE : Integer.parseInt(volume.replace(" ", ""));
-    }
-    
-    @Override
-    public String getSecurityId() {
-        return securityId;
-    }
-
-    @Override
-    public double getChange() {
-        return percentageChange;
-    }
+    public String getLastChangedTime() { return this.lastChanged.toString(); }
 
     @Override
     public String sessionResult() {

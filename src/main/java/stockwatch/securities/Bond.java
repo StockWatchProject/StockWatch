@@ -20,4 +20,13 @@ public class Bond extends SecurityImpl {
     @Override
     public void setExpirationDate(String date) {}
 
+    @Override
+    public int getLop() { return 0; }
+
+    @Override
+    public int getLopChange() { return 0; }
+
+    @Override
+    public String getExpirationDate() { return null; }
+
 }

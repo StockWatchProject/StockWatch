@@ -8,12 +8,18 @@ public class FutureContract extends SecurityImpl {
     public void setLop(String lop) {
         this.lop = lop.equals("--") ? UNDEFINED_VALUE : Integer.parseInt(lop.trim());
     }
+    
+    @Override
+    public int getLop() { return this.lop; }
 
     @Override
     public void setLopChange(String lopChange) {
         this.lopChange = lopChange.equals("--") ? UNDEFINED_VALUE : Integer.parseInt(lopChange.trim().replace("+", ""));
     }
 
+    @Override
+    public int getLopChange() { return this.lopChange; }
+    
     @Override
     public String toString() {
         return String.format(OUTPUT_FORMAT, securityName) + " "
@@ -28,5 +34,8 @@ public class FutureContract extends SecurityImpl {
     }
 
     @Override
-    public void setExpirationDate(String date) {}
+    public void setExpirationDate(String date) { }
+
+    @Override
+    public String getExpirationDate() { return null; }
 }

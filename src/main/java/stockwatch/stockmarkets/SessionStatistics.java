@@ -69,7 +69,7 @@ public class SessionStatistics {
             return;
 
         for (ISecurity company : companies) {
-            avg += company.getChange();
+            avg += company.getPercentageChange();
         }
         avgReturn = avg / companies.size();
     }
