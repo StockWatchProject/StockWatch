@@ -14,14 +14,14 @@ public class Utils {
     static public Predicate<ISecurity> isUp = new Predicate<ISecurity>() {
         @Override
         public boolean apply(ISecurity arg) {
-            return arg.getChange() > 0 ? true : false;
+            return arg.getPercentageChange() > 0 ? true : false;
         }
     };
     
     static public Predicate<ISecurity> isDown = new Predicate<ISecurity>() {
         @Override
         public boolean apply(ISecurity arg) {
-            return arg.getChange() < 0 ? true : false;
+            return arg.getPercentageChange() < 0 ? true : false;
         }
     };
 
@@ -40,11 +40,11 @@ public class Utils {
         @Override
         public int compare(ISecurity o1, ISecurity o2) {
 
-            if (o1.getChange() < o2.getChange())
+            if (o1.getPercentageChange() < o2.getPercentageChange())
                 return 1;
-            else if (o1.getChange() > o2.getChange())
+            else if (o1.getPercentageChange() > o2.getPercentageChange())
                 return -1;
-            else if (o1.getChange() == UNDEFINED_VALUE || o2.getChange() == UNDEFINED_VALUE)
+            else if (o1.getPercentageChange() == UNDEFINED_VALUE || o2.getPercentageChange() == UNDEFINED_VALUE)
                 return 0;
             else
                 return 0;
