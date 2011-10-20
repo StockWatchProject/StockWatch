@@ -1,11 +1,18 @@
 package stockwatch.stockmarkets;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
+import org.apache.log4j.Logger;
+
+import stockwatch.messages.QuoteMessages.Quote;
+import stockwatch.messages.QuoteMessages.QuoteList;
 import stockwatch.securities.ISecurity;
 import stockwatch.stockmarkets.descriptions.IMarketTypes;
 
 public class InternalMarket {
+    private static final Logger logger = Logger.getLogger(InternalMarket.class);
     private IMarketTypes marketType;
     private Vector<ISecurity> securities;
     private SessionStatistics stats;
@@ -31,7 +38,7 @@ public class InternalMarket {
     public void makeStatistics() {
         stats.makeStatistics(securities);
     }
-
+    
     @Override
     public String toString() {
         String stats = "";
@@ -44,6 +51,21 @@ public class InternalMarket {
         }
         
         return stockList + stats;
+    }
+    
+    public QuoteList serialize() {
+        List<Quote> quotes = new ArrayList<Quote>(securities.size());
+        for (ISecurity s : securities) {
+            Quote q = Quote.newBuilder()
+                    .setName(s.getSecurityName())
+                    .setId(s.getSecurityId())
+                    .setLastPrice(s.getLastTransactionPrice())
+                    .build();
+            
+            quotes.add(q);
+        }
+        logger.debug(quotes.toString());
+        return QuoteList.newBuilder().addAllQuote(quotes).build();
     }
     
 }

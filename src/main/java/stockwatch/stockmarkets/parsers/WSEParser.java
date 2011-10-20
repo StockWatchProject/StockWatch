@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Vector;
 
 import org.apache.log4j.Logger;
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -88,7 +89,9 @@ public class WSEParser implements QuotesParser {
     
     private Elements getAllSecurities(String pageAddr) throws SecuritiesGettingException {
         try {
-            Document sourceDocument = Jsoup.connect(pageAddr).get();
+            Connection conn = Jsoup.connect(pageAddr);
+            conn.timeout(10000);
+            Document sourceDocument = conn.get();
             Elements parsedElems = sourceDocument.getElementsByAttributeValueMatching("id", reqex);
             return parsedElems;
         } catch (UnknownHostException e) {

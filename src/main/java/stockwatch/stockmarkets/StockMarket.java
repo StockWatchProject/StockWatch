@@ -47,6 +47,7 @@ public class StockMarket {
             for (InternalMarket market : internalMarkets) {
                 market.makeStatistics();
             }
+            logger.debug("Quotes upaded.");
         } catch (SecuritiesParsingException e) {
             logger.error("Couldn't update quotes, cause: " + e.getMessage(), e);
         }
