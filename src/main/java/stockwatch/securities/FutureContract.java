@@ -1,8 +1,17 @@
 package stockwatch.securities;
 
+import stockwatch.messages.QuoteMessages.Quote;
+
 public class FutureContract extends SecurityImpl {
-    int lop;
-    int lopChange;
+    private final int marketId;
+    private int lop;
+    private int lopChange;
+    
+    protected FutureContract() { marketId = -1;}
+    
+    public FutureContract(int marketId) {
+        this.marketId = marketId;
+    }
 
     @Override
     public void setLop(String lop) {
@@ -38,4 +47,25 @@ public class FutureContract extends SecurityImpl {
 
     @Override
     public String getExpirationDate() { return null; }
+    
+    @Override
+    public Quote fullSerialize() {
+        return Quote.newBuilder()
+                .setName(this.getSecurityName())
+                .setId(this.getSecurityId())
+                .setMarketId(this.getMarketId())
+                .setLastPrice(this.getLastTransactionPrice())
+                .setPercentageChange(this.getPercentageChange())
+                .setOpen(this.getOpenPrice())
+                .setLow(this.getLow())
+                .setHigh(this.getHigh())
+                .setVolume(this.getVolume())
+                .setLastChangeTime(this.getLastChangedTime())
+                .setLop(this.getLop())
+                .setLopChange(this.getLopChange())
+                .build();
+    }
+    
+    @Override
+    public int getMarketId() { return marketId; }
 }

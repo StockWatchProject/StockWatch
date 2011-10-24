@@ -8,6 +8,351 @@ public final class QuoteMessages {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
+  public enum MessageType
+      implements com.google.protobuf.ProtocolMessageEnum {
+    AVAILABLE_REQ(0, 1),
+    QUOTE_LIST(1, 2),
+    ;
+    
+    public static final int AVAILABLE_REQ_VALUE = 1;
+    public static final int QUOTE_LIST_VALUE = 2;
+    
+    
+    public final int getNumber() { return value; }
+    
+    public static MessageType valueOf(int value) {
+      switch (value) {
+        case 1: return AVAILABLE_REQ;
+        case 2: return QUOTE_LIST;
+        default: return null;
+      }
+    }
+    
+    public static com.google.protobuf.Internal.EnumLiteMap<MessageType>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static com.google.protobuf.Internal.EnumLiteMap<MessageType>
+        internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<MessageType>() {
+            public MessageType findValueByNumber(int number) {
+              return MessageType.valueOf(number);
+            }
+          };
+    
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(index);
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return stockwatch.messages.QuoteMessages.getDescriptor().getEnumTypes().get(0);
+    }
+    
+    private static final MessageType[] VALUES = {
+      AVAILABLE_REQ, QUOTE_LIST, 
+    };
+    
+    public static MessageType valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      return VALUES[desc.getIndex()];
+    }
+    
+    private final int index;
+    private final int value;
+    
+    private MessageType(int index, int value) {
+      this.index = index;
+      this.value = value;
+    }
+    
+    // @@protoc_insertion_point(enum_scope:serialized.MessageType)
+  }
+  
+  public interface AvailableSecuritiesReqOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+  }
+  public static final class AvailableSecuritiesReq extends
+      com.google.protobuf.GeneratedMessage
+      implements AvailableSecuritiesReqOrBuilder {
+    // Use AvailableSecuritiesReq.newBuilder() to construct.
+    private AvailableSecuritiesReq(Builder builder) {
+      super(builder);
+    }
+    private AvailableSecuritiesReq(boolean noInit) {}
+    
+    private static final AvailableSecuritiesReq defaultInstance;
+    public static AvailableSecuritiesReq getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public AvailableSecuritiesReq getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return stockwatch.messages.QuoteMessages.internal_static_serialized_AvailableSecuritiesReq_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return stockwatch.messages.QuoteMessages.internal_static_serialized_AvailableSecuritiesReq_fieldAccessorTable;
+    }
+    
+    private void initFields() {
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static stockwatch.messages.QuoteMessages.AvailableSecuritiesReq parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static stockwatch.messages.QuoteMessages.AvailableSecuritiesReq parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static stockwatch.messages.QuoteMessages.AvailableSecuritiesReq parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static stockwatch.messages.QuoteMessages.AvailableSecuritiesReq parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static stockwatch.messages.QuoteMessages.AvailableSecuritiesReq parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static stockwatch.messages.QuoteMessages.AvailableSecuritiesReq parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static stockwatch.messages.QuoteMessages.AvailableSecuritiesReq parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static stockwatch.messages.QuoteMessages.AvailableSecuritiesReq parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static stockwatch.messages.QuoteMessages.AvailableSecuritiesReq parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static stockwatch.messages.QuoteMessages.AvailableSecuritiesReq parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(stockwatch.messages.QuoteMessages.AvailableSecuritiesReq prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements stockwatch.messages.QuoteMessages.AvailableSecuritiesReqOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return stockwatch.messages.QuoteMessages.internal_static_serialized_AvailableSecuritiesReq_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return stockwatch.messages.QuoteMessages.internal_static_serialized_AvailableSecuritiesReq_fieldAccessorTable;
+      }
+      
+      // Construct using stockwatch.messages.QuoteMessages.AvailableSecuritiesReq.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return stockwatch.messages.QuoteMessages.AvailableSecuritiesReq.getDescriptor();
+      }
+      
+      public stockwatch.messages.QuoteMessages.AvailableSecuritiesReq getDefaultInstanceForType() {
+        return stockwatch.messages.QuoteMessages.AvailableSecuritiesReq.getDefaultInstance();
+      }
+      
+      public stockwatch.messages.QuoteMessages.AvailableSecuritiesReq build() {
+        stockwatch.messages.QuoteMessages.AvailableSecuritiesReq result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private stockwatch.messages.QuoteMessages.AvailableSecuritiesReq buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        stockwatch.messages.QuoteMessages.AvailableSecuritiesReq result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public stockwatch.messages.QuoteMessages.AvailableSecuritiesReq buildPartial() {
+        stockwatch.messages.QuoteMessages.AvailableSecuritiesReq result = new stockwatch.messages.QuoteMessages.AvailableSecuritiesReq(this);
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof stockwatch.messages.QuoteMessages.AvailableSecuritiesReq) {
+          return mergeFrom((stockwatch.messages.QuoteMessages.AvailableSecuritiesReq)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(stockwatch.messages.QuoteMessages.AvailableSecuritiesReq other) {
+        if (other == stockwatch.messages.QuoteMessages.AvailableSecuritiesReq.getDefaultInstance()) return this;
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+          }
+        }
+      }
+      
+      
+      // @@protoc_insertion_point(builder_scope:serialized.AvailableSecuritiesReq)
+    }
+    
+    static {
+      defaultInstance = new AvailableSecuritiesReq(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:serialized.AvailableSecuritiesReq)
+  }
+  
   public interface QuoteOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
@@ -19,43 +364,47 @@ public final class QuoteMessages {
     boolean hasId();
     String getId();
     
-    // optional double lastPrice = 3;
+    // required int32 marketId = 3;
+    boolean hasMarketId();
+    int getMarketId();
+    
+    // optional double lastPrice = 4;
     boolean hasLastPrice();
     double getLastPrice();
     
-    // optional double percentageChange = 4;
+    // optional double percentageChange = 5;
     boolean hasPercentageChange();
     double getPercentageChange();
     
-    // optional double open = 5;
+    // optional double open = 6;
     boolean hasOpen();
     double getOpen();
     
-    // optional double low = 6;
+    // optional double low = 7;
     boolean hasLow();
     double getLow();
     
-    // optional double high = 7;
+    // optional double high = 8;
     boolean hasHigh();
     double getHigh();
     
-    // optional int32 volume = 8;
+    // optional int32 volume = 9;
     boolean hasVolume();
     int getVolume();
     
-    // optional string lastChangeTime = 9;
+    // optional string lastChangeTime = 10;
     boolean hasLastChangeTime();
     String getLastChangeTime();
     
-    // optional int32 lop = 10;
+    // optional int32 lop = 11;
     boolean hasLop();
     int getLop();
     
-    // optional int32 lopChane = 11;
-    boolean hasLopChane();
-    int getLopChane();
+    // optional int32 lopChange = 12;
+    boolean hasLopChange();
+    int getLopChange();
     
-    // optional string expirationDate = 12;
+    // optional string expirationDate = 13;
     boolean hasExpirationDate();
     String getExpirationDate();
   }
@@ -152,71 +501,81 @@ public final class QuoteMessages {
       }
     }
     
-    // optional double lastPrice = 3;
-    public static final int LASTPRICE_FIELD_NUMBER = 3;
+    // required int32 marketId = 3;
+    public static final int MARKETID_FIELD_NUMBER = 3;
+    private int marketId_;
+    public boolean hasMarketId() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public int getMarketId() {
+      return marketId_;
+    }
+    
+    // optional double lastPrice = 4;
+    public static final int LASTPRICE_FIELD_NUMBER = 4;
     private double lastPrice_;
     public boolean hasLastPrice() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     public double getLastPrice() {
       return lastPrice_;
     }
     
-    // optional double percentageChange = 4;
-    public static final int PERCENTAGECHANGE_FIELD_NUMBER = 4;
+    // optional double percentageChange = 5;
+    public static final int PERCENTAGECHANGE_FIELD_NUMBER = 5;
     private double percentageChange_;
     public boolean hasPercentageChange() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     public double getPercentageChange() {
       return percentageChange_;
     }
     
-    // optional double open = 5;
-    public static final int OPEN_FIELD_NUMBER = 5;
+    // optional double open = 6;
+    public static final int OPEN_FIELD_NUMBER = 6;
     private double open_;
     public boolean hasOpen() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     public double getOpen() {
       return open_;
     }
     
-    // optional double low = 6;
-    public static final int LOW_FIELD_NUMBER = 6;
+    // optional double low = 7;
+    public static final int LOW_FIELD_NUMBER = 7;
     private double low_;
     public boolean hasLow() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     public double getLow() {
       return low_;
     }
     
-    // optional double high = 7;
-    public static final int HIGH_FIELD_NUMBER = 7;
+    // optional double high = 8;
+    public static final int HIGH_FIELD_NUMBER = 8;
     private double high_;
     public boolean hasHigh() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     public double getHigh() {
       return high_;
     }
     
-    // optional int32 volume = 8;
-    public static final int VOLUME_FIELD_NUMBER = 8;
+    // optional int32 volume = 9;
+    public static final int VOLUME_FIELD_NUMBER = 9;
     private int volume_;
     public boolean hasVolume() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
+      return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     public int getVolume() {
       return volume_;
     }
     
-    // optional string lastChangeTime = 9;
-    public static final int LASTCHANGETIME_FIELD_NUMBER = 9;
+    // optional string lastChangeTime = 10;
+    public static final int LASTCHANGETIME_FIELD_NUMBER = 10;
     private java.lang.Object lastChangeTime_;
     public boolean hasLastChangeTime() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
+      return ((bitField0_ & 0x00000200) == 0x00000200);
     }
     public String getLastChangeTime() {
       java.lang.Object ref = lastChangeTime_;
@@ -244,31 +603,31 @@ public final class QuoteMessages {
       }
     }
     
-    // optional int32 lop = 10;
-    public static final int LOP_FIELD_NUMBER = 10;
+    // optional int32 lop = 11;
+    public static final int LOP_FIELD_NUMBER = 11;
     private int lop_;
     public boolean hasLop() {
-      return ((bitField0_ & 0x00000200) == 0x00000200);
+      return ((bitField0_ & 0x00000400) == 0x00000400);
     }
     public int getLop() {
       return lop_;
     }
     
-    // optional int32 lopChane = 11;
-    public static final int LOPCHANE_FIELD_NUMBER = 11;
-    private int lopChane_;
-    public boolean hasLopChane() {
-      return ((bitField0_ & 0x00000400) == 0x00000400);
+    // optional int32 lopChange = 12;
+    public static final int LOPCHANGE_FIELD_NUMBER = 12;
+    private int lopChange_;
+    public boolean hasLopChange() {
+      return ((bitField0_ & 0x00000800) == 0x00000800);
     }
-    public int getLopChane() {
-      return lopChane_;
+    public int getLopChange() {
+      return lopChange_;
     }
     
-    // optional string expirationDate = 12;
-    public static final int EXPIRATIONDATE_FIELD_NUMBER = 12;
+    // optional string expirationDate = 13;
+    public static final int EXPIRATIONDATE_FIELD_NUMBER = 13;
     private java.lang.Object expirationDate_;
     public boolean hasExpirationDate() {
-      return ((bitField0_ & 0x00000800) == 0x00000800);
+      return ((bitField0_ & 0x00001000) == 0x00001000);
     }
     public String getExpirationDate() {
       java.lang.Object ref = expirationDate_;
@@ -299,6 +658,7 @@ public final class QuoteMessages {
     private void initFields() {
       name_ = "";
       id_ = "";
+      marketId_ = 0;
       lastPrice_ = 0D;
       percentageChange_ = 0D;
       open_ = 0D;
@@ -307,7 +667,7 @@ public final class QuoteMessages {
       volume_ = 0;
       lastChangeTime_ = "";
       lop_ = 0;
-      lopChane_ = 0;
+      lopChange_ = 0;
       expirationDate_ = "";
     }
     private byte memoizedIsInitialized = -1;
@@ -320,6 +680,10 @@ public final class QuoteMessages {
         return false;
       }
       if (!hasId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasMarketId()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -337,34 +701,37 @@ public final class QuoteMessages {
         output.writeBytes(2, getIdBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeDouble(3, lastPrice_);
+        output.writeInt32(3, marketId_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeDouble(4, percentageChange_);
+        output.writeDouble(4, lastPrice_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeDouble(5, open_);
+        output.writeDouble(5, percentageChange_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeDouble(6, low_);
+        output.writeDouble(6, open_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeDouble(7, high_);
+        output.writeDouble(7, low_);
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeInt32(8, volume_);
+        output.writeDouble(8, high_);
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        output.writeBytes(9, getLastChangeTimeBytes());
+        output.writeInt32(9, volume_);
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        output.writeInt32(10, lop_);
+        output.writeBytes(10, getLastChangeTimeBytes());
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        output.writeInt32(11, lopChane_);
+        output.writeInt32(11, lop_);
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
-        output.writeBytes(12, getExpirationDateBytes());
+        output.writeInt32(12, lopChange_);
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        output.writeBytes(13, getExpirationDateBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -385,43 +752,47 @@ public final class QuoteMessages {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(3, lastPrice_);
+          .computeInt32Size(3, marketId_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(4, percentageChange_);
+          .computeDoubleSize(4, lastPrice_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(5, open_);
+          .computeDoubleSize(5, percentageChange_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(6, low_);
+          .computeDoubleSize(6, open_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(7, high_);
+          .computeDoubleSize(7, low_);
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(8, volume_);
+          .computeDoubleSize(8, high_);
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(9, getLastChangeTimeBytes());
+          .computeInt32Size(9, volume_);
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(10, lop_);
+          .computeBytesSize(10, getLastChangeTimeBytes());
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(11, lopChane_);
+          .computeInt32Size(11, lop_);
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(12, getExpirationDateBytes());
+          .computeInt32Size(12, lopChange_);
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(13, getExpirationDateBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -551,26 +922,28 @@ public final class QuoteMessages {
         bitField0_ = (bitField0_ & ~0x00000001);
         id_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        lastPrice_ = 0D;
+        marketId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        percentageChange_ = 0D;
+        lastPrice_ = 0D;
         bitField0_ = (bitField0_ & ~0x00000008);
-        open_ = 0D;
+        percentageChange_ = 0D;
         bitField0_ = (bitField0_ & ~0x00000010);
-        low_ = 0D;
+        open_ = 0D;
         bitField0_ = (bitField0_ & ~0x00000020);
-        high_ = 0D;
+        low_ = 0D;
         bitField0_ = (bitField0_ & ~0x00000040);
-        volume_ = 0;
+        high_ = 0D;
         bitField0_ = (bitField0_ & ~0x00000080);
-        lastChangeTime_ = "";
+        volume_ = 0;
         bitField0_ = (bitField0_ & ~0x00000100);
-        lop_ = 0;
+        lastChangeTime_ = "";
         bitField0_ = (bitField0_ & ~0x00000200);
-        lopChane_ = 0;
+        lop_ = 0;
         bitField0_ = (bitField0_ & ~0x00000400);
-        expirationDate_ = "";
+        lopChange_ = 0;
         bitField0_ = (bitField0_ & ~0x00000800);
+        expirationDate_ = "";
+        bitField0_ = (bitField0_ & ~0x00001000);
         return this;
       }
       
@@ -620,41 +993,45 @@ public final class QuoteMessages {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.lastPrice_ = lastPrice_;
+        result.marketId_ = marketId_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.percentageChange_ = percentageChange_;
+        result.lastPrice_ = lastPrice_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.open_ = open_;
+        result.percentageChange_ = percentageChange_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.low_ = low_;
+        result.open_ = open_;
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000040;
         }
-        result.high_ = high_;
+        result.low_ = low_;
         if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000080;
         }
-        result.volume_ = volume_;
+        result.high_ = high_;
         if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
           to_bitField0_ |= 0x00000100;
         }
-        result.lastChangeTime_ = lastChangeTime_;
+        result.volume_ = volume_;
         if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
           to_bitField0_ |= 0x00000200;
         }
-        result.lop_ = lop_;
+        result.lastChangeTime_ = lastChangeTime_;
         if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
           to_bitField0_ |= 0x00000400;
         }
-        result.lopChane_ = lopChane_;
+        result.lop_ = lop_;
         if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
           to_bitField0_ |= 0x00000800;
+        }
+        result.lopChange_ = lopChange_;
+        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
+          to_bitField0_ |= 0x00001000;
         }
         result.expirationDate_ = expirationDate_;
         result.bitField0_ = to_bitField0_;
@@ -678,6 +1055,9 @@ public final class QuoteMessages {
         }
         if (other.hasId()) {
           setId(other.getId());
+        }
+        if (other.hasMarketId()) {
+          setMarketId(other.getMarketId());
         }
         if (other.hasLastPrice()) {
           setLastPrice(other.getLastPrice());
@@ -703,8 +1083,8 @@ public final class QuoteMessages {
         if (other.hasLop()) {
           setLop(other.getLop());
         }
-        if (other.hasLopChane()) {
-          setLopChane(other.getLopChane());
+        if (other.hasLopChange()) {
+          setLopChange(other.getLopChange());
         }
         if (other.hasExpirationDate()) {
           setExpirationDate(other.getExpirationDate());
@@ -719,6 +1099,10 @@ public final class QuoteMessages {
           return false;
         }
         if (!hasId()) {
+          
+          return false;
+        }
+        if (!hasMarketId()) {
           
           return false;
         }
@@ -758,53 +1142,58 @@ public final class QuoteMessages {
               id_ = input.readBytes();
               break;
             }
-            case 25: {
+            case 24: {
               bitField0_ |= 0x00000004;
-              lastPrice_ = input.readDouble();
+              marketId_ = input.readInt32();
               break;
             }
             case 33: {
               bitField0_ |= 0x00000008;
-              percentageChange_ = input.readDouble();
+              lastPrice_ = input.readDouble();
               break;
             }
             case 41: {
               bitField0_ |= 0x00000010;
-              open_ = input.readDouble();
+              percentageChange_ = input.readDouble();
               break;
             }
             case 49: {
               bitField0_ |= 0x00000020;
-              low_ = input.readDouble();
+              open_ = input.readDouble();
               break;
             }
             case 57: {
               bitField0_ |= 0x00000040;
+              low_ = input.readDouble();
+              break;
+            }
+            case 65: {
+              bitField0_ |= 0x00000080;
               high_ = input.readDouble();
               break;
             }
-            case 64: {
-              bitField0_ |= 0x00000080;
+            case 72: {
+              bitField0_ |= 0x00000100;
               volume_ = input.readInt32();
               break;
             }
-            case 74: {
-              bitField0_ |= 0x00000100;
-              lastChangeTime_ = input.readBytes();
-              break;
-            }
-            case 80: {
+            case 82: {
               bitField0_ |= 0x00000200;
-              lop_ = input.readInt32();
+              lastChangeTime_ = input.readBytes();
               break;
             }
             case 88: {
               bitField0_ |= 0x00000400;
-              lopChane_ = input.readInt32();
+              lop_ = input.readInt32();
               break;
             }
-            case 98: {
+            case 96: {
               bitField0_ |= 0x00000800;
+              lopChange_ = input.readInt32();
+              break;
+            }
+            case 106: {
+              bitField0_ |= 0x00001000;
               expirationDate_ = input.readBytes();
               break;
             }
@@ -886,136 +1275,157 @@ public final class QuoteMessages {
         onChanged();
       }
       
-      // optional double lastPrice = 3;
+      // required int32 marketId = 3;
+      private int marketId_ ;
+      public boolean hasMarketId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public int getMarketId() {
+        return marketId_;
+      }
+      public Builder setMarketId(int value) {
+        bitField0_ |= 0x00000004;
+        marketId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearMarketId() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        marketId_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional double lastPrice = 4;
       private double lastPrice_ ;
       public boolean hasLastPrice() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       public double getLastPrice() {
         return lastPrice_;
       }
       public Builder setLastPrice(double value) {
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         lastPrice_ = value;
         onChanged();
         return this;
       }
       public Builder clearLastPrice() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         lastPrice_ = 0D;
         onChanged();
         return this;
       }
       
-      // optional double percentageChange = 4;
+      // optional double percentageChange = 5;
       private double percentageChange_ ;
       public boolean hasPercentageChange() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       public double getPercentageChange() {
         return percentageChange_;
       }
       public Builder setPercentageChange(double value) {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         percentageChange_ = value;
         onChanged();
         return this;
       }
       public Builder clearPercentageChange() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         percentageChange_ = 0D;
         onChanged();
         return this;
       }
       
-      // optional double open = 5;
+      // optional double open = 6;
       private double open_ ;
       public boolean hasOpen() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       public double getOpen() {
         return open_;
       }
       public Builder setOpen(double value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000020;
         open_ = value;
         onChanged();
         return this;
       }
       public Builder clearOpen() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000020);
         open_ = 0D;
         onChanged();
         return this;
       }
       
-      // optional double low = 6;
+      // optional double low = 7;
       private double low_ ;
       public boolean hasLow() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       public double getLow() {
         return low_;
       }
       public Builder setLow(double value) {
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000040;
         low_ = value;
         onChanged();
         return this;
       }
       public Builder clearLow() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000040);
         low_ = 0D;
         onChanged();
         return this;
       }
       
-      // optional double high = 7;
+      // optional double high = 8;
       private double high_ ;
       public boolean hasHigh() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       public double getHigh() {
         return high_;
       }
       public Builder setHigh(double value) {
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000080;
         high_ = value;
         onChanged();
         return this;
       }
       public Builder clearHigh() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000080);
         high_ = 0D;
         onChanged();
         return this;
       }
       
-      // optional int32 volume = 8;
+      // optional int32 volume = 9;
       private int volume_ ;
       public boolean hasVolume() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       public int getVolume() {
         return volume_;
       }
       public Builder setVolume(int value) {
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000100;
         volume_ = value;
         onChanged();
         return this;
       }
       public Builder clearVolume() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000100);
         volume_ = 0;
         onChanged();
         return this;
       }
       
-      // optional string lastChangeTime = 9;
+      // optional string lastChangeTime = 10;
       private java.lang.Object lastChangeTime_ = "";
       public boolean hasLastChangeTime() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
+        return ((bitField0_ & 0x00000200) == 0x00000200);
       }
       public String getLastChangeTime() {
         java.lang.Object ref = lastChangeTime_;
@@ -1031,69 +1441,69 @@ public final class QuoteMessages {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000100;
+  bitField0_ |= 0x00000200;
         lastChangeTime_ = value;
         onChanged();
         return this;
       }
       public Builder clearLastChangeTime() {
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000200);
         lastChangeTime_ = getDefaultInstance().getLastChangeTime();
         onChanged();
         return this;
       }
       void setLastChangeTime(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000200;
         lastChangeTime_ = value;
         onChanged();
       }
       
-      // optional int32 lop = 10;
+      // optional int32 lop = 11;
       private int lop_ ;
       public boolean hasLop() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
+        return ((bitField0_ & 0x00000400) == 0x00000400);
       }
       public int getLop() {
         return lop_;
       }
       public Builder setLop(int value) {
-        bitField0_ |= 0x00000200;
+        bitField0_ |= 0x00000400;
         lop_ = value;
         onChanged();
         return this;
       }
       public Builder clearLop() {
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000400);
         lop_ = 0;
         onChanged();
         return this;
       }
       
-      // optional int32 lopChane = 11;
-      private int lopChane_ ;
-      public boolean hasLopChane() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
+      // optional int32 lopChange = 12;
+      private int lopChange_ ;
+      public boolean hasLopChange() {
+        return ((bitField0_ & 0x00000800) == 0x00000800);
       }
-      public int getLopChane() {
-        return lopChane_;
+      public int getLopChange() {
+        return lopChange_;
       }
-      public Builder setLopChane(int value) {
-        bitField0_ |= 0x00000400;
-        lopChane_ = value;
+      public Builder setLopChange(int value) {
+        bitField0_ |= 0x00000800;
+        lopChange_ = value;
         onChanged();
         return this;
       }
-      public Builder clearLopChane() {
-        bitField0_ = (bitField0_ & ~0x00000400);
-        lopChane_ = 0;
+      public Builder clearLopChange() {
+        bitField0_ = (bitField0_ & ~0x00000800);
+        lopChange_ = 0;
         onChanged();
         return this;
       }
       
-      // optional string expirationDate = 12;
+      // optional string expirationDate = 13;
       private java.lang.Object expirationDate_ = "";
       public boolean hasExpirationDate() {
-        return ((bitField0_ & 0x00000800) == 0x00000800);
+        return ((bitField0_ & 0x00001000) == 0x00001000);
       }
       public String getExpirationDate() {
         java.lang.Object ref = expirationDate_;
@@ -1109,19 +1519,19 @@ public final class QuoteMessages {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000800;
+  bitField0_ |= 0x00001000;
         expirationDate_ = value;
         onChanged();
         return this;
       }
       public Builder clearExpirationDate() {
-        bitField0_ = (bitField0_ & ~0x00000800);
+        bitField0_ = (bitField0_ & ~0x00001000);
         expirationDate_ = getDefaultInstance().getExpirationDate();
         onChanged();
         return this;
       }
       void setExpirationDate(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000800;
+        bitField0_ |= 0x00001000;
         expirationDate_ = value;
         onChanged();
       }
@@ -1700,6 +2110,664 @@ public final class QuoteMessages {
     // @@protoc_insertion_point(class_scope:serialized.QuoteList)
   }
   
+  public interface MsgWrapperOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // required .serialized.MessageType type = 1;
+    boolean hasType();
+    stockwatch.messages.QuoteMessages.MessageType getType();
+    
+    // optional .serialized.AvailableSecuritiesReq req = 2;
+    boolean hasReq();
+    stockwatch.messages.QuoteMessages.AvailableSecuritiesReq getReq();
+    stockwatch.messages.QuoteMessages.AvailableSecuritiesReqOrBuilder getReqOrBuilder();
+    
+    // optional .serialized.QuoteList quoteList = 3;
+    boolean hasQuoteList();
+    stockwatch.messages.QuoteMessages.QuoteList getQuoteList();
+    stockwatch.messages.QuoteMessages.QuoteListOrBuilder getQuoteListOrBuilder();
+  }
+  public static final class MsgWrapper extends
+      com.google.protobuf.GeneratedMessage
+      implements MsgWrapperOrBuilder {
+    // Use MsgWrapper.newBuilder() to construct.
+    private MsgWrapper(Builder builder) {
+      super(builder);
+    }
+    private MsgWrapper(boolean noInit) {}
+    
+    private static final MsgWrapper defaultInstance;
+    public static MsgWrapper getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public MsgWrapper getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return stockwatch.messages.QuoteMessages.internal_static_serialized_MsgWrapper_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return stockwatch.messages.QuoteMessages.internal_static_serialized_MsgWrapper_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // required .serialized.MessageType type = 1;
+    public static final int TYPE_FIELD_NUMBER = 1;
+    private stockwatch.messages.QuoteMessages.MessageType type_;
+    public boolean hasType() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public stockwatch.messages.QuoteMessages.MessageType getType() {
+      return type_;
+    }
+    
+    // optional .serialized.AvailableSecuritiesReq req = 2;
+    public static final int REQ_FIELD_NUMBER = 2;
+    private stockwatch.messages.QuoteMessages.AvailableSecuritiesReq req_;
+    public boolean hasReq() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public stockwatch.messages.QuoteMessages.AvailableSecuritiesReq getReq() {
+      return req_;
+    }
+    public stockwatch.messages.QuoteMessages.AvailableSecuritiesReqOrBuilder getReqOrBuilder() {
+      return req_;
+    }
+    
+    // optional .serialized.QuoteList quoteList = 3;
+    public static final int QUOTELIST_FIELD_NUMBER = 3;
+    private stockwatch.messages.QuoteMessages.QuoteList quoteList_;
+    public boolean hasQuoteList() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public stockwatch.messages.QuoteMessages.QuoteList getQuoteList() {
+      return quoteList_;
+    }
+    public stockwatch.messages.QuoteMessages.QuoteListOrBuilder getQuoteListOrBuilder() {
+      return quoteList_;
+    }
+    
+    private void initFields() {
+      type_ = stockwatch.messages.QuoteMessages.MessageType.AVAILABLE_REQ;
+      req_ = stockwatch.messages.QuoteMessages.AvailableSecuritiesReq.getDefaultInstance();
+      quoteList_ = stockwatch.messages.QuoteMessages.QuoteList.getDefaultInstance();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      if (!hasType()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (hasQuoteList()) {
+        if (!getQuoteList().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeEnum(1, type_.getNumber());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeMessage(2, req_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeMessage(3, quoteList_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(1, type_.getNumber());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, req_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, quoteList_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static stockwatch.messages.QuoteMessages.MsgWrapper parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static stockwatch.messages.QuoteMessages.MsgWrapper parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static stockwatch.messages.QuoteMessages.MsgWrapper parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static stockwatch.messages.QuoteMessages.MsgWrapper parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static stockwatch.messages.QuoteMessages.MsgWrapper parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static stockwatch.messages.QuoteMessages.MsgWrapper parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static stockwatch.messages.QuoteMessages.MsgWrapper parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static stockwatch.messages.QuoteMessages.MsgWrapper parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static stockwatch.messages.QuoteMessages.MsgWrapper parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static stockwatch.messages.QuoteMessages.MsgWrapper parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(stockwatch.messages.QuoteMessages.MsgWrapper prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements stockwatch.messages.QuoteMessages.MsgWrapperOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return stockwatch.messages.QuoteMessages.internal_static_serialized_MsgWrapper_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return stockwatch.messages.QuoteMessages.internal_static_serialized_MsgWrapper_fieldAccessorTable;
+      }
+      
+      // Construct using stockwatch.messages.QuoteMessages.MsgWrapper.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getReqFieldBuilder();
+          getQuoteListFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        type_ = stockwatch.messages.QuoteMessages.MessageType.AVAILABLE_REQ;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (reqBuilder_ == null) {
+          req_ = stockwatch.messages.QuoteMessages.AvailableSecuritiesReq.getDefaultInstance();
+        } else {
+          reqBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        if (quoteListBuilder_ == null) {
+          quoteList_ = stockwatch.messages.QuoteMessages.QuoteList.getDefaultInstance();
+        } else {
+          quoteListBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return stockwatch.messages.QuoteMessages.MsgWrapper.getDescriptor();
+      }
+      
+      public stockwatch.messages.QuoteMessages.MsgWrapper getDefaultInstanceForType() {
+        return stockwatch.messages.QuoteMessages.MsgWrapper.getDefaultInstance();
+      }
+      
+      public stockwatch.messages.QuoteMessages.MsgWrapper build() {
+        stockwatch.messages.QuoteMessages.MsgWrapper result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private stockwatch.messages.QuoteMessages.MsgWrapper buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        stockwatch.messages.QuoteMessages.MsgWrapper result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public stockwatch.messages.QuoteMessages.MsgWrapper buildPartial() {
+        stockwatch.messages.QuoteMessages.MsgWrapper result = new stockwatch.messages.QuoteMessages.MsgWrapper(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.type_ = type_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        if (reqBuilder_ == null) {
+          result.req_ = req_;
+        } else {
+          result.req_ = reqBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        if (quoteListBuilder_ == null) {
+          result.quoteList_ = quoteList_;
+        } else {
+          result.quoteList_ = quoteListBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof stockwatch.messages.QuoteMessages.MsgWrapper) {
+          return mergeFrom((stockwatch.messages.QuoteMessages.MsgWrapper)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(stockwatch.messages.QuoteMessages.MsgWrapper other) {
+        if (other == stockwatch.messages.QuoteMessages.MsgWrapper.getDefaultInstance()) return this;
+        if (other.hasType()) {
+          setType(other.getType());
+        }
+        if (other.hasReq()) {
+          mergeReq(other.getReq());
+        }
+        if (other.hasQuoteList()) {
+          mergeQuoteList(other.getQuoteList());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        if (!hasType()) {
+          
+          return false;
+        }
+        if (hasQuoteList()) {
+          if (!getQuoteList().isInitialized()) {
+            
+            return false;
+          }
+        }
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              int rawValue = input.readEnum();
+              stockwatch.messages.QuoteMessages.MessageType value = stockwatch.messages.QuoteMessages.MessageType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(1, rawValue);
+              } else {
+                bitField0_ |= 0x00000001;
+                type_ = value;
+              }
+              break;
+            }
+            case 18: {
+              stockwatch.messages.QuoteMessages.AvailableSecuritiesReq.Builder subBuilder = stockwatch.messages.QuoteMessages.AvailableSecuritiesReq.newBuilder();
+              if (hasReq()) {
+                subBuilder.mergeFrom(getReq());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setReq(subBuilder.buildPartial());
+              break;
+            }
+            case 26: {
+              stockwatch.messages.QuoteMessages.QuoteList.Builder subBuilder = stockwatch.messages.QuoteMessages.QuoteList.newBuilder();
+              if (hasQuoteList()) {
+                subBuilder.mergeFrom(getQuoteList());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setQuoteList(subBuilder.buildPartial());
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // required .serialized.MessageType type = 1;
+      private stockwatch.messages.QuoteMessages.MessageType type_ = stockwatch.messages.QuoteMessages.MessageType.AVAILABLE_REQ;
+      public boolean hasType() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public stockwatch.messages.QuoteMessages.MessageType getType() {
+        return type_;
+      }
+      public Builder setType(stockwatch.messages.QuoteMessages.MessageType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
+        type_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearType() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        type_ = stockwatch.messages.QuoteMessages.MessageType.AVAILABLE_REQ;
+        onChanged();
+        return this;
+      }
+      
+      // optional .serialized.AvailableSecuritiesReq req = 2;
+      private stockwatch.messages.QuoteMessages.AvailableSecuritiesReq req_ = stockwatch.messages.QuoteMessages.AvailableSecuritiesReq.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          stockwatch.messages.QuoteMessages.AvailableSecuritiesReq, stockwatch.messages.QuoteMessages.AvailableSecuritiesReq.Builder, stockwatch.messages.QuoteMessages.AvailableSecuritiesReqOrBuilder> reqBuilder_;
+      public boolean hasReq() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public stockwatch.messages.QuoteMessages.AvailableSecuritiesReq getReq() {
+        if (reqBuilder_ == null) {
+          return req_;
+        } else {
+          return reqBuilder_.getMessage();
+        }
+      }
+      public Builder setReq(stockwatch.messages.QuoteMessages.AvailableSecuritiesReq value) {
+        if (reqBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          req_ = value;
+          onChanged();
+        } else {
+          reqBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      public Builder setReq(
+          stockwatch.messages.QuoteMessages.AvailableSecuritiesReq.Builder builderForValue) {
+        if (reqBuilder_ == null) {
+          req_ = builderForValue.build();
+          onChanged();
+        } else {
+          reqBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      public Builder mergeReq(stockwatch.messages.QuoteMessages.AvailableSecuritiesReq value) {
+        if (reqBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              req_ != stockwatch.messages.QuoteMessages.AvailableSecuritiesReq.getDefaultInstance()) {
+            req_ =
+              stockwatch.messages.QuoteMessages.AvailableSecuritiesReq.newBuilder(req_).mergeFrom(value).buildPartial();
+          } else {
+            req_ = value;
+          }
+          onChanged();
+        } else {
+          reqBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      public Builder clearReq() {
+        if (reqBuilder_ == null) {
+          req_ = stockwatch.messages.QuoteMessages.AvailableSecuritiesReq.getDefaultInstance();
+          onChanged();
+        } else {
+          reqBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      public stockwatch.messages.QuoteMessages.AvailableSecuritiesReq.Builder getReqBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getReqFieldBuilder().getBuilder();
+      }
+      public stockwatch.messages.QuoteMessages.AvailableSecuritiesReqOrBuilder getReqOrBuilder() {
+        if (reqBuilder_ != null) {
+          return reqBuilder_.getMessageOrBuilder();
+        } else {
+          return req_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          stockwatch.messages.QuoteMessages.AvailableSecuritiesReq, stockwatch.messages.QuoteMessages.AvailableSecuritiesReq.Builder, stockwatch.messages.QuoteMessages.AvailableSecuritiesReqOrBuilder> 
+          getReqFieldBuilder() {
+        if (reqBuilder_ == null) {
+          reqBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              stockwatch.messages.QuoteMessages.AvailableSecuritiesReq, stockwatch.messages.QuoteMessages.AvailableSecuritiesReq.Builder, stockwatch.messages.QuoteMessages.AvailableSecuritiesReqOrBuilder>(
+                  req_,
+                  getParentForChildren(),
+                  isClean());
+          req_ = null;
+        }
+        return reqBuilder_;
+      }
+      
+      // optional .serialized.QuoteList quoteList = 3;
+      private stockwatch.messages.QuoteMessages.QuoteList quoteList_ = stockwatch.messages.QuoteMessages.QuoteList.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          stockwatch.messages.QuoteMessages.QuoteList, stockwatch.messages.QuoteMessages.QuoteList.Builder, stockwatch.messages.QuoteMessages.QuoteListOrBuilder> quoteListBuilder_;
+      public boolean hasQuoteList() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public stockwatch.messages.QuoteMessages.QuoteList getQuoteList() {
+        if (quoteListBuilder_ == null) {
+          return quoteList_;
+        } else {
+          return quoteListBuilder_.getMessage();
+        }
+      }
+      public Builder setQuoteList(stockwatch.messages.QuoteMessages.QuoteList value) {
+        if (quoteListBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          quoteList_ = value;
+          onChanged();
+        } else {
+          quoteListBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      public Builder setQuoteList(
+          stockwatch.messages.QuoteMessages.QuoteList.Builder builderForValue) {
+        if (quoteListBuilder_ == null) {
+          quoteList_ = builderForValue.build();
+          onChanged();
+        } else {
+          quoteListBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      public Builder mergeQuoteList(stockwatch.messages.QuoteMessages.QuoteList value) {
+        if (quoteListBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004) &&
+              quoteList_ != stockwatch.messages.QuoteMessages.QuoteList.getDefaultInstance()) {
+            quoteList_ =
+              stockwatch.messages.QuoteMessages.QuoteList.newBuilder(quoteList_).mergeFrom(value).buildPartial();
+          } else {
+            quoteList_ = value;
+          }
+          onChanged();
+        } else {
+          quoteListBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      public Builder clearQuoteList() {
+        if (quoteListBuilder_ == null) {
+          quoteList_ = stockwatch.messages.QuoteMessages.QuoteList.getDefaultInstance();
+          onChanged();
+        } else {
+          quoteListBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+      public stockwatch.messages.QuoteMessages.QuoteList.Builder getQuoteListBuilder() {
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return getQuoteListFieldBuilder().getBuilder();
+      }
+      public stockwatch.messages.QuoteMessages.QuoteListOrBuilder getQuoteListOrBuilder() {
+        if (quoteListBuilder_ != null) {
+          return quoteListBuilder_.getMessageOrBuilder();
+        } else {
+          return quoteList_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          stockwatch.messages.QuoteMessages.QuoteList, stockwatch.messages.QuoteMessages.QuoteList.Builder, stockwatch.messages.QuoteMessages.QuoteListOrBuilder> 
+          getQuoteListFieldBuilder() {
+        if (quoteListBuilder_ == null) {
+          quoteListBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              stockwatch.messages.QuoteMessages.QuoteList, stockwatch.messages.QuoteMessages.QuoteList.Builder, stockwatch.messages.QuoteMessages.QuoteListOrBuilder>(
+                  quoteList_,
+                  getParentForChildren(),
+                  isClean());
+          quoteList_ = null;
+        }
+        return quoteListBuilder_;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:serialized.MsgWrapper)
+    }
+    
+    static {
+      defaultInstance = new MsgWrapper(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:serialized.MsgWrapper)
+  }
+  
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_serialized_AvailableSecuritiesReq_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_serialized_AvailableSecuritiesReq_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_serialized_Quote_descriptor;
   private static
@@ -1710,6 +2778,11 @@ public final class QuoteMessages {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_serialized_QuoteList_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_serialized_MsgWrapper_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_serialized_MsgWrapper_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1719,14 +2792,20 @@ public final class QuoteMessages {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\023quoteMessages.proto\022\nserialized\"\326\001\n\005Qu" +
-      "ote\022\014\n\004name\030\001 \002(\t\022\n\n\002id\030\002 \002(\t\022\021\n\tlastPri" +
-      "ce\030\003 \001(\001\022\030\n\020percentageChange\030\004 \001(\001\022\014\n\004op" +
-      "en\030\005 \001(\001\022\013\n\003low\030\006 \001(\001\022\014\n\004high\030\007 \001(\001\022\016\n\006v" +
-      "olume\030\010 \001(\005\022\026\n\016lastChangeTime\030\t \001(\t\022\013\n\003l" +
-      "op\030\n \001(\005\022\020\n\010lopChane\030\013 \001(\005\022\026\n\016expiration" +
-      "Date\030\014 \001(\t\"-\n\tQuoteList\022 \n\005quote\030\001 \003(\0132\021" +
-      ".serialized.QuoteB$\n\023stockwatch.messages" +
+      "\n\023quoteMessages.proto\022\nserialized\"\030\n\026Ava" +
+      "ilableSecuritiesReq\"\351\001\n\005Quote\022\014\n\004name\030\001 " +
+      "\002(\t\022\n\n\002id\030\002 \002(\t\022\020\n\010marketId\030\003 \002(\005\022\021\n\tlas" +
+      "tPrice\030\004 \001(\001\022\030\n\020percentageChange\030\005 \001(\001\022\014" +
+      "\n\004open\030\006 \001(\001\022\013\n\003low\030\007 \001(\001\022\014\n\004high\030\010 \001(\001\022" +
+      "\016\n\006volume\030\t \001(\005\022\026\n\016lastChangeTime\030\n \001(\t\022" +
+      "\013\n\003lop\030\013 \001(\005\022\021\n\tlopChange\030\014 \001(\005\022\026\n\016expir" +
+      "ationDate\030\r \001(\t\"-\n\tQuoteList\022 \n\005quote\030\001 " +
+      "\003(\0132\021.serialized.Quote\"\216\001\n\nMsgWrapper\022%\n" +
+      "\004type\030\001 \002(\0162\027.serialized.MessageType\022/\n\003",
+      "req\030\002 \001(\0132\".serialized.AvailableSecuriti" +
+      "esReq\022(\n\tquoteList\030\003 \001(\0132\025.serialized.Qu" +
+      "oteList*0\n\013MessageType\022\021\n\rAVAILABLE_REQ\020" +
+      "\001\022\016\n\nQUOTE_LIST\020\002B$\n\023stockwatch.messages" +
       "B\rQuoteMessages"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
@@ -1734,22 +2813,38 @@ public final class QuoteMessages {
         public com.google.protobuf.ExtensionRegistry assignDescriptors(
             com.google.protobuf.Descriptors.FileDescriptor root) {
           descriptor = root;
-          internal_static_serialized_Quote_descriptor =
+          internal_static_serialized_AvailableSecuritiesReq_descriptor =
             getDescriptor().getMessageTypes().get(0);
+          internal_static_serialized_AvailableSecuritiesReq_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_serialized_AvailableSecuritiesReq_descriptor,
+              new java.lang.String[] { },
+              stockwatch.messages.QuoteMessages.AvailableSecuritiesReq.class,
+              stockwatch.messages.QuoteMessages.AvailableSecuritiesReq.Builder.class);
+          internal_static_serialized_Quote_descriptor =
+            getDescriptor().getMessageTypes().get(1);
           internal_static_serialized_Quote_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_serialized_Quote_descriptor,
-              new java.lang.String[] { "Name", "Id", "LastPrice", "PercentageChange", "Open", "Low", "High", "Volume", "LastChangeTime", "Lop", "LopChane", "ExpirationDate", },
+              new java.lang.String[] { "Name", "Id", "MarketId", "LastPrice", "PercentageChange", "Open", "Low", "High", "Volume", "LastChangeTime", "Lop", "LopChange", "ExpirationDate", },
               stockwatch.messages.QuoteMessages.Quote.class,
               stockwatch.messages.QuoteMessages.Quote.Builder.class);
           internal_static_serialized_QuoteList_descriptor =
-            getDescriptor().getMessageTypes().get(1);
+            getDescriptor().getMessageTypes().get(2);
           internal_static_serialized_QuoteList_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_serialized_QuoteList_descriptor,
               new java.lang.String[] { "Quote", },
               stockwatch.messages.QuoteMessages.QuoteList.class,
               stockwatch.messages.QuoteMessages.QuoteList.Builder.class);
+          internal_static_serialized_MsgWrapper_descriptor =
+            getDescriptor().getMessageTypes().get(3);
+          internal_static_serialized_MsgWrapper_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_serialized_MsgWrapper_descriptor,
+              new java.lang.String[] { "Type", "Req", "QuoteList", },
+              stockwatch.messages.QuoteMessages.MsgWrapper.class,
+              stockwatch.messages.QuoteMessages.MsgWrapper.Builder.class);
           return null;
         }
       };

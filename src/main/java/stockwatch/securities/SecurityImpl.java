@@ -2,6 +2,8 @@ package stockwatch.securities;
 
 import java.sql.Time;
 
+import stockwatch.messages.QuoteMessages.Quote;
+
 public abstract class SecurityImpl implements ISecurity {
     String securityName;
     String securityId;
@@ -96,6 +98,31 @@ public abstract class SecurityImpl implements ISecurity {
     public String sessionResult() {
         return String.format(OUTPUT_FORMAT, securityName) + " "
             + String.format(OUTPUT_FORMAT, percentageChange) + "%";
+    }
+    
+    @Override
+    public Quote fullSerialize() {
+        return Quote.newBuilder()
+                .setName(this.getSecurityName())
+                .setId(this.getSecurityId())
+                .setMarketId(this.getMarketId())
+                .setLastPrice(this.getLastTransactionPrice())
+                .setPercentageChange(this.getPercentageChange())
+                .setOpen(this.getOpenPrice())
+                .setLow(this.getLow())
+                .setHigh(this.getHigh())
+                .setVolume(this.getVolume())
+                .setLastChangeTime(this.getLastChangedTime())
+                .build();
+    }
+    
+    @Override
+    public Quote simpleSerialize() {
+        return Quote.newBuilder()
+                .setName(this.getSecurityName())
+                .setId(this.getSecurityId())
+                .setMarketId(this.getMarketId())
+                .build();
     }
     
     public abstract void setLop(String lop);

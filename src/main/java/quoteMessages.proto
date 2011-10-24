@@ -3,21 +3,36 @@ package serialized;
 option java_package = "stockwatch.messages";
 option java_outer_classname = "QuoteMessages";
 
+message AvailableSecuritiesReq {
+}
+
 message Quote {
     required string name             = 1;
     required string id               = 2;
-    optional double lastPrice        = 3;
-    optional double percentageChange = 4;
-    optional double open             = 5;
-    optional double low              = 6;
-    optional double high             = 7;
-    optional int32  volume           = 8;
-    optional string lastChangeTime   = 9;
-    optional int32  lop              = 10;
-    optional int32  lopChane         = 11;
-    optional string expirationDate   = 12;
+    required int32  marketId         = 3;
+    optional double lastPrice        = 4;
+    optional double percentageChange = 5;
+    optional double open             = 6;
+    optional double low              = 7;
+    optional double high             = 8;
+    optional int32  volume           = 9;
+    optional string lastChangeTime   = 10;
+    optional int32  lop              = 11;
+    optional int32  lopChange        = 12;
+    optional string expirationDate   = 13;
 }
 
 message QuoteList {
     repeated Quote quote = 1;
+}
+
+enum MessageType {
+    AVAILABLE_REQ = 1;
+    QUOTE_LIST    = 2;
+}
+
+message MsgWrapper {
+    required MessageType            type      = 1;
+    optional AvailableSecuritiesReq req       = 2;
+    optional QuoteList              quoteList = 3;
 }

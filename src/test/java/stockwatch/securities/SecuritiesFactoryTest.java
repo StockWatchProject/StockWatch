@@ -25,37 +25,37 @@ public class SecuritiesFactoryTest extends TestCase {
 
     @Test
     public void testGetSecurity() {
-        ISecurity newSecurity = securitiesFactory.getSecurity(MarketTypes.MainMarket);
+        ISecurity newSecurity = securitiesFactory.getSecurity(MarketTypes.MainMarket, 0);
         assertTrue(newSecurity instanceof Share);
     }
 
     @Test
     public void testGetStock() {
-        ISecurity newSecurity = securitiesFactory.getSecurity(MarketTypes.NewConnect);
+        ISecurity newSecurity = securitiesFactory.getSecurity(MarketTypes.NewConnect, 0);
         assertTrue(newSecurity instanceof Share);
     }
 
     @Test
     public void testGetBond() {
-        ISecurity newSecurity = securitiesFactory.getSecurity(MarketTypes.Catalyst);
+        ISecurity newSecurity = securitiesFactory.getSecurity(MarketTypes.Catalyst, 0);
         assertTrue(newSecurity instanceof Bond);
     }
 
     @Test
     public void testGetFutureContract() {
-        ISecurity newSecurity = securitiesFactory.getSecurity(MarketTypes.Futures);
+        ISecurity newSecurity = securitiesFactory.getSecurity(MarketTypes.Futures, 0);
         assertTrue(newSecurity instanceof FutureContract);
     }
 
     @Test
     public void testGetOption() {
-        ISecurity newSecurity = securitiesFactory.getSecurity(MarketTypes.Options);
+        ISecurity newSecurity = securitiesFactory.getSecurity(MarketTypes.Options, 0);
         assertTrue(newSecurity instanceof Option);
     }
 
     @Test
     public void testGetIndex() {
-        ISecurity newSecurity = securitiesFactory.getSecurity(MarketTypes.Indexes);
+        ISecurity newSecurity = securitiesFactory.getSecurity(MarketTypes.Indexes, 0);
         assertTrue(newSecurity instanceof Index);
     }
 

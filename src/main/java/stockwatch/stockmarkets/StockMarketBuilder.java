@@ -1,7 +1,7 @@
 package stockwatch.stockmarkets;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.log4j.Logger;
 
@@ -11,10 +11,12 @@ import stockwatch.stockmarkets.parsers.QuotesParser;
 import stockwatch.stockmarkets.parsers.QuotesParsersFactory;
 
 import com.google.common.annotations.VisibleForTesting;
+import com.google.common.collect.Lists;
 
 public class StockMarketBuilder {
     private static final Logger logger = Logger.getLogger(StockMarketBuilder.class);
     private static StockMarketBuilder instance = new StockMarketBuilder();
+    private static final AtomicInteger idGen = new AtomicInteger();
     
     public static StockMarketBuilder getInstnce() {
         return instance;
@@ -22,11 +24,11 @@ public class StockMarketBuilder {
 
     @VisibleForTesting
     List<InternalMarket> initMarkets(IStockMarketDescription marketDesc) {
-        List<InternalMarket> internalMarkets = new ArrayList<InternalMarket>();
+        List<InternalMarket> internalMarkets = Lists.newArrayList();
         
         IMarketTypes allMarket[] = marketDesc.getInternalMarkets();
         for (IMarketTypes market : allMarket) {
-            InternalMarket newInternalMarket = new InternalMarket(market.getType());
+            InternalMarket newInternalMarket = new InternalMarket(market.getType(), idGen.getAndIncrement());
             internalMarkets.add(newInternalMarket);
             logger.debug("Added internal market: " +  market.getName());
         }

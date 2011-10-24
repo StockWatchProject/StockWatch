@@ -4,41 +4,41 @@ import stockwatch.stockmarkets.descriptions.IMarketTypes;
 
 public class SecuritiesFactory {
 
-    public ISecurity getSecurity(IMarketTypes type) throws IllegalArgumentException {
+    public ISecurity getSecurity(IMarketTypes type, int marketId) throws IllegalArgumentException {
         SecurityTypes securityType = type.getSecurityType();
         switch (securityType) {
             case Stock:
-                return getStock();
+                return getStock(marketId);
             case Bond:
-                return getBond();
+                return getBond(marketId);
             case FuturesContract:
-                return getFutureContract();
+                return getFutureContract(marketId);
             case Option:
-                return getOption();
+                return getOption(marketId);
             case Index:
-                return getIndex();
+                return getIndex(marketId);
             default:
                 throw new IllegalArgumentException("Wrong market type " + type);
         }
     }
 
-    ISecurity getStock() {
-        return new Share();
+    ISecurity getStock(int marketId) {
+        return new Share(marketId);
     }
 
-    ISecurity getBond() {
-        return new Bond();
+    ISecurity getBond(int marketId) {
+        return new Bond(marketId);
     }
 
-    ISecurity getFutureContract() {
-        return new FutureContract();
+    ISecurity getFutureContract(int marketId) {
+        return new FutureContract(marketId);
     }
     
-    ISecurity getOption() {
-        return new Option();
+    ISecurity getOption(int marketId) {
+        return new Option(marketId);
     }
     
-    ISecurity getIndex() {
-        return new Index();
+    ISecurity getIndex(int marketId) {
+        return new Index(marketId);
     }
 }

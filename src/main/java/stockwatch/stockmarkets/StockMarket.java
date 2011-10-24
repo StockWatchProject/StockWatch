@@ -4,16 +4,34 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import stockwatch.Utils;
 import stockwatch.exceptions.SecuritiesParsingException;
+import stockwatch.messages.QuoteMessages.Quote;
+import stockwatch.messages.QuoteMessages.QuoteList;
+import stockwatch.messages.QuoteMessages.QuoteList.Builder;
 import stockwatch.stockmarkets.descriptions.DescriptionsFactory;
 import stockwatch.stockmarkets.descriptions.IStockMarketDescription;
 import stockwatch.stockmarkets.parsers.QuotesParser;
+
+import com.google.common.base.Predicate;
 
 public class StockMarket {
     private static final Logger logger = Logger.getLogger(StockMarket.class);
     private MarketNames name;
     private List<InternalMarket> internalMarkets;
     private QuotesParser quotesParser;
+    
+    public class MarketChecker implements Predicate<Quote> {
+        private int id;
+        
+        public MarketChecker(int id) {
+            this.id = id;
+        }
+        
+        public boolean apply(Quote quote) {
+            return quote.getMarketId() == this.id;
+        }
+    };
     
     public StockMarket(MarketNames mName){
         IStockMarketDescription description = DescriptionsFactory.getDescription(mName);
@@ -54,4 +72,26 @@ public class StockMarket {
         return this;
     }
 
+    /* Method returns requested quotes */
+    public QuoteList getQuotes(QuoteList quotesRequest) {
+        Builder builder = QuoteList.newBuilder();
+        
+        for (InternalMarket market : internalMarkets) {
+            builder.mergeFrom(market.getQuotes(Utils.findIf(quotesRequest.getQuoteList(), new MarketChecker(market.getId()))));
+        }
+        logger.debug("List of: " + builder.getQuoteList().size() + " quotes from " + name + "will be sent.");
+        return builder.build();
+    }
+
+    /* Method returns requested quotes */
+    public QuoteList getQuotes() {
+        Builder builder = QuoteList.newBuilder();
+        
+        for (InternalMarket market : internalMarkets) {
+            builder.mergeFrom(market.getQuotes());
+        }
+        logger.debug("List of: " + builder.getQuoteList().size() + " quotes from " + name + "will be sent.");
+        return builder.build();
+    }
+    
 }

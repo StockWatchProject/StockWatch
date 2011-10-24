@@ -1,5 +1,7 @@
 package stockwatch.securities;
 
+import stockwatch.messages.QuoteMessages.Quote;
+
 public interface ISecurity {
     public final static String OUTPUT_FORMAT = "%20s";
     public final static int UNDEFINED_VALUE = 0;
@@ -42,4 +44,9 @@ public interface ISecurity {
 
     public String toString();
     public String sessionResult();
+    
+    public int getMarketId();
+    
+    public Quote fullSerialize();
+    public Quote simpleSerialize();
 }

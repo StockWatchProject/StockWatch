@@ -1,6 +1,13 @@
 package stockwatch.securities;
 
+
 public class Share extends SecurityImpl {
+    private final int marketId;
+    
+    public Share(int marketId) {
+        this.marketId = marketId;
+    }
+    
     @Override
     public String toString() {
         return String.format(OUTPUT_FORMAT, securityName) + " " 
@@ -29,4 +36,7 @@ public class Share extends SecurityImpl {
 
     @Override
     public String getExpirationDate() { return null; }
+    
+    @Override
+    public int getMarketId() { return marketId; }
 }

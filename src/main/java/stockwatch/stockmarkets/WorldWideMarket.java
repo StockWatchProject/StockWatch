@@ -5,6 +5,9 @@ import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
+import stockwatch.messages.QuoteMessages.QuoteList;
+import stockwatch.messages.QuoteMessages.QuoteList.Builder;
+
 public class WorldWideMarket extends TimerTask {
     private static final Logger logger = Logger.getLogger(WorldWideMarket.class);
     private Vector<StockMarket> stockExchanges;
@@ -23,9 +26,25 @@ public class WorldWideMarket extends TimerTask {
     }
 
     @Override
-    public void run() {
+    public synchronized void run() {
         for (StockMarket stockExchange : stockExchanges) {
             stockExchange.updateQuotes();
         }
+    }
+    
+    public synchronized QuoteList getQuotes(QuoteList quotesRequest) {
+        Builder builder = QuoteList.newBuilder();
+        for (StockMarket market : stockExchanges) {
+            builder.mergeFrom(market.getQuotes(quotesRequest));
+        }
+        return builder.build();
+    }
+    
+    public synchronized QuoteList getQuotes() {
+        Builder builder = QuoteList.newBuilder();
+        for (StockMarket market : stockExchanges) {
+            builder.mergeFrom(market.getQuotes());
+        }
+        return builder.build();
     }
 }

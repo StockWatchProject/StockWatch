@@ -36,8 +36,9 @@ public class WSEParser implements QuotesParser {
         this.securityFactory = new SecuritiesFactory();
     }
     
-    private void addSecurities(final Elements parsedSecurities, Vector<ISecurity> market, IMarketTypes marketType) 
+    private void addSecurities(final Elements parsedSecurities, InternalMarket internalMarket) 
             throws IllegalArgumentException {
+        Vector<ISecurity> market = internalMarket.getSecurities();
         // add new securities only if there are new 
         if (market.size() == parsedSecurities.size()) {
             logger.debug("Security list is up to date.");
@@ -48,24 +49,24 @@ public class WSEParser implements QuotesParser {
         
         for (Element security : parsedSecurities) {
             Elements securityName = security.getElementsByClass("nazwa");
-            ISecurity newSecurity = securityFactory.getSecurity(marketType);
+            ISecurity newSecurity = securityFactory.getSecurity(internalMarket.getMarketType(), internalMarket.getId());
             newSecurity.setSecurityName(securityName.last().text());
             market.addElement(newSecurity);
         }
     }
     
-    private void addSecuritiesId(final Elements parsedSecurities, Vector<ISecurity> market) {
+    private void addSecuritiesId(final Elements parsedSecurities, InternalMarket market) {
         int i = 0;
         for (Element security : parsedSecurities) {
             Elements securityName = security.getElementsByAttribute("id");
-            market.elementAt(i).setSecurityId(securityName.last().id());
+            market.getSecurities().elementAt(i).setSecurityId(securityName.last().id());
             ++i;
         }
     }
     
-    private void initMarket(final Elements parsedSecurities, Vector<ISecurity> market, IMarketTypes marketType) 
+    private void initMarket(final Elements parsedSecurities, InternalMarket market) 
             throws IllegalArgumentException {
-        addSecurities(parsedSecurities, market, marketType);
+        addSecurities(parsedSecurities, market);
         addSecuritiesId(parsedSecurities, market);
     }
     
@@ -105,12 +106,12 @@ public class WSEParser implements QuotesParser {
         }
     }
     
-    private void parse(Vector<ISecurity> market, String pageAddr, String[] tagList, IMarketTypes marketType) 
+    private void parse(String pageAddr, String[] tagList, InternalMarket market) 
             throws SecuritiesParsingException {
         try {
             Elements allSecurities = getAllSecurities(pageAddr);
-            initMarket(allSecurities, market, marketType);
-            parseTags(allSecurities, market, tagList);
+            initMarket(allSecurities, market);
+            parseTags(allSecurities, market.getSecurities(), tagList);
         } catch (SecuritiesGettingException e) {
             throw new SecuritiesParsingException("Securities not parsed, cause: " + e.getMessage(), e);  
         }
@@ -121,7 +122,7 @@ public class WSEParser implements QuotesParser {
         // Iterate over all internal markets of WSE and parse it's quotes.
         for (InternalMarket market : wseInternalMarkets) {
             IMarketTypes marketType = market.getMarketType();
-            parse(market.getSecurities(), marketType.getPageAddress(), marketType.getTags(), marketType);
+            parse(marketType.getPageAddress(), marketType.getTags(), market);
             logger.trace(market.toString());
         }
         return wseInternalMarkets;

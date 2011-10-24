@@ -17,7 +17,7 @@ public class InternalMarketTest extends TestCase {
     public void setUp() throws Exception {
         desc = new WSEDescription();
         allMarket = desc.getInternalMarkets();
-        internalMarket = new InternalMarket(allMarket[0]);
+        internalMarket = new InternalMarket(allMarket[0], 0);
     }
     
     @Test

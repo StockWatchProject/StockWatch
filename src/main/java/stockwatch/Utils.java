@@ -1,11 +1,13 @@
 package stockwatch;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 
 import stockwatch.securities.ISecurity;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Lists;
 
 public class Utils {
 
@@ -14,23 +16,31 @@ public class Utils {
     static public Predicate<ISecurity> isUp = new Predicate<ISecurity>() {
         @Override
         public boolean apply(ISecurity arg) {
-            return arg.getPercentageChange() > 0 ? true : false;
+            return arg.getPercentageChange() > 0;
         }
     };
     
     static public Predicate<ISecurity> isDown = new Predicate<ISecurity>() {
         @Override
         public boolean apply(ISecurity arg) {
-            return arg.getPercentageChange() < 0 ? true : false;
+            return arg.getPercentageChange() < 0;
         }
     };
-
+    
+    public static <T> ArrayList<T> findIf(Collection<T> coll, Predicate<T> predicate) {
+        ArrayList<T> l = Lists.newArrayList();
+        for (T obj : coll) {
+             if (predicate.apply(obj)) 
+                 l.add(obj);
+        }
+        return l;
+    }
+    
     static public <T> int countIf(Collection<T> coll, Predicate<T> p) {
         int countedPred = 0;
         for (T elem : coll) {
-            if (p.apply(elem)) {
+            if (p.apply(elem))
                 ++countedPred;
-            }
         }
         return countedPred;
     }

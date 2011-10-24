@@ -13,6 +13,8 @@ public class ConfigParser {
     private Properties appProperties;
     private InputStream propertiesFile;
     private int refreshRate;
+    private int initialDelay;
+    private int portNum;
 
     public ConfigParser() {
         try {
@@ -22,7 +24,10 @@ public class ConfigParser {
             appProperties.load(propertiesFile);
             PropertyConfigurator.configure(fileName);
             
-            refreshRate = Integer.parseInt(appProperties.getProperty("StockWatch.refreshRate"));
+            refreshRate  = Integer.parseInt(appProperties.getProperty("StockWatch.refreshRate"));
+            initialDelay = Integer.parseInt(appProperties.getProperty("StockWatch.initialDelay"));
+            portNum      = Integer.parseInt(appProperties.getProperty("StockWatch.port"));
+            
         } catch (FileNotFoundException e) {
             System.exit(-1);
         } catch (IOException e) {
@@ -30,7 +35,9 @@ public class ConfigParser {
         }
     }
     
-    public int getRefreshRate() {
-        return refreshRate;
-    }
+    public int getRefreshRate() { return refreshRate; }
+    
+    public int getInitialDelay() { return initialDelay; }
+    
+    public int getPortNum() { return portNum; }
 }
