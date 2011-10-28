@@ -26,9 +26,11 @@ import com.google.common.base.Preconditions;
 public class WSEParser implements QuotesParser {
     private static final Logger logger = Logger.getLogger(WSEParser.class);
     private static final String reqex = "[A-Z][A-Z].{10}";
+    private static final int TIMEOUT = 3000;
     private ArrayList<InternalMarket> wseInternalMarkets;
     private CallbackFactory<ISecurity, Element> callbackFactory;
     private SecuritiesFactory securityFactory;
+    private Connection connection;
     
     public WSEParser(ArrayList<InternalMarket> markets) {
         this.wseInternalMarkets = markets;
@@ -90,9 +92,9 @@ public class WSEParser implements QuotesParser {
     
     private Elements getAllSecurities(String pageAddr) throws SecuritiesGettingException {
         try {
-            Connection conn = Jsoup.connect(pageAddr);
-            conn.timeout(10000);
-            Document sourceDocument = conn.get();
+            connection = Jsoup.connect(pageAddr);
+            connection.timeout(TIMEOUT);
+            Document sourceDocument = connection.get();
             Elements parsedElems = sourceDocument.getElementsByAttributeValueMatching("id", reqex);
             return parsedElems;
         } catch (UnknownHostException e) {

@@ -26,7 +26,7 @@ public class WorldWideMarket extends TimerTask {
     }
 
     @Override
-    public synchronized void run() {
+    public void run() {
         for (StockMarket stockExchange : stockExchanges) {
             stockExchange.updateQuotes();
         }

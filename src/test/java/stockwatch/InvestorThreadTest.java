@@ -49,7 +49,13 @@ public class InvestorThreadTest extends TestCase {
                 .setId("ID-MCI")
                 .setMarketId(0).build();
         
-        QuoteList quoteListSimple = QuoteList.newBuilder().addQuote(quote).build();
+        QuoteList quoteListSimple = 
+                QuoteList.newBuilder()
+                .addQuote(quote)
+                .addQuote(quote)
+                .addQuote(quote)
+                .addQuote(quote)
+                .build();
         return quoteListSimple;
     }
     
@@ -68,7 +74,14 @@ public class InvestorThreadTest extends TestCase {
                 .setLastChangeTime("00:00:00")
                 .build();
         
-        QuoteList quoteListFull = QuoteList.newBuilder().addQuote(quoteFull).build();
+        QuoteList quoteListFull = 
+                QuoteList.newBuilder()
+                .addQuote(quoteFull)
+                .addQuote(quoteFull)
+                .addQuote(quoteFull)
+                .addQuote(quoteFull)
+                .addQuote(quoteFull)
+                .build();
         
         return quoteListFull;
     }
@@ -97,6 +110,7 @@ public class InvestorThreadTest extends TestCase {
             verify(worldWideMarket, times(1)).getQuotes();
             verify(socket, times(1)).getInputStream();
             verify(socket, times(1)).getOutputStream();
+            verify(socket, times(1)).close();
             
             assertEquals(quoteList.toByteArray().length, output.toByteArray().length);
             assertEquals(quoteList, QuoteList.parseFrom(output.toByteArray()));
@@ -131,6 +145,7 @@ public class InvestorThreadTest extends TestCase {
             verify(worldWideMarket, times(1)).getQuotes(quoteListSimple);
             verify(socket, times(1)).getInputStream();
             verify(socket, times(1)).getOutputStream();
+            verify(socket, times(1)).close();
             
             assertEquals(quoteListFull.toByteArray().length, output.toByteArray().length);
             assertEquals(quoteListFull, QuoteList.parseFrom(output.toByteArray()));

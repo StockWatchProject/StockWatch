@@ -15,22 +15,17 @@ import stockwatch.stockmarkets.parsers.QuotesParser;
 
 import com.google.common.base.Predicate;
 
+
 public class StockMarket {
     private static final Logger logger = Logger.getLogger(StockMarket.class);
     private MarketNames name;
     private List<InternalMarket> internalMarkets;
     private QuotesParser quotesParser;
     
-    public class MarketChecker implements Predicate<Quote> {
+    private class MarketChecker implements Predicate<Quote> {
         private int id;
-        
-        public MarketChecker(int id) {
-            this.id = id;
-        }
-        
-        public boolean apply(Quote quote) {
-            return quote.getMarketId() == this.id;
-        }
+        public MarketChecker(int id) { this.id = id; }
+        public boolean apply(Quote quote) { return quote.getMarketId() == this.id; }
     };
     
     public StockMarket(MarketNames mName){

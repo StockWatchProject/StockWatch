@@ -15,12 +15,16 @@ public class InvestorThread extends Thread {
     private static final Logger logger = Logger.getLogger(InvestorThread.class);
     private Socket socket;
     private final WorldWideMarket worldWideMarket;
+    private ProtoMessageReader protoMsgReader;
+    private ProtoMessageWriter protoMsgWriter;
     private final int investorId;
     
     public InvestorThread(Socket socket, WorldWideMarket worldWideMarket, int threadId) {
         super("InvestorThread");
         this.socket = socket;
         this.worldWideMarket = worldWideMarket;
+        this.protoMsgReader = new ProtoMessageReader();
+        this.protoMsgWriter = new ProtoMessageWriter();
         this.investorId = threadId;
     }
     
@@ -28,14 +32,12 @@ public class InvestorThread extends Thread {
         switch (msgWrapper.getType()) {
             case AVAILABLE_REQ: {
                 QuoteList responseMsg = worldWideMarket.getQuotes();
-                ProtoMessageWriter.writeTo(responseMsg, socket.getOutputStream());
-                socket.close();
+                protoMsgWriter.writeTo(responseMsg, socket.getOutputStream());
                 break;
             }
             case QUOTE_LIST: {
                 QuoteList responseMsg = worldWideMarket.getQuotes(msgWrapper.getQuoteList());
-                ProtoMessageWriter.writeTo(responseMsg, socket.getOutputStream());
-                socket.close();
+                protoMsgWriter.writeTo(responseMsg, socket.getOutputStream());
                 break;
             }
             default: {
@@ -48,10 +50,21 @@ public class InvestorThread extends Thread {
     public void run() {
         logger.debug("InvestorThread no.: " + investorId + " is running.");
         try {
-            MsgWrapper msgWrapper = ProtoMessageReader.readFrom(socket.getInputStream());
+            MsgWrapper msgWrapper = protoMsgReader.readFrom(socket.getInputStream());
             handleMessage(msgWrapper);
         } catch (IOException e) {
             logger.debug(e.getMessage() + e.getCause());
+        } finally {
+            try {
+                socket.close();
+            } catch (IOException e) {
+                logger.error("Could not close socket! " + e.getMessage());
+            }
         }
+    }
+    
+    @Override
+    public void finalize() {
+        logger.debug("InvestorThread no.: " + investorId + " is gone.");
     }
 }

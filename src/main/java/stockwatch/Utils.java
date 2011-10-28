@@ -46,10 +46,8 @@ public class Utils {
     }
 
     static public class CompanyComparator implements Comparator<ISecurity> {
-
         @Override
         public int compare(ISecurity o1, ISecurity o2) {
-
             if (o1.getPercentageChange() < o2.getPercentageChange())
                 return 1;
             else if (o1.getPercentageChange() > o2.getPercentageChange())
@@ -59,7 +57,6 @@ public class Utils {
             else
                 return 0;
         }
-
     }
     
     public static <T extends Enum<T>> String[] enumToStringArray(T[] values) {  

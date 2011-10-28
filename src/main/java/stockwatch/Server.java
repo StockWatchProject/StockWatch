@@ -44,8 +44,8 @@ public class Server {
         
         try {
             serverSocket = new ServerSocket(PORT_NUM);
-        } catch (IOException e1) {
-            logger.error("Could not listen on port: " + PORT_NUM);
+        } catch (IOException e) {
+            logger.error("Could not listen on port: " + PORT_NUM + " " + e.getMessage());
             System.exit(-1);
         }
         
@@ -54,8 +54,7 @@ public class Server {
                 clientSocket = serverSocket.accept();
                 new InvestorThread(clientSocket, worldWideMarket, threadIdGen.getAndIncrement()).start();
             } catch (IOException e) {
-                logger.error("Accept problem!");
-                System.exit(-1);
+                logger.error("Accept problem!" + e.getMessage());
             }
         }
     }

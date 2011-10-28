@@ -10,10 +10,10 @@ import stockwatch.messages.QuoteMessages.MsgWrapper;
 public class ProtoMessageReader {
     private static final Logger logger = Logger.getLogger(ProtoMessageReader.class);
     
-    public static MsgWrapper readFrom(InputStream input) throws IOException {
+    public MsgWrapper readFrom(InputStream input) throws IOException {
         MsgWrapper msgWrapper = MsgWrapper.parseFrom(input);
         input.close();
-        logger.debug("Message " + msgWrapper.getType() + " received!");
+        logger.debug("Message " + msgWrapper.getType() + " received! [" + msgWrapper.getSerializedSize() + "bytes].");
         return msgWrapper;
     }
 }
