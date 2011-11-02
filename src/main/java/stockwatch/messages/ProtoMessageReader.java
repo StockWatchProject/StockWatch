@@ -11,9 +11,8 @@ public class ProtoMessageReader {
     private static final Logger logger = Logger.getLogger(ProtoMessageReader.class);
     
     public MsgWrapper readFrom(InputStream input) throws IOException {
-        MsgWrapper msgWrapper = MsgWrapper.parseFrom(input);
-        input.close();
-        logger.debug("Message " + msgWrapper.getType() + " received! [" + msgWrapper.getSerializedSize() + "bytes].");
+        MsgWrapper msgWrapper = MsgWrapper.parseDelimitedFrom(input);
+        logger.debug("Message " + msgWrapper.getType() + " received! [" + msgWrapper.getSerializedSize() + " bytes].");
         return msgWrapper;
     }
 }

@@ -14,6 +14,7 @@ import stockwatch.stockmarkets.descriptions.IStockMarketDescription;
 import stockwatch.stockmarkets.parsers.QuotesParser;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Lists;
 
 
 public class StockMarket {
@@ -53,6 +54,13 @@ public class StockMarket {
         //TODO: be or not to be %)
     }
     
+    public List<Integer> getInternalMarketIds() {
+        List<Integer> ids = Lists.newArrayList();
+        for (InternalMarket market : internalMarkets)
+            ids.add(market.getId());
+        return ids;
+    }
+    
     public StockMarket updateQuotes() {
         try {
             internalMarkets = quotesParser.parseQuotes();
@@ -74,7 +82,7 @@ public class StockMarket {
         for (InternalMarket market : internalMarkets) {
             builder.mergeFrom(market.getQuotes(Utils.findIf(quotesRequest.getQuoteList(), new MarketChecker(market.getId()))));
         }
-        logger.debug("List of: " + builder.getQuoteList().size() + " quotes from " + name + "will be sent.");
+        logger.debug("List of: " + builder.getQuoteList().size() + " quotes from " + name + " will be sent.");
         return builder.build();
     }
 
@@ -85,7 +93,7 @@ public class StockMarket {
         for (InternalMarket market : internalMarkets) {
             builder.mergeFrom(market.getQuotes());
         }
-        logger.debug("List of: " + builder.getQuoteList().size() + " quotes from " + name + "will be sent.");
+        logger.debug("List of: " + builder.getQuoteList().size() + " quotes from " + name + " will be sent.");
         return builder.build();
     }
     

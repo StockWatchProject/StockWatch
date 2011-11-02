@@ -18,11 +18,12 @@ public class ConfigParser {
 
     public ConfigParser() {
         try {
+            PropertyConfigurator.configure(fileName);
+            
             appProperties = new Properties();
             propertiesFile = new FileInputStream(fileName);
             
             appProperties.load(propertiesFile);
-            PropertyConfigurator.configure(fileName);
             
             refreshRate  = Integer.parseInt(appProperties.getProperty("StockWatch.refreshRate"));
             initialDelay = Integer.parseInt(appProperties.getProperty("StockWatch.initialDelay"));

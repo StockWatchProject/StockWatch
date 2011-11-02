@@ -1,5 +1,7 @@
 package stockwatch;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
@@ -17,6 +19,8 @@ public class InvestorThread extends Thread {
     private final WorldWideMarket worldWideMarket;
     private ProtoMessageReader protoMsgReader;
     private ProtoMessageWriter protoMsgWriter;
+    private DataOutputStream outputStream;
+    private DataInputStream inputStream;
     private final int investorId;
     
     public InvestorThread(Socket socket, WorldWideMarket worldWideMarket, int threadId) {
@@ -28,16 +32,33 @@ public class InvestorThread extends Thread {
         this.investorId = threadId;
     }
     
+    private void openStreams() {
+        try {
+            outputStream = new DataOutputStream(socket.getOutputStream());
+            inputStream = new DataInputStream(socket.getInputStream());
+        } catch (IOException e) {
+            logger.error("Could not open stream! " + e.getMessage());
+        }
+    }
+    
+    private void closeStreams() {
+        try {
+            outputStream.close();
+            inputStream.close();
+        } catch (IOException e) {
+            logger.error("Could not close stream! " + e.getMessage());
+        }
+    }
     private void handleMessage(MsgWrapper msgWrapper) throws IOException {
         switch (msgWrapper.getType()) {
             case AVAILABLE_REQ: {
                 QuoteList responseMsg = worldWideMarket.getQuotes();
-                protoMsgWriter.writeTo(responseMsg, socket.getOutputStream());
+                protoMsgWriter.writeTo(responseMsg, outputStream);
                 break;
             }
             case QUOTE_LIST: {
                 QuoteList responseMsg = worldWideMarket.getQuotes(msgWrapper.getQuoteList());
-                protoMsgWriter.writeTo(responseMsg, socket.getOutputStream());
+                protoMsgWriter.writeTo(responseMsg, outputStream);
                 break;
             }
             default: {
@@ -50,8 +71,10 @@ public class InvestorThread extends Thread {
     public void run() {
         logger.debug("InvestorThread no.: " + investorId + " is running.");
         try {
-            MsgWrapper msgWrapper = protoMsgReader.readFrom(socket.getInputStream());
+            openStreams();
+            MsgWrapper msgWrapper = protoMsgReader.readFrom(inputStream);
             handleMessage(msgWrapper);
+            closeStreams();
         } catch (IOException e) {
             logger.debug(e.getMessage() + e.getCause());
         } finally {
