@@ -90,15 +90,17 @@ public class InternalMarket {
     
     @Override
     public String toString() {
+        StringBuffer strBuff = new StringBuffer();
+        
         String stats = "";
         stats += this.getStats().toString();
         
-        String stockList = "\n";
-        stockList += this.getMarketType() + " quotes:\n";
+        strBuff.append("\n");
+        strBuff.append(this.getMarketType() + " quotes:\n");
         for (ISecurity security : securities) {
-            stockList += security.toString() + "\n";
+            strBuff.append(security.toString() + "\n");
         }
-        
-        return stockList + stats;
+        strBuff.append(stats);
+        return strBuff.toString();
     }
 }

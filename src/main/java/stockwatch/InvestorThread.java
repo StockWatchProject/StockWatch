@@ -32,6 +32,11 @@ public class InvestorThread extends Thread {
         this.investorId = threadId;
     }
     
+    @Override
+    protected void finalize() {
+        logger.debug("InvestorThread no.: " + investorId + " is gone.");
+    }
+    
     private void openStreams() {
         try {
             outputStream = new DataOutputStream(socket.getOutputStream());
@@ -63,6 +68,7 @@ public class InvestorThread extends Thread {
             }
             default: {
                 logger.error("Unsupported message type received!");
+                break;
             }
         }
     }
@@ -84,10 +90,5 @@ public class InvestorThread extends Thread {
                 logger.error("Could not close socket! " + e.getMessage());
             }
         }
-    }
-    
-    @Override
-    public void finalize() {
-        logger.debug("InvestorThread no.: " + investorId + " is gone.");
     }
 }

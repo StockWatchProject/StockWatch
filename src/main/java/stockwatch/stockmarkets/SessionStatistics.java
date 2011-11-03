@@ -65,9 +65,9 @@ public class SessionStatistics {
 
     private void countAvgReturn(Vector<ISecurity> companies) {
         double avg = 0;
-        if (companies.size() == 0)
+        if (companies.size() == 0) {
             return;
-
+        }
         for (ISecurity company : companies) {
             avg += company.getPercentageChange();
         }
@@ -101,25 +101,26 @@ public class SessionStatistics {
 
     @Override
     public String toString() {
+        StringBuffer strBuff = new StringBuffer();
+        
+        strBuff.append("\n");
 
-        String stats = "\n";
+        strBuff.append("Amount of growing securities: " + this.numberOfGrowingStocks + "\n");
+        strBuff.append("Amount of falling securities: " + this.numberOfFallingStocks + "\n");
 
-        stats += "Amount of growing securities: " + numberOfGrowingStocks + "\n";
-        stats += "Amount of falling securities: " + numberOfFallingStocks + "\n";
-
-        stats += "\nTop ten growing securities: \n\n";
-        for (ISecurity company : topUp) {
-            stats += company.sessionResult() + "\n";
+        strBuff.append("\nTop ten growing securities: \n\n");
+        for (ISecurity company : this.topUp) {
+            strBuff.append(company.sessionResult() + "\n");
         }
 
-        stats += "\nTop ten falling securities: \n\n";
-        for (ISecurity company : topDown) {
-            stats += company.sessionResult() + "\n";
+        strBuff.append("\nTop ten falling securities: \n\n");
+        for (ISecurity company : this.topDown) {
+            strBuff.append(company.sessionResult() + "\n");
         }
 
-        stats += "\nAverage return of securities: " + avgReturn + " [%]" + "\n";
+        strBuff.append("\nAverage return of securities: " + this.avgReturn + " [%]" + "\n");
 
-        return stats;
+        return strBuff.toString();
     }
 
 }

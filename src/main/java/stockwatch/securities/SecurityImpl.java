@@ -130,6 +130,4 @@ public abstract class SecurityImpl implements ISecurity {
     public abstract void setLopChange(String lopChange);
 
     public abstract void setExpirationDate(String date);
-
-    public abstract String toString();
 }

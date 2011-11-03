@@ -9,10 +9,10 @@ public class DescriptionsFactory {
     private static final Logger logger = Logger.getLogger(DescriptionsFactory.class);
     
     static public IStockMarketDescription getDescription(MarketNames mName){
-        String ClassName = "stockwatch.stockmarkets.descriptions." + mName.name() + "Description";
+        String className = "stockwatch.stockmarkets.descriptions." + mName.name() + "Description";
         //TODO: After migration to jdk7 change this chain of catch to only one exception:  ReflectiveOperationException
         try {
-            IStockMarketDescription newDesc = (IStockMarketDescription) Class.forName(ClassName).newInstance();
+            IStockMarketDescription newDesc = (IStockMarketDescription) Class.forName(className).newInstance();
             logger.debug(newDesc.getClass().getSimpleName() + " has risen.");
             return newDesc;
         } catch (ClassNotFoundException e) {

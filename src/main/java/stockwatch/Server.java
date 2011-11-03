@@ -45,7 +45,7 @@ public class Server {
         try {
             serverSocket = new ServerSocket(PORT_NUM);
         } catch (IOException e) {
-            logger.error("Could not listen on port: " + PORT_NUM + " " + e.getMessage());
+            logger.fatal("Could not listen on port: " + PORT_NUM + " " + e.getMessage());
             System.exit(-1);
         }
         

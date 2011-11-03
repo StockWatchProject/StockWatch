@@ -28,19 +28,21 @@ public class Utils {
     };
     
     public static <T> ArrayList<T> findIf(Collection<T> coll, Predicate<T> predicate) {
-        ArrayList<T> l = Lists.newArrayList();
+        ArrayList<T> filteredList = Lists.newArrayList();
         for (T obj : coll) {
-             if (predicate.apply(obj)) 
-                 l.add(obj);
+             if (predicate.apply(obj)) {
+                 filteredList.add(obj);
+             }
         }
-        return l;
+        return filteredList;
     }
     
-    static public <T> int countIf(Collection<T> coll, Predicate<T> p) {
+    static public <T> int countIf(Collection<T> coll, Predicate<T> predicate) {
         int countedPred = 0;
         for (T elem : coll) {
-            if (p.apply(elem))
+            if (predicate.apply(elem)) {
                 ++countedPred;
+            }
         }
         return countedPred;
     }
@@ -48,14 +50,18 @@ public class Utils {
     static public class CompanyComparator implements Comparator<ISecurity> {
         @Override
         public int compare(ISecurity o1, ISecurity o2) {
-            if (o1.getPercentageChange() < o2.getPercentageChange())
+            if (o1.getPercentageChange() < o2.getPercentageChange()) {
                 return 1;
-            else if (o1.getPercentageChange() > o2.getPercentageChange())
+            }
+            else if (o1.getPercentageChange() > o2.getPercentageChange()) {
                 return -1;
-            else if (o1.getPercentageChange() == UNDEFINED_VALUE || o2.getPercentageChange() == UNDEFINED_VALUE)
+            }
+            else if (o1.getPercentageChange() == UNDEFINED_VALUE || o2.getPercentageChange() == UNDEFINED_VALUE) {
                 return 0;
-            else
+            }
+            else {
                 return 0;
+            }
         }
     }
     
